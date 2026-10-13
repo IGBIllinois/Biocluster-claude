@@ -8,6 +8,16 @@ description: "Run jobs on the IGB biocluster (University of Illinois Urbana-Cham
 The compute target is **`igb`** (login node `biologin-3`). An older `biocluster`
 target pointed at `biologin-2`, which no longer resolves — if you see it, do not use it.
 
+## About the optional sidecar
+
+The repository also carries `kernel.py`, which turns the rules below into callable
+helpers (`igb_sbatch_preamble`, `igb_choose_partition`, `igb_job_script`, ...). **It is
+NOT installed when this skill is imported from GitHub — imported skills are
+documentation-only and sidecar files are excluded.** Everything it encodes is stated in
+full in this document, so nothing is lost; the file is there for anyone who wants to
+install it by hand into a local copy of the skill. Do not call those functions unless
+you have confirmed they exist in your kernel.
+
 ## Confidence tiers
 
 Every capability claim in the `igb-*` skills is tagged:
@@ -26,7 +36,7 @@ at tier C and it works, say so in your reply so the skill can be promoted.
    of these facts, plus anything later sessions appended.
 2. `c = host.compute.create('igb')` in a **`repl`** cell.
 3. Pick the partition from the table below against the user's groups. Do not probe.
-4. Build the job script from `recipes/` or from `igb_sbatch_preamble()` in `kernel.py`.
+4. Build the job script from the skeleton below, or adapt one in `recipes/`.
 5. Submit, end the cell, park on `wait_for_notification`.
 
 **Do not go exploring.** Everything in this document was paid for by an earlier
@@ -36,7 +46,7 @@ lot) rather than a handful of `module avail` probes — then append what it told
 
 ## Site policy — IGB's rules, not ours
 
-Two of these are enforcement, not etiquette. Programmatic: `igb_site_policy()`.
+Two of these are enforcement, not etiquette.
 
 1. **Never run compute on a login node.** IGB policy; accounts can be locked. Login
    nodes are for submitting, staging data and building environments only.
@@ -82,7 +92,7 @@ user set.
 ## Partitions
 
 Full table with group ACLs and hardware: `references/partitions.md`.
-Resolve programmatically with `igb_partitions()` / `igb_sbatch_preamble()` from `kernel.py`.
+Check your own access with `id` against `scontrol show partition | grep AllowGroups`.
 
 | Partition | Hardware | Node mem ceiling | Wait | Use it for |
 |---|---|---|---|---|
@@ -98,7 +108,7 @@ so long jobs are allowed.
 
 **The tradeoff that decides the partition** — and it is counter-intuitive: the *idle*
 GPU partition has the **smallest** memory on the cluster, and the 2 TB partition has no
-GPU at all. `igb_choose_partition(needs_gpu=, mem_gb=)` encodes it:
+GPU at all:
 
 | Need | Partition | Why |
 |---|---|---|
@@ -226,8 +236,9 @@ Full detail: `references/databases.md`.
 
 ## Job script skeleton
 
-`igb_sbatch_preamble()` in `kernel.py` emits the directives with the memory clamp
-applied. Worked templates: `recipes/af3_monomer.sh`, `recipes/scanpy.sh`.
+Worked templates: `recipes/af3_monomer.sh`, `recipes/scanpy.sh`. **Check `--mem`
+against the partition's ceiling in the table above before submitting** — over it, the
+job pends forever with `Reason=Resources` and no error.
 
     #SBATCH -p admin
     #SBATCH -N 1
@@ -267,8 +278,7 @@ efficiency, 1.31 GB used. Roughly 2 cores and 8 GB suffices and queues sooner.
 
 ## When it breaks
 
-Symptom-to-diagnosis table: `references/failures.md`. Programmatic:
-`igb_known_failures()`.
+Symptom-to-diagnosis table: `references/failures.md`.
 
 The one to internalise: a job PENDING with `Reason=Resources` that never starts is
 usually an **unschedulable memory request**, not a queue wait. Diagnostic:
@@ -286,4 +296,4 @@ Agent-submitted jobs appear in Slurm as `operon-<first 8 chars of the job uuid>`
     scontrol show job <jobid> | grep -E 'Reason|TRES'       # why is it still pending
     tail -f <workdir>/run.log
 
-`igb_audit_commands()` returns these as a dict for pasting into a reply.
+Hand these to the user rather than only reporting your own account of the run.

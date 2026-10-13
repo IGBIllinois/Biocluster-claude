@@ -6,8 +6,15 @@
    host** → `biologin-3.igb.illinois.edu`, your IGB username, your SSH key. This cannot
    come from a skill; it is app configuration you do once. (Note `biologin-2` no longer
    resolves — use `biologin-3`.)
-2. **Import the skills.** **Skills → Import from GitHub** → this repository's URL. The
-   seven `igb-*` skills under `skills/` are what you want.
+2. **Import the skills.** **Skills → Import from GitHub** → this repository's URL. You
+   should see:
+
+       Imported 7 skills from IGBIllinois/Biocluster-claude
+       Skipped: igb-cluster (kernel) - 1 kernel sidecar file(s) excluded
+
+   **That "Skipped" line is expected and nothing is missing.** Imported skills are
+   documentation-only, so `skills/igb-cluster/kernel.py` is not installed. Every rule it
+   encodes is written out in full in the skill documents.
 3. **Record your own partition access.** This differs per account, because IGB grants
    partitions by Unix group — yours is not a colleague's. Ask the agent to run:
 

@@ -55,4 +55,4 @@ AlphaFold 2 is also installed (`alphafold/{2.1.2,2.3.1,2.3.2}` with
 
 GPU and under 60 GB → `admin` (idle, starts in under a minute). GPU and over 60 GB →
 `gpu` (250 GB/node, but 22-32 h observed queue; warn the user first). CPU-only → `normal`.
-`igb_choose_partition()` in the hub's `kernel.py` encodes this.
+The hub skill's partition table carries the same rule.

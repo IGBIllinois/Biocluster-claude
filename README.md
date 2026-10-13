@@ -19,7 +19,10 @@ versions pair with which, and which failures are silent.
 | `igb-workflows` | Nextflow, Snakemake, Cromwell, containers |
 | `igb-ngs-pipelines` | ordinary sequencing work, plus an index of all 927 modules |
 
-`igb-cluster` is the hub and is always loaded first; the other six assume it. They are
+`igb-cluster` is the hub and is always loaded first; the other six assume it. It also
+ships `kernel.py`, which turns the site rules into callable helpers — **GitHub import
+excludes sidecar files**, so that file is not installed by the steps in
+[INSTALL.md](INSTALL.md) and the skill documents are written to stand alone without it. They are
 the **site layer** only — which module, which database, which partition, measured
 wall-clock, known failures. For the science itself the agent loads the tool's own skill
 (`alphafold2`, `boltz`, `scvi-tools`, `proteinmpnn`, …) alongside.
