@@ -1,0 +1,928 @@
+module,family,n_versions,latest,on_wiki,description
+AGAT,annotation-databases,2,1.7.0,True,Suite of tools to handle gene annotations in any GTF/GFF format
+ANNOVAR,annotation-databases,1,2019Oct24-IGB-gcc-8.2.0-Perl-5.28.1,True,ANNOVAR is an efficient software tool to utilize update-to-date information to functionally annotate genetic variants detected from diverse genomes (including h
+ARB,annotation-databases,1,6.0.6,True,The ARB software is a graphically oriented package comprising various tools for sequence database handling and data analysis. A central database of processed (a
+BRAKER,annotation-databases,6,3.0.8-IGB-gcc-8.2.0,True,BRAKER2 is an extension of BRAKER1 which allows for fully automated training of the gene prediction tools GeneMark-EX and AUGUSTUS from RNA-Seq and/or protein h
+BaMMmotif,annotation-databases,1,2.0,True,Bayesian Markov Model motif discovery software (version 2).
+Crossmap,annotation-databases,2,0.7.3-IGB-gcc-8.2.0-Python-3.10.1,True,CrossMap is a program for genome coordinates conversion between different assemblies (such as hg18 (NCBI36) <=> hg19 (GRCh37)). It supports commonly used file f
+DeepEC,annotation-databases,1,20190806-IGB-gcc-4.9.4-Python-3.6.1,True,DeepEC
+EAT,annotation-databases,1,1.0.0-IGB-gcc-8.2.0-Python-3.7.2,True,Embedding-based annotation transfer (EAT) uses Euclidean distance between vector representations (embeddings) of proteins to transfer annotations from a set of 
+EDirect,annotation-databases,1,20160310-IGB-gcc-4.9.4,True,"Entrez Direct (EDirect) provides access to the NCBI's suite of interconnected databases (publication, sequence, structure, gene, variation, expression, etc.) fr"
+EVidenceModeler,annotation-databases,2,1.1.1-IGB-gcc-8.2.0-Perl-5.28.1,True,The EVidenceModeler (aka EVM) software combines ab intio gene predictions and protein and transcript alignments into weighted consensus gene structures. EVM pro
+ExonOntology,annotation-databases,1,20171018-IGB-gcc-8.2.0-Perl-5.28.1,True,"This project consists of a set of scripts that are necessary to perform offline Exon Ontology analyses. Briefly, it can accept a list of genomic sequences as in"
+FEELnc,annotation-databases,1,20180117-IGB-gcc-4.9.4,True,This document is intended to give a technical description of the FEELnc pipeline in order to annotate long non-coding RNAs (lncRNAs) based on reconstructed tran
+FragGeneScan,annotation-databases,1,1.31-IGB-gcc-4.9.4,True,FragGeneScan is an application for finding (fragmented) genes in short reads.
+GLIMMER,annotation-databases,1,3.02b-IGB-gcc-4.9.4,True,"Glimmer is a system for finding genes in microbial DNA, especiallythe genomes of bacteria, archaea, and viruses."
+GeneMark-ES,annotation-databases,3,4.62-IGB-gcc-8.2.0-Perl-5.28.1,True,Novel genomes can be analyzed by the program GeneMark-ES utilizing unsupervised training.
+GeneMarkS,annotation-databases,1,4.30-IGB-gcc-4.9.4,True,GeneMarkS: a self-training method for prediction of gene starts in microbial genomes
+GeneMarkS-T,annotation-databases,1,5.1,True,
+GenomeThreader,annotation-databases,1,1.7.1,True,GenomeThreader is a software tool to compute gene structure predictions. The gene structure predictions are calculated using a similarity-based approach where a
+GlimmerHMM,annotation-databases,1,3.0.4-IGB-gcc-4.9.4,True,"GlimmerHMM is a new gene finder based on a Generalized Hidden Markov Model. Although the gene finder conforms to the overall mathematical framework of a GHMM, a"
+HMMER,annotation-databases,6,3.4-IGB-gcc-8.2.0,True,"HMMER is used for searching sequence databases for homologs of protein sequences, and for making protein sequence alignments. It implements methods using probab"
+HOMER,annotation-databases,1,4.9.1-IGB-gcc-4.9.4-Perl-5.24.1,True,HOMER (Hypergeometric Optimization of Motif EnRichment) is a suite of tools for Motif Discovery and ChIP-Seq analysis. It is a collection of command line progra
+ITSx,annotation-databases,1,1.1.1-IGB-gcc-4.9.4,True,TSx: Improved software detection and extraction of ITS1 and ITS2 from ribosomal ITS sequences of fungi and other eukaryotes for use in environmental sequencing
+Infernal,annotation-databases,2,1.1.5-IGB-gcc-8.2.0,True,"Infernal,INFERence of RNA ALignment, is for searching DNA sequence databases for RNA structure and sequence similarities."
+InterProScan,annotation-databases,7,5.67-99.0-IGB-gcc-8.2.0-Java-15.0.1,True,"InterProScan is the software package that allows sequences (protein and nucleic) to be scanned against InterPros signatures. Signatures are predictive models, p"
+LTRretriever,annotation-databases,1,2.9.0-IGB-gcc-4.9.4-Perl-5.24.1,True,"LTR_retriever is a command line program (in Perl) for accurate identification of LTR retrotransposons (LTR-RTs) from outputs of LTRharvest, LTR_FINDER, MGEScan "
+Liftoff,annotation-databases,2,1.6.3-IGB-gcc-8.2.0-Python-3.7.2,True,"Liftoff is a tool that accurately maps annotations in GFF or GTF between assemblies of the same, or closely-related species."
+MAKER,annotation-databases,4,3.01.1-beta-IGB-gcc-4.9.4-Perl-5.26.1-unthreaded,True,MAKER is a portable and easily configurable genome annotation pipeline. Its purpose is to allow smaller eukaryotic and prokaryotic genome projects to independen
+MCScanX,annotation-databases,1,20221031-IGB-gcc-8.2.0,True,The MCScanX package has two major components: a modified version of MCscan algorithm allowing users to handle MCScan more conveniently and to view multiple alig
+MMseqs2,annotation-databases,1,10-6d92c,True,MMseqs2 (Many-against-Many sequence searching) is a software suite to search and cluster huge protein and nucleotide sequence sets.
+MOODS,annotation-databases,1,1.9.4.1-IGB-gcc-8.2.0-Python-3.7.2,True,MOODS is a suite of algorithms for matching position weight matrices (PWM) against DNA sequences. It features advanced matrix matching algorithms implemented in
+MUSCLE,annotation-databases,2,5.1.0-IGB-gcc-8.2.0,True,"MUSCLE is one of the best-performing multiple alignment programs according to published benchmark tests, with accuracy and speed that are consistently better th"
+MetaEuk,annotation-databases,1,4-IGB-gcc-8.2.0,True,MetaEuk is a modular toolkit designed for large-scale gene discovery and annotation in eukaryotic metagenomic contigs. MetaEuk combines the fast and sensitive h
+MetaGeneAnnotator,annotation-databases,1,20080819-x86-64,True,MetaGeneAnnotator is a gene-finding program for prokaryote and phage.
+MetaGeneMark-2,annotation-databases,1,20210406-IGB-gcc-8.2.0,True,"MetaGeneMark-2 is an unsupervised metagenomic gene finder. It improves on MetaGeneMark by adding models for better gene start prediction, as well as automatic s"
+PASApipeline,annotation-databases,1,2.5.3-IGB-gcc-8.2.0,True,"PASA, acronym for Program to Assemble Spliced Alignments (and pronounced 'pass-uh'), is a eukaryotic genome annotation tool that exploits spliced alignments of "
+PEnG-motif,annotation-databases,1,1.0.1,True,"PEnG-motif is an open-source software package for searching statistically overrepresented motifs (position specific weight matrices, PWMs) in a set of DNA seque"
+Prodigal,annotation-databases,1,2.6.3,True,"Fast, reliable protein-coding gene prediction for prokaryotic genomes."
+ProtHint,annotation-databases,2,2.6.0-IGB-gcc-8.2.0,True,"ProtHint is a pipeline for predicting and scoring hints (in the form of introns, start and stop codons) in the genome of interest by mapping and spliced alignin"
+RECON,annotation-databases,1,1.08-IGB-gcc-4.9.4-Perl-5.24.1,True,a package for automated de novo identification of repeat families from genomic sequences
+RNAmmer,annotation-databases,2,1.2-IGB-gcc-8.2.0-Perl-5.28.1,True,Ribosomal RNA sub units
+RREFinder,annotation-databases,1,1.0.2-IGB-gcc-8.2.0-Python-3.7.2,True,Bioinformatic application for the detection of RREs in protein sequences of interest
+RSAT,annotation-databases,1,20230828-IGB-gcc-8.2.0,True,"We offer tools to analyse cis-regulatory elements in genome sequences, motif discovery (support genome-wide data sets like ChIP-seq), transcription factor bindi"
+RepeatMasker,annotation-databases,5,4.1.5-IGB-gcc-8.2.0-Perl-5.28.1,True,RepeatMasker is a program that screens DNA sequences for interspersed repeats and low complexity DNA sequences.
+RepeatModeler,annotation-databases,3,2.0.2a-IGB-gcc-4.9.4-Perl-5.24.1,True,RepeatModeler is a de novo transposable element (TE) family identification and modeling package. At the heart of RepeatModeler are three de-novo repeat finding 
+RepeatScout,annotation-databases,1,1.0.5-IGB-gcc-4.9.4,True,"De Novo Repeat Finder,"
+SNAP,annotation-databases,1,2013-11-29-IGB-gcc-4.9.4,True,(Semi-HMM-based Nucleic Acid Parser) gene prediction tool
+Segway,annotation-databases,1,2.0.1-IGB-gcc-4.9.4-Python-2.7.13,True,Segway is a tool for easy pattern discovery and identification in functional genomics data.
+Trinotate,annotation-databases,3,4.0.0-IGB-gcc-8.2.0-Perl-5.28.1,True,"Trinotate is a comprehensive annotation suite designed for automatic functional annotation of transcriptomes, particularly de novo assembled transcriptomes, fro"
+antismash,annotation-databases,4,7.1.0-0,True,"antiSMASH allows the rapid genome-wide identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome"
+augustus,annotation-databases,4,3.4.0-IGB-gcc-8.2.0,True,AUGUSTUS is a program that predicts genes in eukaryotic genomic sequences
+bamm-suite,annotation-databases,1,20191127-IGB-gcc-4.9.4-Python-3.6.1,True,BaMM-suite is the motif finding suite developed by the Soedinglab.
+barrnap,annotation-databases,1,0.9-IGB-gcc-4.9.4,True,Barrnap predicts the location of ribosomal RNA genes in genomes.
+cisgenome,annotation-databases,1,2.0-IGB-gcc-4.9.4,True,"An integrated tool for tiling array, ChIP-seq, genome and cis-regulatory element analysis"
+clinker,annotation-databases,1,0.0.27-IGB-gcc-8.2.0-Python-3.7.2,True,clinker is a pipeline for easily generating publication-quality gene cluster comparison figures.
+cooler,annotation-databases,2,0.8.2-IGB-gcc-8.2.0-Python-3.7.2,True,"Cooler is a support library for a sparse, compressed, binary persistent storage format, also called cooler, used to store genomic interaction data, such as Hi-C"
+cooltools,annotation-databases,1,0.4.1-IGB-gcc-8.2.0-Python-3.7.2,True,The tools for your .cools
+eggnog-mapper,annotation-databases,1,2.1.12-IGB-gcc-8.2.0-Python-3.7.2,True,EggNOG-mapper is a tool for fast functional annotation of novel sequences.
+gapseq,annotation-databases,2,1.4.0-IGB-gcc-8.2.0,True,Informed prediction and analysis of bacterial metabolic pathways and genome-scale networks
+geneclass,annotation-databases,1,2.0,True,GeneClass2 is a program employing multilocus genotypes to select or exclude populations as origins of individuals (Assignment and Migrants Detection). This is a
+gevalt,annotation-databases,1,2.0-Java-1.8.0_152,True,GEVALT (GEnotype Visualization and ALgorithmic Tool) is designed to simplify and expedite the process of genotype analysis and disease association tests by prov
+gffcompare,annotation-databases,1,0.10.6-IGB-gcc-4.9.4,True,"The program gffcompare can be used to compare, merge, annotate and estimate accuracy of one or more GFF files (the query files), when compared with a reference "
+loupe,annotation-databases,1,2.1.1,True,"Loupe is a genome browser designed to visualize the Linked-Read data produced by the 10x Chromium Platform. Loupe is named for a jewelers loupe, which is used t"
+mlst,annotation-databases,1,2.19.0-IGB-gcc-8.2.0-Perl-5.28.1,True,Scan contig files against traditional PubMLST typing schemes
+multigeneblast,annotation-databases,1,1.1.12-IGB-gcc-4.9.4,True,MultiGeneBlast is an open source tool for identification of homologs of multigene modules such as operons and gene clusters. It is based on a reformatting of th
+pfamscan,annotation-databases,1,1.6-IGB-gcc-4.9.4-Perl-5.24.1,True,"This readme should help you get started with ""pfam_scan.pl"", which is for usewith the HMMER3 version of HMMER."
+pftoolsV3,annotation-databases,1,3.2.12-IGB-gcc-8.2.0,True,A suite of tools to build and search generalized profiles (protein and DNA).
+pharokka,annotation-databases,1,1.7.5-IGB-gcc-8.2.0-Python-3.10.1,True,pharokka is a rapid standardised annotation tool for bacteriophage genomes and metagenomes.
+ppanini,annotation-databases,1,0.7.3.1-IGB-gcc-4.9.4-Python-2.7.13,True,PPANINI (Prioritization and Prediction of functional Annotation for Novel and Important genes via automated data Network Integration) is a computational pipelin
+prokka,annotation-databases,3,1.14.6-IGB-gcc-8.2.0-Perl-5.28.1,True,"Whole genome annotation is the process of identifying features of interest in a set of genomic DNA sequences, and labelling them with useful information. Prokka"
+rodeo2,annotation-databases,1,2.4.2-IGB-gcc-8.2.0-Python-3.7.2,True,"RODEO evaluates one or many genes, characterizing a gene neighborhood based on the presence of profile hidden Markov models (pHMMs)."
+scoary,annotation-databases,1,1.6.16-IGB-gcc-4.9.4-Python-3.6.1,True,Scoary is designed to take the gene_presence_absence.csv file from Roary as well as a traits file created by the user and calculate the assocations between all 
+skylign,annotation-databases,1,1.1-IGB-gcc-4.9.4-Perl-5.24.1,True,Skylign is a tool for creating logos representing both sequence alignments and profile hidden Markov models. Submit to the form on the right in order to produce
+snoscan,annotation-databases,2,0.9.1-IGB-gcc-4.9.4-Perl-5.26.1-unthreaded,True,Search for C/D box methylation guide snoRNA genes in a genomic sequence
+tRNAscan-SE,annotation-databases,2,2.0.12-IGB-gcc-8.2.0,True,tRNAscan-SE: a tool for finding transfer RNAs
+tbl2asn,annotation-databases,4,20200707,True,Tbl2asn is a command-line program that automates the creation of sequence records for submission to GenBank
+trf,annotation-databases,1,4.0.9,True,Tandem Repeats Finder is a program to locate and display tandem repeats in DNA sequences.
+virulencefinder,annotation-databases,1,2.0.4-IGB-gcc-8.2.0-Python-3.7.2,True,The VirulenceFinder service contains one python script virulencefinder.py which is the script of the latest version of the VirulenceFinder service. VirulenceFin
+3d-dna,genome-assembly,1,20190801-IGB-gcc-8.2.0-Python-3.7.2,True,De novo assembly of the Aedes aegypti genome using Hi-C yields chromosome-length scaffolds
+454,genome-assembly,1,2.8,True,"The GS Data Analysis Software package includes the tools to investigate complex genomic variation in samples including de novo assembly, reference guided alignm"
+ABySS,genome-assembly,1,2.0.2-IGB-gcc-4.9.4,True,ABySS is a de novo sequence assembler intended for short paired-end reads and large genomes.
+AGEnt,genome-assembly,1,0.2.1-IGB-gcc-4.9.4,True,"AGEnt performs in silico subtractive hybridization of core genome sequences, such as those produced by Spine, against a query genomic sequence to identify acces"
+AMOS,genome-assembly,1,3.1.0-IGB-gcc-4.9.4,True,The AMOS consortium is committed to the development of open-source whole genome assembly software.
+ARCS,genome-assembly,2,1.2.1-IGB-gcc-8.2.0-Perl-5.28.1,True,Scaffolding genome sequence assemblies using 10X Genomics GemCode/Chromium data.
+AlignGraph,genome-assembly,1,20180222-IGB-gcc-4.9.4,True,AlignGraph is a software that extends and joins contigs or scaffolds by reassembling them with help provided by a reference genome of a closely related organism
+Assemblytics,genome-assembly,2,df5361f-IGB-gcc-4.9.4,True,Analyze your assembly by comparing it to a reference genome
+BUSCO,genome-assembly,7,6.0.0-IGB-gcc-8.2.0-Python-3.10.1,True,Assessing genome assembly and annotation completeness with Benchmarking Universal Single-Copy Orthologs (BUSCO)
+Bandage,genome-assembly,1,0.8.1,True,"Bandage is a GUI program that allows users to interact with the assembly graphs made by de novo assemblers such as Velvet, SPAdes, MEGAHIT and others."
+Bifrost,genome-assembly,1,1.0.4-IGB-gcc-8.2.0,True,"Parallel construction, indexing and querying of colored and compacted de Bruijn graphs"
+Canu,genome-assembly,10,2.2-IGB-gcc-8.2.0-Perl-5.28.1,True,"Canu is a fork of the Celera Assembler, designed for high-noise single-molecule sequencing (such as the PacBio RS II or Oxford Nanopore MinION)."
+CheckM,genome-assembly,3,1.1.9-IGB-gcc-8.2.0-Python-3.7.2,True,"CheckM provides a set of tools for assessing the quality of genomes recovered from isolates, single cells, or metagenomes."
+CheckM2,genome-assembly,1,1.0.1,True,"Unlike CheckM1, CheckM2 has universally trained machine learning models it applies regardless of taxonomic lineage to predict the completeness and contamination"
+Chromonomer,genome-assembly,1,1.13-IGB-gcc-8.2.0,True,Chromonomer is a program designed to integrate a genome assembly with a genetic map. Chromonomer tries very hard to identify and remove markers that are out of 
+Circlator,genome-assembly,2,1.5.5-IGB-gcc-8.2.0-Python-3.7.2,True,A tool to circularize genome assemblies.
+DISCOVARdenovo,genome-assembly,1,52488-IGB-gcc-4.9.4,True,DISCOVAR de novo can generate de novo assemblies for both large and small genomes. It currently does not call variants.
+FALCON,genome-assembly,1,1.8.8-IGB-gcc-4.9.4-Python-2.7.13,True,FALCON is a diploid aware genome assembler designed for Pacific Biosciences long read data.
+FALCON_unzip,genome-assembly,1,0.4.0-IGB-gcc-4.9.4-Python-2.7.13,True,"FALCON-Unzip contains the modules that works with FALCON for full diploid assembly (representing haplotype specific contigs as ""haplotigs"" as assembly output)."
+Falcon2Fastg,genome-assembly,1,0.3.1-IGB-gcc-4.9.4-Python-2.7.13,True,"This software converts the results of PacBio assembly using FALCON, to a FASTG graph that can be visualized using Bandage."
+FastANI,genome-assembly,2,1.34-IGB-gcc-8.2.0,True,FastANI is developed for fast alignment-free computation of whole-genome Average Nucleotide Identity (ANI). ANI is defined as mean nucleotide identity of orthol
+FastK,genome-assembly,1,1.2-IGB-gcc-8.2.0,True,FastK is a k‑mer counter that is optimized for processing high quality DNA assembly data sets such as those produced with an Illumina instrument or a PacBio run
+Flye,genome-assembly,8,2.9.6-IGB-gcc-8.2.0-Python-3.10.1,True,"Flye is a de novo assembler for single molecule sequencing reads, such as those produced by PacBio and Oxford Nanopore Technologies."
+GAPPadder,genome-assembly,1,20170601-IGB-gcc-4.9.4,True,GAPPadder is designed for closing gaps on the draft genomes with paired-end reads or mate-paired reads.
+GenomeScope2,genome-assembly,1,2.1.0-IGB-gcc-8.2.0,True,"We have developed GenomeScope 2.0, which applies classical insights from combinatorial theory to establish a detailed mathematical model of how k-mer frequencie"
+GetOrganelle,genome-assembly,1,1.7.7.1-IGB-gcc-8.2.0-Python-3.10.1,True,This toolkit assemblies organelle genome from genomic skimming data.
+HAPO-G,genome-assembly,1,1.2-IGB-gcc-8.2.0,True,Hapo-G (pronounced like apogee) is a tool that aims to improve the quality of genome assemblies by polishing the consensus with accurate reads.
+HapHiC,genome-assembly,1,1.0.7,True,"a fast, reference-independent, allele-aware scaffolding tool based on Hi-C data"
+Jellyfish,genome-assembly,5,2.3.0-IGB-gcc-8.2.0,True,"Jellyfish is a tool for fast, memory-efficient counting of k-mers in DNA. A k-mer is a substring of length k, and counting the occurrences of all such substring"
+LINKS,genome-assembly,3,1.8.7-IGB-gcc-8.2.0-Perl-5.28.1,True,"LINKS is a scalable genomics application for scaffolding or re-scaffolding genome assembly drafts with long reads, such as those produced by Oxford Nanopore Tec"
+LRBinner,genome-assembly,1,0.1-IGB-gcc-8.2.0-Python-3.7.2,True,Binning Error-Prone Long Reads Using Auto Encoders
+MEGAHIT,genome-assembly,2,1.2.9-IGB-gcc-8.2.0,True,"MEGAHIT is a single node assembler for large and complex metagenomics NGS reads, such as soil. It makes use of succinct de Bruijn graph (SdBG) to achieve low me"
+MToolBox,genome-assembly,2,1.2.1-IGB-gcc-4.9.4,True,MToolBox is a highly automated bioinformatics pipeline to reconstruct and analyze human mitochondrial DNA from high throughput sequencing data. MToolBox include
+MUMmer,genome-assembly,5,4.0.0rc1-IGB-gcc-8.2.0,True,MUMmer is a system for rapidly aligning entire genomes
+MaSuRCA,genome-assembly,5,4.1.1-IGB-gcc-8.2.0,True,MaSuRCA is whole genome assembly software. It combines the efficiency of the de Bruijn graph and Overlap-Layout-Consensus (OLC) approaches. MaSuRCA can assemble
+MashMap,genome-assembly,1,2.0,True,MashMap implements a fast and approximate algorithm for computing local alignment boundaries between long DNA sequences. It can be useful for mapping genome ass
+McCortex,genome-assembly,1,1.0.1-IGB-gcc-4.9.4,True,Multi-sample de novo assembly and variant calling using Linked de bruijn graphs. Variant calling with and without a reference genome. Between closely related sa
+Meraculous-2d,genome-assembly,1,2.2.6-IGB-gcc-4.9.4,True,"Meraculous-2D is a whole genome assembler for NGS reads (Illumina) that is capable of assembling large, diploid genomes with modest computational requirements."
+MetaVelvet,genome-assembly,1,1.2.02-IGB-gcc-4.9.4,True,An extension of Velvet assembler to de novo metagenome assembly from short sequence reads
+Minipolish,genome-assembly,1,0.2.0-IGB-gcc-8.2.0-Python-3.10.1,True,"That's where Minipolish comes in. With a single command, it will use Racon to polish up a miniasm assembly, while keeping the assembly in graph form."
+NextPolish,genome-assembly,1,1.4.0-IGB-gcc-8.2.0,True,"NextPolish is used to fix base errors (SNV/Indel) in the genome generated by noisy long reads, it can be used with short read data only or long read data only o"
+Omni-C,genome-assembly,1,20210526-IGB-gcc-8.2.0-Python-3.7.2,True,The Dovetail™ Omni-C™ library uses a sequence-independent endonuclease for chromatin digestion prior to proximity ligation and library generation.
+PANDAseq,genome-assembly,1,2.11-IGB-gcc-4.9.4,True,PANDAseq assembles Illumina Solexa overlapping pair-end reads. - Homepage: https://github.com/neufeld/pandaseq
+Pacasus,genome-assembly,1,1.2-IGB-gcc-4.9.4-Python-2.7.13,True,Tool for detecting and cleaning PacBio / Nanopore long reads after whole genome amplification.
+Peregrine,genome-assembly,1,1.5.4,True,Peregrine & SHIMMER Genome Assembly Toolkit
+Polypolish,genome-assembly,1,0.6.0,True,"Polypolish is a tool for polishing genome assemblies with short reads. Unlike other polishers, Polypolish uses SAM files where each read has been aligned to all"
+RAILS,genome-assembly,1,1.5.1-IGB-gcc-8.2.0,True,RAILS and Cobbler are genomics application for scaffolding and automated finishing of genome assemblies with long DNA sequences. They can be used to scaffold & 
+REAPR,genome-assembly,1,1.0.18-IGB-gcc-4.9.4,True,"REAPR is a tool that evaluates the accuracy of a genome assembly using mapped paired end reads, without the use of a reference genome for comparison. It can be "
+RagTag,genome-assembly,3,2.1.0-IGB-gcc-8.2.0-Python-3.10.1,True,"RagTag, the successor to RaGOO, is a command line tool for reference-guided genome assembly improvement."
+Ragout,genome-assembly,1,2.0-IGB-gcc-4.9.4,True,Ragout (Reference-Assisted Genome Ordering UTility) is a tool for chromosome assembly using multiple references.
+Raven,genome-assembly,1,1.8.3-IGB-gcc-8.2.0,True,Raven is a de novo genome assembler for long uncorrected reads.
+SALSA,genome-assembly,2,2.3-IGB-gcc-4.9.4-Python-2.7.13,True,A tool to scaffold long read assemblies with Hi-C
+SMARTdenovo,genome-assembly,1,20170916-IGB-gcc-4.9.4-Perl-5.24.1,True,SMARTdenovo is a de novo assembler for PacBio and Oxford Nanopore (ONT) data. It produces an assembly from all-vs-all raw read alignments without an error corre
+SOAPdenovo2,genome-assembly,1,r242-IGB-gcc-8.2.0,True,SOAPdenovo is a novel short-read assembly method that can build a de novo draft assembly for the human-sized genomes. The program is specially designed to assem
+SPAdes,genome-assembly,10,3.15.5-IGB-gcc-8.2.0-Python-3.7.2,True,"SPAdes is a versatile toolkit designed for assembly and analysis of sequencing data. SPAdes is primarily developed for Illumina sequencing data, but can be used"
+Stacks,genome-assembly,3,2.62-IGB-gcc-8.2.0,True,"Stacks is a software pipeline for building loci from short-read sequences, such as those generated on the Illumina platform. Stacks was developed to work with r"
+Supernova,genome-assembly,7,2.1.1,True,Supernova is a software package for de novo assembly from Chromium Linked-Reads that are made from a single whole-genome library from an individual DNA source. 
+TULIP,genome-assembly,1,20170513-IGB-gcc-4.9.4-Perl-5.24.1,True,"Tulipseed takes as input alignments files of long reads to sparse short seeds, and outputs a graph and scaffold structures. Tulipbulb adds long read sequencing "
+Trycycler,genome-assembly,1,0.4.1-IGB-gcc-8.2.0-Python-3.7.2,True,"Trycycler is a tool for generating consensus long-read assemblies for bacterial genomes. I.e. if you have multiple long-read assemblies for the same isolate, Tr"
+Unicycler,genome-assembly,4,0.5.1-IGB-gcc-8.2.0-Python-3.10.1,True,Unicycler is an assembly pipeline for bacterial genomes. It can assemble Illumina-only read sets where it functions as a SPAdes-optimiser. It can also assembly 
+abyss,genome-assembly,1,2.2.5-IGB-gcc-8.2.0,True,ABySS is a de novo sequence assembler intended for short paired-end reads and large genomes.
+apollo,genome-assembly,1,20200510-IGB-gcc-8.2.0,True,"A Sequencing-Technology-Independent, Scalable, and Accurate Assembly Polishing Algorithm"
+asset,genome-assembly,1,1.0.3-IGB-gcc-8.2.0,True,Assembly evaluation tool
+blobtools,genome-assembly,3,1.1.1-IGB-gcc-4.9.4-Python-3.6.1,True,Application for the visualisation of (draft) genome assemblies using TAGC (Taxon-annotated Gc-Coverage) plots
+blobtools2,genome-assembly,2,2.6.4-IGB-gcc-8.2.0-Python-3.7.2,True,Application for the visualisation of (draft) genome assemblies using TAGC (Taxon-annotated Gc-Coverage) plots
+cbc_pacbio,genome-assembly,1,beta-IGB-gcc-8.2.0,True,Command-line scripts and pipelines to perform downstream analyses of Sequel II subreads
+cortex,genome-assembly,1,1.0.5.21-IGB-gcc-4.9.4,True,reference free variant assembly
+gce,genome-assembly,1,1.0.2-IGB-gcc-8.2.0,True,"GCE (genomic charactor estimator) is a bayes model based method to estimate the genome size, genomic repeat content and the heterozygsis rate of the sequencings"
+hifiasm,genome-assembly,10,0.5-IGB-gcc-8.2.0,True,"Hifiasm is a fast haplotype-resolved de novo assembler for PacBio Hifi reads. Unlike most existing assemblers, hifiasm starts from uncollapsed genome. Thus, it "
+hypo,genome-assembly,1,1.0.3-IGB-gcc-8.2.0,True,HyPo--a Hybrid Polisher-- utilises short as well as long reads within a single run to polish a long reads assembly of small and large genomes. I
+icorn,genome-assembly,1,0.97-IGB-gcc-4.9.4,True,Inputs: Reference Sequence (FASTA) & reads (FASTQ) & information of short reads
+idba-ud,genome-assembly,1,1.1.3-IGB-gcc-4.9.4,True,IDBA-UD is a iterative De Bruijn Graph De Novo Assembler for Short Reads Sequencing data with Highly Uneven Sequencing Depth.
+medaka,genome-assembly,2,2.0.1-IGB-gcc-8.2.0-Python-3.10.1,True,"Medaka demonstrates a framework for error correcting sequencing data, particularly aimed at nanopore sequencing. Tools are provided for both training and infere"
+merqury,genome-assembly,1,1.3-IGB-gcc-8.2.0,True,Evaluate genome assemblies with k-mers and more
+metaMDBG,genome-assembly,2,1.4,True,"MetaMDBG is a fast and memory-efficient assembler designed for long and accurate metagenomics reads (e.g. PacBio HiFi, Nanopore R10). It is optimized for metage"
+metaviralSPAdes,genome-assembly,1,20200721-IGB-gcc-8.2.0-Python-3.7.2,True,"It contains script for viral assembly from metagenomes (assembler/metaviralspades.py), which is based on metaplasmidSPAdes."
+miniasm,genome-assembly,1,0.2-IGB-gcc-4.9.4,True,Miniasm is a very fast OLC-based de novo assembler for noisy long reads. It takes all-vs-all read self-mappings (typically by minimap) as input and outputs an a
+pagit,genome-assembly,1,1.0,True,"Tools to generate automatically high quality sequence by ordering contigs, closing gaps, correcting sequence errors and transferring annotation."
+parabricks,genome-assembly,2,3.7.0,True,"NVIDIA Clara™ Parabricks is a computational framework supporting genomics applications from DNA to RNA. It employs NVIDIA’s CUDA, HPC, AI, and data analytics st"
+pb-assembly,genome-assembly,2,0.0.8,True,PacBio Assembly Tool Suite
+pbaa,genome-assembly,1,1.0.3.0,True,PacBio Amplicon Analysis (pbaa) separates complex mixtures of amplicon targets from genomic samples. The pbaa application is designed to cluster and generate hi
+pbipa,genome-assembly,2,1.3.2,True,Improved Phased Assembler (IPA) is the official PacBio software for HiFi genome assembly. IPA was designed to utilize the accuracy of PacBio HiFi reads to produ
+phrap,genome-assembly,1,1.090518-IGB-gcc-8.2.0,True,"A Finishing Package (BAM File Viewer, Assembly Editor, Autofinish, Autoreport, Autoedit, and Align Reads To Reference Sequence)"
+pilon,genome-assembly,2,1.23-Java-1.8.0_152,True,"Pilon is a software tool which can be used to:- Automatically improve draft assemblies- Find variation among strains, including large event detection"
+plass,genome-assembly,2,3-764a3,True,Plass (Protein-Level ASSembler) is a software to assemble short read sequencing data on a protein level.
+platanus,genome-assembly,1,1.2.4,True,Platanus is a novel de novo sequence assembler that can reconstruct genomic sequences ofhighly heterozygous diploids from massively parallel shotgun sequencing 
+purge_dups,genome-assembly,2,1.2.5-IGB-gcc-8.2.0-Python-3.7.2,True,purge haplotigs and overlaps in an assembly based on read depth
+purge_haplotigs,genome-assembly,1,1.1.1-IGB-gcc-8.2.0,True,A simple pipeline for reassigning primary contigs that should be labelled as haplotigs.
+quast,genome-assembly,3,5.0.2-IGB-gcc-8.2.0-Python-3.7.2,True,QUAST performs fast and convenient quality evaluation and comparison of genome assemblies.
+quickmerge,genome-assembly,1,0.2-IGB-gcc-4.9.4-Python-2.7.13,True,"quickmerge uses a simple concept to improve contiguity of genome assemblies based on long molecule sequences, often with dramatic outcomes. The program uses inf"
+racon,genome-assembly,4,1.5.0-IGB-gcc-8.2.0-Python-3.10.1,True,"Racon is intended as a standalone consensus module to correct raw contigs generated by rapid assembly methods which do not include a consensus step, such as Min"
+shasta,genome-assembly,1,0.2.0,True,The goal of the Shasta long read assembler is to rapidly produce accurate assembled sequence using as input DNA reads generated by Oxford Nanopore flow cells.
+smrtlink,genome-assembly,7,9.0.0.92188,True,"PacBio open-source SMRT Analysis software suite is designed for use with Single Molecule, Real-Time (SMRT) Sequencing data. You can analyze, visualize, and mana"
+smudgeplot,genome-assembly,1,0.2.5-IGB-gcc-8.2.0-Python-3.7.2,True,This tool extracts heterozygous kmer pairs from kmer count databases and performs gymnastics with them.
+unanimity,genome-assembly,1,20180307-IGB-gcc-4.9.4,True,C++ library and its applications to generate and process accurate consensus sequences
+velvet,genome-assembly,2,1.2.10-IGB-gcc-8.2.0-kmer_121,True,"Velvet is a de novo genomic assembler specially designed for short read sequencing technologies, such as Solexa or 454, developed by Daniel Zerbino and Ewan Bir"
+wtdbg2,genome-assembly,2,2.5-IGB-gcc-4.9.4,True,Wtdbg2 is a de novo sequence assembler for long noisy reads produced by PacBio or Oxford Nanopore Technologies (ONT). It assembles raw reads without error corre
+yahs,genome-assembly,1,1.2a.2-IGB-gcc-8.2.0,True,YaHS is a scaffolding tool using Hi-C data. It relies on a new algothrim for contig joining detection which considers the topological distribution of Hi-C signa
+BRIG,imaging-microscopy,1,0.95-Java-1.8.0_152,True,"BRIG is a free cross-platform (Windows/Mac/Unix) application that can display circular comparisons between a large number of genomes, with a focus on handling g"
+Juicer,imaging-microscopy,1,1.6.0-IGB-gcc-8.2.0,True,"Juicer is a platform for analyzing kilobase resolution Hi-C data. In this distribution, we include the pipeline for generating Hi-C maps from fastq raw data fil"
+OpenSfM,imaging-microscopy,1,0.5.1-IGB-gcc-8.2.0-Python-3.7.2,True,OpenSfM is a Structure from Motion library written in Python. The library serves as a processing pipeline for reconstructing camera poses and 3D scenes from mul
+PEAKachu,imaging-microscopy,1,0.1.0-IGB-gcc-8.2.0-Python-3.7.2,True,Peak calling tool for CLIP-seq data
+PePr,imaging-microscopy,1,1.1.21-IGB-gcc-4.9.4-Python-2.7.13,True,PePr is a ChIP-Seq Peak-calling and Prioritization pipeline that uses a sliding window approach and models read counts across replicates and between groups with
+Phantompeaktools,imaging-microscopy,1,1.2-IGB-gcc-4.9.4-R-3.4.1,True,Custom SPP for Phantompeaktools
+VMD,imaging-microscopy,2,1.9.4a38-IGB-gcc-8.2.0,True,"VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting."
+deeplabcut,imaging-microscopy,2,2.2.1.1-IGB-gcc-8.2.0-Python-3.7.2,True,Markerless pose estimation of user-defined features with deep learning for all animals
+eeglab,imaging-microscopy,1,2021.1-IGB-gcc-8.2.0,True,"EEGLAB is an interactive Matlab toolbox for processing continuous and event-related EEG, MEG and other electrophysiological data incorporating independent compo"
+juicer_tools,imaging-microscopy,1,1.22.01-Java-1.8.0_201,True,
+metashape,imaging-microscopy,2,2.0.1,True,Agisoft Metashape is a stand-alone software product that performs photogrammetric processing of digital images and generates 3D spatial data to be used in GIS a
+metashape-pro,imaging-microscopy,3,2.0.2,True,Agisoft Metashape is a stand-alone software product that performs photogrammetric processing of digital images and generates 3D spatial data to be used in GIS a
+metashape-python,imaging-microscopy,2,2.0.1-IGB-gcc-8.2.0-Python-3.7.2,True,Process digital images and generate 3D spatial data. Fast and highly accurate.
+pyGenomeTracks,imaging-microscopy,1,3.8-IGB-gcc-8.2.0-Python-3.7.2,True,pyGenomeTracks aims to produce high-quality genome browser tracks that are highly customizable.
+root-painter-trainer,imaging-microscopy,1,0.2.19.1-IGB-gcc-8.2.0-Python-3.10.1,True,RootPainter is a GUI-based software tool for the rapid training of deep neural networks for use in biological image analysis. RootPainter uses a client-server a
+simba,imaging-microscopy,1,1.3.0,True,The SimBA region of interest (ROI) interface allows users to define and draw ROIs on videos. ROI data can be used to calculate basic descriptive statistics base
+sleap,imaging-microscopy,1,1.2.4-IGB-gcc-8.2.0-Python-3.7.2,True,SLEAP is an open source deep-learning based framework for multi-animal pose tracking. It can be used to track any type or number of animals and includes an adva
+spaceranger,imaging-microscopy,10,4.1.0,True,Space Ranger is a set of analysis pipelines that process Visium spatial RNA-seq output and brightfield and fluorescence microscope images in order to detect tis
+Anaconda2,languages-stats,1,4.3.1,True,"Built to complement the rich, open source Python community,the Anaconda platform provides an enterprise-ready data analytics platform that empowers companies to"
+Anaconda3,languages-stats,7,5.1.0,True,"Built to complement the rich, open source Python community,the Anaconda platform provides an enterprise-ready data analytics platform that empowers companies to"
+GAMS,languages-stats,2,32.2.0,True,The General Algebraic Modeling System (GAMS) is a high-level modeling system for mathematical programming and optimization. It consists of a language compiler a
+Go,languages-stats,1,1.24.4,True,"Go is an open source programming language that makes it easy to build simple, reliable, and efficient software."
+IPython,languages-stats,1,5.3.0-IGB-gcc-4.9.4-Python-3.6.1,True,IPython provides a rich architecture for interactive computing with: Powerful interactive shells (terminal and Qt-based). A browser-based notebook with support 
+Java,languages-stats,7,25.0.1,True,"Java Platform, Standard Edition (Java SE) lets you develop and deployJava applications on desktops and servers."
+Julia,languages-stats,1,1.11.3-linux-x86_64,True,"Julia is a high-level, high-performance dynamic programming language for numerical computing"
+Lua,languages-stats,3,5.3.4-IGB-gcc-4.9.4,True,"Lua is a powerful, fast, lightweight, embeddable scripting language. Lua combines simple procedural syntax with powerful data description constructs based on as"
+MATLAB,languages-stats,3,2020b-IGB-gcc-8.2.0,True,MATLAB is a high-level language and interactive environment that enables you to perform computationally intensive tasks faster than with traditional programming
+Mathematica,languages-stats,1,14.1.0,True,"Mathematica is a computational software program used in many scientific, engineering, mathematicaland computing fields."
+Miniconda2,languages-stats,1,4.7.12.1,True,"Built to complement the rich, open source Python community,the Anaconda platform provides an enterprise-ready data analytics platform that empowers companies to"
+Miniconda3,languages-stats,5,4.7.12.1,True,"Miniconda is a free minimal installer for conda. It is a small, bootstrap version of Anaconda that includes only conda, Python, the packages they depend on, and"
+Nim,languages-stats,1,2.2.4-IGB-gcc-8.2.0,True,Nim is a systems and applications programming language.
+OCaml,languages-stats,1,4.05.0-IGB-gcc-4.9.4,True,OCaml is a general purpose industrial-strength programming language with an emphasis on expressiveness and safety. Developed for more than 20 years at Inria it 
+Perl,languages-stats,4,5.28.1-IGB-gcc-8.2.0,True,Larry Wall's Practical Extraction and Report Language
+Python,languages-stats,5,3.7.2-IGB-gcc-8.2.0,True,Python is a programming language that lets you work more quickly and integrate your systems more effectively.
+R,languages-stats,14,4.5.1-IGB-gcc-8.2.0,True,R is a free software environment for statistical computing and graphics.
+RStudio,languages-stats,1,2023.09.1-494,True,"Used by millions of people weekly, the RStudio integrated development environment (IDE) is a set of tools built to help you be more productive with R and Python"
+Ruby,languages-stats,1,2.4.2-IGB-gcc-4.9.4,True,"Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to wr"
+dotNet,languages-stats,1,8.0.405,True,".NET is the free, open-source, cross-platform framework for building modern apps and powerful cloud services."
+mypy,languages-stats,1,1.16.1-IGB-gcc-8.2.0-Python-3.10.1,True,"Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or ""duck"") typing and static typing."
+ncdf4,languages-stats,1,1.16-IGB-gcc-4.9.4-R-3.3.3,True,"This package provides a high-level R interface to data files written using Unidatas netCDF library (version 4 or earlier), which are binary data files that are "
+nltk,languages-stats,2,3.5-IGB-gcc-8.2.0-Python-3.7.2,True,"NLTK -- the Natural Language Toolkit -- is a suite of open source Python modules, data sets, and tutorials supporting research and development in Natural Langua"
+pypy,languages-stats,1,7.3.5-IGB-gcc-4.9.4-Python-2.7.13,True,"A fast, compliant alternative implementation of Python"
+rpy,languages-stats,1,1.0.3-IGB-gcc-4.9.4-Python-2.7.13-R-2.15.3,True,"RPy is a very simple, yet robust, Python interface to the R Programming Language. Itcan manage all kinds of R objects and can execute arbitrary R functionsinclu"
+rpy2,languages-stats,7,3.4.5-IGB-gcc-8.2.0-Python-3.7.2-R-4.1.2,True,"rpy2 is a redesign and rewrite of rpy. It is providing a low-level interface to R from Python, a proposed high-level interface, including wrappers to graphical "
+swift-t,languages-stats,1,1.3-IGB-gcc-4.9.4,True,"Swift/T is a completely new implementation of the Swift language for high-performance computing. In this implementation, the Swift script is translated into an "
+wombat,languages-stats,1,20210107,True,"WOMBAT is a program to facilitate analyses fitting a linear, mixed model via restricted maximum likelihood (REML)."
+Anacapa,metagenomics-microbiome,1,20200814-IGB-gcc-4.9.4-Python-2.7.13,True,Anacapa is an eDNA toolkit that allows users to build comprehensive reference databases and assign taxonomy to raw multilocus metabarcode sequence data.
+BamM,metagenomics-microbiome,1,1.7.3-IGB-gcc-4.9.4-Python-2.7.13,True,"The primary motivation for building BamM was to replaace PySam in GroopM. Not saying PySam is bad, it's just that GroopM doesn't need all the PySam features and"
+BiG-SCAPE,metagenomics-microbiome,2,1.1.5-IGB-gcc-8.2.0-Python-3.7.2,True,"BiG-SCAPE (Biosynthetic Gene Similarity Clustering and Prospecting Engine) is a software package, written in Python, that constructs sequence similarity network"
+Bracken,metagenomics-microbiome,2,2.6.2-IGB-gcc-8.2.0,True,"Bracken is a companion program to Kraken 1 or Kraken 2 While Kraken classifies reads to multiple levels in the taxonomic tree, Bracken allows estimation of abun"
+CONCOCT,metagenomics-microbiome,2,1.1.0-IGB-gcc-8.2.0-Python-3.7.2,True,"A program for unsupervised binning of metagenomic contigs by using nucleotide composition, coverage data in multiple samples and linkage data from paired end re"
+DAS_Tool,metagenomics-microbiome,1,1.1.2-IGB-gcc-4.9.4,True,"DAS Tool is an automated method that integrates the results of a flexible number of binning algorithms to calculate an optimized, non-redundant set of bins from"
+EMIRGE,metagenomics-microbiome,1,0.61.1-IGB-gcc-4.9.4-Python-2.7.13,True,"EMIRGE reconstructs full length ribosomal genes from short readsequencing data. In the process, it also provides estimates of thesequences abundances."
+Grinder,metagenomics-microbiome,1,0.5.4-IGB-gcc-4.9.4-Perl-5.24.1,True,Grinder is a versatile open-source bioinformatic tool to create simulated omic shotgun and amplicon sequence libraries for all main sequencing platforms.
+HOPS,metagenomics-microbiome,1,0.33,True,HOPS is a java pipeline which focuses on screening MALT data for the presence of a user-specified list of target species. The pipeline essentially exists to mak
+HUMAnN2,metagenomics-microbiome,2,0.11.2-IGB-gcc-4.9.4-Python-3.6.1,True,HUMAnN is a pipeline for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatr
+IM-TORNADO,metagenomics-microbiome,1,2.0.3.3-IGB-gcc-4.9.4-Python-2.7.13,True,A pipeline for 16S reads from paired-end libraries
+KneadData,metagenomics-microbiome,5,0.8.0-IGB-gcc-8.2.0-Python-3.7.2,True,"KneadData is a tool designed to perform quality control on metagenomic sequencing data, especially data from microbiome experiments. In these experiments, sampl"
+Kraken,metagenomics-microbiome,2,1.1.1-IGB-gcc-8.2.0,True,"Kraken is a system for assigning taxonomic labels to short DNA sequences, usually obtained through metagenomic studies. Previous attempts by other bioinformatic"
+Kraken2,metagenomics-microbiome,5,2.1.6-IGB-gcc-8.2.0,True,"Kraken is a system for assigning taxonomic labels to short DNA sequences, usually obtained through metagenomic studies. Previous attempts by other bioinformatic"
+KrakenTools,metagenomics-microbiome,1,1.2-IGB-gcc-8.2.0-Python-3.7.2,True,"KrakenTools is a suite of scripts to be used alongside the Kraken, KrakenUniq, Kraken 2, or Bracken programs. These scripts are designed to help Kraken users wi"
+KrakenUniq,metagenomics-microbiome,1,1.0.4-IGB-gcc-8.2.0,True,KrakenUniq: confident and fast metagenomics classification using unique k-mer counts
+Krona,metagenomics-microbiome,1,2.7-IGB-gcc-4.9.4-Perl-5.24.1,True,Interactively explore metagenomes and more from a web browser.
+LEfSe,metagenomics-microbiome,1,20180219-IGB-gcc-4.9.4-Python-2.7.13,True,LEfSe
+MEGAN,metagenomics-microbiome,1,6.12.2-Java-1.8.0_152,True,MEGAN6 is a comprehensive toolbox for interactively analyzing microbiome data. All the interactive tools you need in one application.
+MIJAMP,metagenomics-microbiome,1,20250922-IGB-gcc-8.2.0,True,"Detecting bacterial methylation motifs is of interest to synthetic biologists working with newly domesticated strains, as cells use these methylation patterns t"
+Mash,metagenomics-microbiome,1,2.2.2-IGB-gcc-8.2.0,True,Fast genome and metagenome distance estimation using MinHash
+MetaBAT,metagenomics-microbiome,3,2.17-IGB-gcc-8.2.0,True,"MetaBAT, an efficient tool for accurately reconstructing single genomes from complex microbial communities"
+Mothur,metagenomics-microbiome,5,1.47.0-IGB-gcc-8.2.0,True,"Mothur is a single piece of open-source, expandable software to fill the bioinformatics needs of the microbial ecology community."
+OBITools3,metagenomics-microbiome,1,3.0.0b42-IGB-gcc-8.2.0-Python-3.7.2,True,The OBITools3: A package for the management of analyses and data in DNA metabarcoding
+PICRUSt,metagenomics-microbiome,2,1.1.3-IGB-gcc-4.9.4-Python-2.7.13,True,"PICRUSt (pronounced pie crust) is a bioinformatics software package designed to predict metagenome functional content from marker gene (e.g., 16S rRNA) surveys "
+PICRUSt2,metagenomics-microbiome,2,2.4.1-IGB-gcc-8.2.0-Python-3.7.2,True,PICRUSt2 (Phylogenetic Investigation of Communities by Reconstruction of Unobserved States) is a software for predicting functional abundances based only on mar
+PanKmer,metagenomics-microbiome,1,0.20.4,True,k-mer based and reference-free pangenome analysis
+PhiSpy,metagenomics-microbiome,1,2.3-IGB-gcc-4.9.4-Python-2.7.13,True,A novel algorithm for finding prophages in microbial genomes that combines similarity-based and composition-based strategies
+QIIME,metagenomics-microbiome,1,1.9.1,True,QIIME is an open-source bioinformatics pipeline for performing microbiome analysis from raw DNA sequencing data.
+QIIME2,metagenomics-microbiome,22,2026.7,True,QIIME is an open-source bioinformatics pipeline for performing microbiome analysis from raw DNA sequencing data.
+USEARCH,metagenomics-microbiome,6,9.2.64,True,USEARCH is a unique sequence analysis tool which offers search and clustering algorithms that are often orders of magnitude faster than BLAST.
+VICSIN,metagenomics-microbiome,1,1.0-IGB-gcc-4.9.4-Perl-5.24.1-Python-2.7.13,True,"VICSIN = Viral, Integrative, and Conjugative Sequence Identification and Networking"
+VSEARCH,metagenomics-microbiome,1,2.4.3-IGB-gcc-4.9.4,True,"VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accura"
+VirSorter,metagenomics-microbiome,1,20170215-IGB-gcc-4.9.4-Perl-5.24.1,True,VirSorter: mining viral signal from microbial genomic data.
+VirSorter2,metagenomics-microbiome,2,2.2.4,True,"irSorter2 applies a multi-classifier, expert-guided approach to detect diverse DNA and RNA virus genomes."
+anvio,metagenomics-microbiome,3,7.1-IGB-gcc-4.9.4-Python-3.6.1,True,"Anvi’o is an open-source, community-driven analysis and visualization platform for ‘omics data."
+big-map2-analyse,metagenomics-microbiome,1,20200124,True,This is the Github repository for the Biosynthetic Gene cluster Meta’omics abundance Profiler
+big-map2-process,metagenomics-microbiome,1,20200124,True,This is the Github repository for the Biosynthetic Gene cluster Meta’omics abundance Profiler
+bio-rocker,metagenomics-microbiome,1,1.2.0-IGB-gcc-4.9.4-Ruby-2.4.2,True,Accurately detecting functional genes in metagenomes.
+centrifuge,metagenomics-microbiome,2,1.0.4-beta-IGB-gcc-4.9.4,True,"Centrifuge is a very rapid and memory-efficient system for the classification of DNA sequences from microbial samples, with better sensitivity than and comparab"
+drep,metagenomics-microbiome,1,3.2.0-IGB-gcc-8.2.0-Python-3.7.2,True,"dRep is a python program which performs rapid pair-wise comparison of genome sets. One of it’s major purposes is for genome de-replication, but it can do a lot "
+figaro,metagenomics-microbiome,1,1.1.2-IGB-gcc-8.2.0-Python-3.7.2,True,An efficient and objective tool for optimizing microbiome rRNA gene trimming parameters.
+gossamer,metagenomics-microbiome,1,20170105-IGB-gcc-4.9.4,True,"The gossamer bioinformatics suite contains goss, gossple, xenome, and electus"
+hifiasm-meta,metagenomics-microbiome,1,0.3-IGB-gcc-8.2.0,True,A hifiasm fork for metagenome assembly using Hifi reads
+humann,metagenomics-microbiome,6,4.0.0.alpha.1-final-IGB-gcc-8.2.0-Python-3.10.1,True,HUMAnN (the HMP Unified Metabolic Analysis Network) is a method for efficiently and accurately profiling the abundance of microbial metabolic pathways and other
+iRep,metagenomics-microbiome,1,20191228-IGB-gcc-8.2.0-Python-3.7.2,True,iRep is a method for determining replication rates for bacteria from single time point metagenomics sequencing and draft-quality genomes.
+maxbin2,metagenomics-microbiome,1,2.2.7-IGB-gcc-4.9.4,True,MaxBin2 is the next-generation of MaxBin (https://sourceforge.net/projects/maxbin/) that supports multiple samples at the same time.
+metaWRAP,metagenomics-microbiome,2,1.3.2,True,"MetaWRAP also includes a novel bin reassembly module, which allows to drastically improve the quality of a set of bins by extracting the reads belonging to each"
+metaphlan,metagenomics-microbiome,7,4.2.4-IGB-gcc-8.2.0-Python-3.10.1,True,"MetaPhlAn is a computational tool for profiling the composition of microbial communities (Bacteria, Archaea and Eukaryotes) from metagenomic shotgun sequencing "
+metaphlan2,metagenomics-microbiome,4,2.7.8-IGB-gcc-4.9.4-Python-3.6.1,True,"MetaPhlAn is a computational tool for profiling the composition of microbial communities (Bacteria, Archaea, Eukaryotes and Viruses) from metagenomic shotgun se"
+microbiomeutil,metagenomics-microbiome,1,20110519-IGB-gcc-4.9.4,True,"Contains ChimeraSlayer, WigeoN, and NAST-iEr"
+mspminer,metagenomics-microbiome,1,2.0,True,MSPminer reconstitutes Metagenomic Species Pan-genomes by binning co-abundant genes across metagenomic samples.
+nonpareil,metagenomics-microbiome,1,3.3.4-IGB-gcc-8.2.0,True,Estimate average coverage and create Nonpareil curves for metagenomic datasets.
+pb-metagenomics-tools,metagenomics-microbiome,1,3.3.2,True,Tools for performing metagenomic analyses using HiFi sequencing data
+phyloFlash,metagenomics-microbiome,1,3.3-IGB-gcc-4.9.4,True,phyloFlash is a pipeline to rapidly reconstruct the SSU rRNAs and explore phylogenetic composition of an Illumina (meta)genomic or transcriptomic dataset.
+pyani,metagenomics-microbiome,1,0.2.10-IGB-gcc-4.9.4-Python-3.6.1,True,Python module for average nucleotide identity analyses
+sbanalyzer,metagenomics-microbiome,2,3.1-2,True,Shoreline Biome’s unique microbiome kits are the key to generating long-read next-generation sequencing data necessary to discriminate microbial strains from an
+semibin,metagenomics-microbiome,1,2.4.0,True,Metagenomic Binning Using Siamese Neural Networks for short and long reads
+shortbred,metagenomics-microbiome,1,0.9.5-IGB-gcc-4.9.4-Python-2.7.13,True,"ShortBRED is a pipeline to take a set of protein sequences, reduce them to a set of unique identifying strings (""markers""), and then search for these markers in"
+songbird,metagenomics-microbiome,1,1.0.3-IGB-gcc-4.9.4-Python-3.6.1,True,Establishing microbial composition measurement standards with reference frames
+sortmerna,metagenomics-microbiome,2,4.3.6,True,"SortMeRNA is a program tool for filtering, mapping and OTU-picking NGS reads in metatranscriptomic and metagenomic data. The core algorithm is based on approxim"
+sourcetracker,metagenomics-microbiome,1,2.0.1-IGB-gcc-4.9.4-Python-3.6.1,True,Bayesian community-wide culture-independent microbial source tracking
+sourmash,metagenomics-microbiome,2,4.8.14-IGB-gcc-8.2.0-Python-3.10.1,True,"Quickly search, compare, and analyze genomic and metagenomic data sets."
+waafle,metagenomics-microbiome,1,1.1.0-IGB-gcc-8.2.0-Python-3.10.1,True,"WAAFLE (a Workflow to Annotate Assemblies and Find LGT Events) is a method for finding novel LGT (Lateral Gene Transfer) events in assembled metagenomes, includ"
+ArcadeLearningEnvironment,ml-gpu-frameworks,1,0.5.1-IGB-gcc-4.9.4-Python-2.7.13,True,The Arcade Learning Environment (ALE) -- a platform for AI research. - Homepage: https://github.com/mgbellemare/Arcade-Learning-Environment
+CUDA,ml-gpu-frameworks,13,9.1.85,True,CUDA (formerly Compute Unified Device Architecture) is a parallel computing platform and programming model created by NVIDIA and implemented by the graphics pro
+GMTK,ml-gpu-frameworks,1,1.4.4-IGB-gcc-4.9.4,True,"The Graphical Models Toolkit (GMTK) is an open source, publicly available toolkit for rapidly prototyping statistical models using dynamic graphical models (DGM"
+Keras,ml-gpu-frameworks,10,2.3.1-IGB-gcc-4.9.4-Python-3.6.1-TF-2.0.3,True,"Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK, or Theano."
+Lasagne,ml-gpu-frameworks,1,20170606-IGB-gcc-4.9.4-Python-2.7.13,True,Lasagne is a lightweight library to build and train neural networks in Theano. - Homepage: http://lasagne.readthedocs.io/en/latest/index.html
+MaskRCNN,ml-gpu-frameworks,1,20190227-IGB-gcc-4.9.4-Python-3.6.1,True,"This is an implementation of Mask R-CNN on Python 3, Keras, and TensorFlow. The model generates bounding boxes and segmentation masks for each instance of an ob"
+NetLogo,ml-gpu-frameworks,2,6.0.3,True,"NetLogo is a multi-agent programmable modeling environment. It is used by many tens of thousands of students, teachers and researchers worldwide."
+OpenCV,ml-gpu-frameworks,3,4.5.2-IGB-gcc-8.2.0-Python-3.7.2,True,OpenCV (Open Source Computer Vision Library) is an open source computer vision and machine learning software library. OpenCV was built to provide a common infra
+OutPredict,ml-gpu-frameworks,1,1.0.0-IGB-gcc-8.2.0-Python-3.7.2,True,"This repository contains OutPredict, a python developed Method for Predicting Out-of-sample Data in Time Series and Steady State data as well as to predict Caus"
+PyCUDA,ml-gpu-frameworks,1,2017.1-IGB-gcc-4.9.4-Python-2.7.13,True,PyCUDA lets you access Nvidia’s CUDA parallel computation API from Python. Several wrappers of the CUDA API already exist-so what’s so special about PyCUDA?
+PyTorch,ml-gpu-frameworks,15,2.7.0-IGB-gcc-8.2.0-Python-3.10.1,True,Tensors and Dynamic neural networks in Pythonwith strong GPU acceleration.
+TAPE,ml-gpu-frameworks,2,20191209-IGB-gcc-4.9.4-Python-3.6.1,True,"Tasks Assessing Protein Embeddings (TAPE), a set of five biologically relevant semi-supervised learning tasks spread across different domains of protein biology"
+TensorFlowModels,ml-gpu-frameworks,2,20171113-IGB-gcc-4.9.4-Python-3.6.1,True,This repository contains a number of different models implemented in TensorFlow:
+Tensorflow,ml-gpu-frameworks,5,2.9.1-IGB-gcc-8.2.0-Python-3.7.2,True,An open-source software library for Machine Intelligence
+Tensorflow-GPU,ml-gpu-frameworks,12,2.9.1-IGB-gcc-8.2.0-Python-3.7.2,True,An open-source software library for Machine Intelligence
+Torch,ml-gpu-frameworks,1,20171018-IGB-gcc-4.9.4-Python-3.6.1,True,"Torch is a scientific computing framework with wide support for machine learning algorithms that puts GPUs first. It is easy to use and efficient, thanks to an "
+abcranger,ml-gpu-frameworks,1,1.2.64,True,Random forests methodologies for ABC model choice and ABC Bayesian parameter inference (
+cddd,ml-gpu-frameworks,1,20200130-IGB-gcc-4.9.4-Python-3.6.1,True,Continuous and Data-Driven Descriptors
+cuDNN,ml-gpu-frameworks,11,8.9.2.23-CUDA-11.8.0,True,The NVIDIA CUDA Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks.
+deep_q_rl,ml-gpu-frameworks,1,20160603-IGB-gcc-4.9.4-Python-2.7.13,True,This package provides a Lasagne/Theano-based implementation of the deep Q-learning algorithm described in:Playing Atari with Deep Reinforcement Learning Volodym
+detectron2,ml-gpu-frameworks,4,0.6-IGB-gcc-8.2.0-Python-3.7.2,True,Detectron2 is Facebook AI Research's next generation software system that implements state-of-the-art object detection algorithms
+gcta,ml-gpu-frameworks,1,1.94.0Beta,True,GCTA (Genome-wide Complex Trait Analysis) is a software package initially developed to estimate the proportion of phenotypic variance explained by all genome-wi
+h2o,ml-gpu-frameworks,1,3.14.0.3-IGB-gcc-4.9.4-R-3.3.3,True,"R scripting functionality for H2O, the open source math engine for big data that computes parallel distributed machine learning algorithms such as generalized l"
+jax-unirep,ml-gpu-frameworks,1,0.9-IGB-gcc-4.9.4-Python-3.6.1,True,Reimplementation of the UniRep protein featurization model in JAX.
+keras-rl,ml-gpu-frameworks,1,0.3.0-IGB-gcc-4.9.4-Python-2.7.13,True,keras-rl implements some state-of-the art deep reinforcement learning algorithms in Python and seamlessly integrates with the deep learning library Keras.
+leidenalg,ml-gpu-frameworks,1,0.10.2-IGB-gcc-8.2.0-Python-3.10.1,True,This package implements the Leiden algorithm in C++ and exposes it to python. It relies on (python-)igraph for it to function.
+libgpuarray,ml-gpu-frameworks,1,0.6.5-IGB-gcc-4.9.4,True,"Make a common GPU ndarray(n dimensions array) that can be reused by all projects that is as future proof as possible, while keeping it easy to use for simple ne"
+libsvm,ml-gpu-frameworks,1,3.24-IGB-gcc-4.9.4,True,"LIBSVM is an integrated software for support vector classification, (C-SVC, nu-SVC), regression (epsilon-SVR, nu-SVR) and distribution estimation (one-class SVM"
+mageck-vispr,ml-gpu-frameworks,1,0.5.4-IGB-gcc-4.9.4-Python-3.6.1,True,"MAGeCK-VISPR is a comprehensive quality control, analysis and visualization workflow for CRISPR/Cas9 screens."
+merlin-p,ml-gpu-frameworks,1,20181020-IGB-gcc-8.2.0,True,Modular regulatory network learning with per gene information (MERLIN) is a network inference method that tries to infer a more accurate regulatory network by i
+numba,ml-gpu-frameworks,6,0.59.0-IGB-gcc-8.2.0-Python-3.10.1,True,"Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc. It uses the remarkable LLVM compiler infrastructure to"
+pgmpy,ml-gpu-frameworks,1,20180320-IGB-gcc-4.9.4-Python-3.6.1,True,pgmpy is a python library for working with Probabilistic Graphical Models.
+pyCUDA,ml-gpu-frameworks,1,2024.1-IGB-gcc-8.2.0-Python-3.10.1,True,PyCUDA lets you access Nvidia’s CUDA parallel computation API from Python. Several wrappers of the CUDA API already exist-so what’s so special about PyCUDA?
+pygpu,ml-gpu-frameworks,1,0.6.5-IGB-gcc-4.9.4-Python-2.7.13,True,Python bindings for libgpuarray - Homepage: http://deeplearning.net/software/libgpuarray
+pylearn2,ml-gpu-frameworks,1,20170525-IGB-gcc-4.9.4-Python-2.7.13,True,Pylearn2 is a library designed to make machine learning research easy. - Homepage: https://github.com/lisa-lab/pylearn2
+pytorch-geometric,ml-gpu-frameworks,1,2.0.4-IGB-gcc-8.2.0-Python-3.7.2,True,PyG (PyTorch Geometric) is a library built upon PyTorch to easily write and train Graph Neural Networks (GNNs) for a wide range of applications related to struc
+root,ml-gpu-frameworks,2,6.14.06-IGB-gcc-4.9.4-Python-2.7.13,True,"A modular scientific software toolkit. It provides all the functionalities needed to deal with big data processing, statistical analysis, visualisation and stor"
+scikit-cuda,ml-gpu-frameworks,1,0.5.1-IGB-gcc-4.9.4-Python-2.7.13,True,"scikit-cuda provides Python interfaces to many of the functions in the CUDA device/runtime, CUBLAS, CUFFT, and CUSOLVER libraries distributed as part of NVIDIAs"
+t3f,ml-gpu-frameworks,4,20200316-IGB-gcc-4.9.4-Python-3.6.1-TF-2.2.0,True,t3f is a library for working with Tensor Train decomposition.
+tensorboardX,ml-gpu-frameworks,4,2.5.1-IGB-gcc-8.2.0,True,Tensorboard for PyTorch.
+tensorly,ml-gpu-frameworks,1,0.4.2-IGB-gcc-4.9.4-Python-3.6.1,True,Simple and Fast Tensor Learning in Python
+torchsample,ml-gpu-frameworks,1,0.1.3-IGB-gcc-4.9.4-Python-3.6.1,True,"High-Level Training, Data Augmentation, and Utilities for Pytorch"
+transformers,ml-gpu-frameworks,1,4.40.2-IGB-gcc-8.2.0-Python-3.10.1,True,"Transformers provides thousands of pretrained models to perform tasks on different modalities such as text, vision, and audio."
+umap-learn,ml-gpu-frameworks,3,0.5.6-IGB-gcc-8.2.0-Python-3.10.1,True,"Uniform Manifold Approximation and Projection (UMAP) is a dimension reduction technique that can be used for visualisation similarly to t-SNE, but also for gene"
+unirep,ml-gpu-frameworks,1,20200303-IGB-gcc-4.9.4-Python-3.6.1,True,"UniRep, a mLSTM ""babbler"" deep representation learner for protein engineering informatics."
+xgboost,ml-gpu-frameworks,1,0.80-IGB-gcc-4.9.4-Python-3.6.1,True,"XGBoost is an optimized distributed gradient boosting library designed to be highly efficient, flexible and portable. It implements machine learning algorithms "
+GROMACS,molecular-dynamics-chemistry,2,2021.2-IGB-gcc-8.2.0-CUDA-11.1.0,True,"GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles"
+Gaussian,molecular-dynamics-chemistry,1,16.C.01,True,Gaussian 16 is the latest in the Gaussian series of programs. It provides state-of-the-art capabilities for electronic structure modeling. Gaussian 16 is licens
+NAMD,molecular-dynamics-chemistry,1,20200428,True,is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems.
+NWChem,molecular-dynamics-chemistry,1,6.6.revision27746-IGB-gcc-4.9.4-Python-2.7.13,True,NWChem aims to provide its users with computational chemistry tools that are scalable both in their ability to treat large scientific computational chemistry pr
+OpenBabel,molecular-dynamics-chemistry,1,3.0.0-IGB-gcc-8.2.0,True,"Open Babel is a chemical toolbox designed to speak the many languages of chemical data. It's an open, collaborative project allowing anyone to search, convert, "
+AMPHORA2,phylogenetics-comparative,1,20190104-IGB-gcc-4.9.4,True,An Automated Phylogenomic Inference Pipeline for Bacterial and Archaeal Sequences.
+ANIcalculator,phylogenetics-comparative,1,1.0,True,
+AdmixTools,phylogenetics-comparative,1,1.0.1-IGB-gcc-4.9.4,True,The ADMIXTOOLS package implements 5 methods described in Patterson et al. (2012) Ancient Admixture in Human History. Details of the methods and algorithm can be
+Arlequin,phylogenetics-comparative,1,3.5,True,An Integrated Software for Population Genetics Data Analysis
+BEAST2,phylogenetics-comparative,2,2.7.5-IGB-gcc-8.2.0-SSE,True,"BEAST 2 is a cross-platform program for Bayesian phylogenetic analysis of molecular sequences. It estimates rooted, time-measured phylogenies using strict or re"
+BayeScan,phylogenetics-comparative,1,2.1,True,"This program, BayeScan aims at identifying candidate loci under natural selection from genetic data, using differences in allele frequencies between populations"
+CLUMPP,phylogenetics-comparative,1,1.1.2,True,CLUMPP is a program that deals with label switching and multimodality problems in population-genetic cluster analyses.
+DIYABC,phylogenetics-comparative,1,2.1.0,True,DIYABC RF V1.0
+DendroPy,phylogenetics-comparative,3,5.0.8-IGB-gcc-8.2.0-Python-3.10.1,True,DendroPy is a Python library for phylogenetic computing.
+FastME,phylogenetics-comparative,2,2.1.6.3-IGB-gcc-8.2.0,True,"FastME provides distance algorithms to infer phylogenies. FastME is based on balanced minimum evolution, which is the very principle of NJ. FastME improves over"
+FastTree,phylogenetics-comparative,2,2.1.11-IGB-gcc-8.2.0,True,FastTree infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences. FastTree can handle alignments with up t
+GTDBTk,phylogenetics-comparative,4,2.6.1,True,GTDB-Tk is a software toolkit for assigning objective taxonomic classifications to bacterial and archaeal genomes based on the Genome Database Taxonomy GTDB
+Lep-MAP3,phylogenetics-comparative,1,20221128-Java-15.0.1,True,Lep-MAP3 (LM3) is a novel linkage map construction software suite. It can handle millions of markers and thousands of individuals possibly on multiple families.
+MAFFT,phylogenetics-comparative,2,7.490-IGB-gcc-8.2.0,True,"MAFFT is a multiple sequence alignment program for unix-like operating systems. It offers a range of multiple alignment methods, L-INS-i (accurate; for alignmen"
+NINJA,phylogenetics-comparative,1,0.97-IGB-gcc-4.9.4,True,Nearly Infinite Neighbor Joining Application
+OrthoFinder,phylogenetics-comparative,4,3.0.1b1-IGB-gcc-8.2.0,True,"OrthoFinder is a fast, accurate and comprehensive platform for comparative genomics. It finds orthologs and orthogroups, infers rooted gene trees for all orthog"
+OrthoMCL,phylogenetics-comparative,1,2.0.9-IGB-gcc-4.9.4-Perl-5.24.1,True,OrthoMCL is a genome-scale algorithm for grouping orthologous protein sequences. - Homepage: http://orthomcl.org/
+PAGAN,phylogenetics-comparative,1,20150723-IGB-gcc-4.9.4,True,PAGAN is a general-purpose method for the alignment of sequence graphs. PAGAN is based on the phylogeny-aware progressive alignment algorithm and uses graphs to
+PAML,phylogenetics-comparative,1,4.9e-IGB-gcc-4.9.4,True,PAML is a package of programs for phylogenetic analyses of DNA or protein sequences using maximum likelihood. - Homepage: http://abacus.gene.ucl.ac.uk/software/
+PRANK,phylogenetics-comparative,1,170427-IGB-gcc-4.9.4,True,"PRANK is a probabilistic multiple alignment program for DNA, codon and amino-acid sequences. It’s based on a novel algorithm that treats insertions correctly an"
+PhyloSift,phylogenetics-comparative,1,1.0.0_01-IGB-gcc-4.9.4-Perl-5.24.1,True,PhyloSift is a suite of software tools to conduct phylogeneticanalysis of genomes and metagenomes.
+RAxML,phylogenetics-comparative,1,8.2.12-IGB-gcc-4.9.4,True,RAxML search algorithm for maximum likelihood based inference of phylogenetic trees.
+RDPClassifier,phylogenetics-comparative,2,2.2-Java-1.8.0_152,True,The RDP Classifier is a naive Bayesian classifier which was developed to provide rapid taxonomic placement based on rRNA sequence data. The RDP Classifier can r
+RFMix,phylogenetics-comparative,1,20180503-IGB-gcc-4.9.4,True,A discriminative method for local ancestry inference
+SEPP,phylogenetics-comparative,4,4.5.5-IGB-gcc-8.2.0-Python-3.10.1,True,"SEPP stands for ""SATe-enabled Phylogenetic Placement"", and addresses the problem of phylogenetic placement of short reads into reference alignments and trees."
+Sibelia,phylogenetics-comparative,1,3.0.7-IGB-gcc-4.9.4,True,"Sibelia is a tool for finding synteny blocks in closely related genomes, like different strains of the same bacterial species."
+Spine,phylogenetics-comparative,1,0.2.1-IGB-gcc-4.9.4,True,Spine identifies a core genome from input genomic sequences. Sequences are aligned using Nucmer and regions found to be in common between all or a user-defined 
+admixture,phylogenetics-comparative,1,1.3.0,True,ADMIXTURE is a software tool for maximum likelihood estimation of individual ancestries from multilocus SNP genotype datasets. It uses the same statistical mode
+beagle-lib,phylogenetics-comparative,2,4.0.0-IGB-gcc-8.2.0-SSE,True,BEAGLE is a high-performance library that can perform the core calculations at the heart of most Bayesian and Maximum Likelihood phylogenetics packages. It can 
+beast2,phylogenetics-comparative,1,2.6.7-Java-1.8.0_201,True,"BEAST 2 is a cross-platform program for Bayesian phylogenetic analysis of molecular sequences. It estimates rooted, time-measured phylogenies using strict or re"
+cactus,phylogenetics-comparative,1,20180705-IGB-gcc-4.9.4-Python-2.7.13,True,Cactus is a reference-free whole-genome multiple alignment program.
+crb-blast,phylogenetics-comparative,1,0.6.9-IGB-gcc-4.9.4,True,Conditional Reciprocal Best BLAST - high confidence ortholog assignment. CRB-BLAST is a novel method for finding orthologs between one set of sequences and anot
+crimap,phylogenetics-comparative,1,2.507-IGB-gcc-8.2.0,True,"CRI-MAP (version 2.4, by Phil Green et al, 1990) has been used extensively in the past 20 years for genetic linkage analysis of diploid species, and has played "
+diyabc,phylogenetics-comparative,1,1.1.28,True,DIYABC RF V1.0
+eigensoft,phylogenetics-comparative,1,7.2.1-IGB-gcc-4.9.4,True,The EIGENSOFT package combines functionality from our population genetics methods (Patterson et al. 2006) and our EIGENSTRAT stratification correction method (P
+epa-ng,phylogenetics-comparative,1,0.3.8-IGB-gcc-8.2.0,True,"EPA-ng is a complete rewrite of the Evolutionary Placement Algorithm (EPA), previously implemented in RAxML. It uses libpll and pll-modules to perform maximum l"
+gappa,phylogenetics-comparative,1,0.6.1-IGB-gcc-8.2.0,True,gappa is a collection of commands for working with phylogenetic data. Its main focus are evolutionary placements of short environmental sequences on a reference
+graphlan,phylogenetics-comparative,1,6ca8735-IGB-gcc-4.9.4-Python-2.7.13,True,"GraPhlAn is a software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It focuses on concise, integrative, informa"
+hapflk,phylogenetics-comparative,1,1.4-IGB-gcc-4.9.4-Python-3.6.1,True,hapflk is a software implementing the hapFLK and FLK tests for the detection of selection signatures based on multiple population genotyping data.
+iqtree,phylogenetics-comparative,1,2.3.5,True,The IQ-TREE software was created as the successor of IQPNNI and TREE-PUZZLE (thus the name IQ-TREE). IQ-TREE was motivated by the rapid accumulation of phylogen
+modeltest-ng,phylogenetics-comparative,1,0.1.7,True,ModelTest-NG is a tool for selecting the best-fit model of evolution for DNA and protein alignments. ModelTest-NG supersedes jModelTest and ProtTest in one sing
+msmc,phylogenetics-comparative,1,1.1.0,True,"This software implements MSMC, a method to infer population size and gene flow from multiple genome sequences"
+pal2nal,phylogenetics-comparative,1,14-IGB-gcc-4.9.4,True,PAL2NAL is a program that converts a multiple sequence alignment of proteins and the corresponding DNA (or mRNA) sequences into a codon alignment.
+pangolin,phylogenetics-comparative,2,2.4.2-IGB-gcc-8.2.0-Python-3.7.2,True,Phylogenetic Assignment of Named Global Outbreak LINeages
+phylophlan,phylogenetics-comparative,3,3.1.1-IGB-gcc-8.2.0-Python-3.10.1,True,PhyloPhlAn is an integrated pipeline for large-scale phylogenetic profiling of genomes and metagenomes.
+phylophlan2,phylogenetics-comparative,1,0.34-IGB-gcc-4.9.4-Python-3.6.1,True,PhyloPhlAn is an integrated pipeline for large-scale phylogenetic profiling of genomes and metagenomes.
+plotsr,phylogenetics-comparative,1,1.1.1-IGB-gcc-8.2.0-Python-3.10.1,True,"Plotsr generates high-quality visualisation of synteny and structural rearrangements between multiple genomes. For this, it uses the genomic structural annotati"
+pplacer,phylogenetics-comparative,2,1.1.alpha19-IGB-gcc-8.2.0-Python-3.7.2,True,Pplacer places query sequences on a fixed reference phylogenetic tree to maximize phylogenetic likelihood or posterior probability according to a reference alig
+prottest3,phylogenetics-comparative,1,3.4.2,True,ProtTest is a bioinformatic tool for the selection of best-fit models of aminoacid replacement for the data at hand. ProtTest makes this selection by finding th
+radinitio,phylogenetics-comparative,2,1.1.1-IGB-gcc-4.9.4-Python-3.6.1,True,RADinitio is a simulation pipeline for the assessment of RADseq experiments. Genetic data are forward simulated for a population of individuals from a designate
+raxml-ng,phylogenetics-comparative,1,1.2.0,True,RAxML-NG is a phylogenetic tree inference tool which uses maximum-likelihood (ML) optimality criterion. Its search heuristic is based on iteratively performing 
+roary,phylogenetics-comparative,1,3.13.0-IGB-gcc-4.9.4-Perl-5.24.1,True,"Roary is a high speed stand alone pan genome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the p"
+strauto,phylogenetics-comparative,1,1-IGB-gcc-4.9.4,True,Automation and Parallelization of STRUCTURE Analysis
+structure,phylogenetics-comparative,1,2.3.4-IGB-gcc-4.9.4,True,The program structure is a free software package for using multi-locus genotype data to investigate population structure.
+syri,phylogenetics-comparative,1,1.7.1,True,SyRI is a comprehensive tool for predicting genomic differences between related genomes using whole-genome assemblies (WGA). The assemblies are aligned using wh
+tolkein,phylogenetics-comparative,1,0.2.6-IGB-gcc-4.9.4-Python-3.6.1,True,Tree of Life Kit of Evolutionary Informatics Novelties
+treemix,phylogenetics-comparative,1,1.13-IGB-gcc-4.9.4,True,"TreeMix is a method for inferring the patterns of population splits and mixtures in the history of a set of populations. In the underlying model, the modern-day"
+MaxQuant,proteomics-massspec,3,2.6.7.0,True,MaxQuant is a quantitative proteomics software package designed for analyzing large mass-spectrometric data sets.
+PARalyzer,proteomics-massspec,1,1.5-Java-17.0.6,True,We developed the PARalyzer algorithm to generate a high resolution map of interaction sites between RNA-binding proteins and their targets.
+dms-tools2,proteomics-massspec,1,2.6.10-IGB-gcc-8.2.0-Python-3.7.2,True,dms_tools2 is a software package for analyzing deep mutational scanning data. It is tailored to analyze libraries created using comprehensive codon mutagenesis 
+mitofates,proteomics-massspec,1,1.2-IGB-gcc-4.9.4-Perl-5.24.1,True,"MitoFates predicts mitochondrial presequence, a cleavable localization signal located in N-terminal, and its cleaved position."
+ANGSD,read-alignment-qc,2,0.941-IGB-gcc-8.2.0,True,ANGSD is a software for analyzing next generation sequencing data. The software can handle a number of different input types from mapped reads to imputed genoty
+AdapterRemoval,read-alignment-qc,1,2.1.7-IGB-gcc-4.9.4,True,This program searches for and removes remnant adapter sequences from High-Throughput Sequencing (HTS) data and (optionally) trims low quality bases from the 3 e
+AnchorWave,read-alignment-qc,1,1.2.6-IGB-gcc-8.2.0,True,AnchorWave (Anchored Wavefront Alignment) identifies collinear regions via conserved anchors (full-length CDS and full-length exon have been implemented current
+BBMap,read-alignment-qc,2,38.94-Java-1.8.0_201,True,"BBMap short read aligner, and other bioinformatic tools."
+BLASR,read-alignment-qc,1,4.0.0-IGB-gcc-4.9.4,True,BLASR (Basic Local Alignment with Successive Refinement) rapidly maps reads to genomes by finding the highest scoring local alignment or set of local alignments
+BLAST,read-alignment-qc,1,2.2.26-Linux_x86_64,True,"Basic Local Alignment Search Tool, or BLAST, is an algorithm for comparing primary biological sequence information, such as the amino-acid sequences of differen"
+BLAST+,read-alignment-qc,7,2.9.0-IGB-gcc-4.9.4,True,"Basic Local Alignment Search Tool, or BLAST, is an algorithm for comparing primary biological sequence information, such as the amino-acid sequences of differen"
+BLAT,read-alignment-qc,1,3.5-IGB-gcc-4.9.4,True,BLAT on DNA is designed to quickly find sequences of 95% and greater similarity of length 25 bases or more.
+BS-Seeker,read-alignment-qc,1,2.1.2-IGB-gcc-4.9.4-Python-2.7.13,True,BS Seeker 2 is a seamless and versatile pipeline for accurately and fast mapping the bisulfite-treated short reads.
+BWA,read-alignment-qc,5,0.7.17-IGB-gcc-8.2.0,True,Burrows-Wheeler Aligner (BWA) is an efficient program that aligns relatively short nucleotide sequences against a long reference sequence such as the human geno
+Bismark,read-alignment-qc,4,0.22.3-IGB-gcc-8.2.0-Perl-5.28.1,True,A tool to map bisulfite converted sequence reads and determine cytosine methylation states
+Bowtie,read-alignment-qc,4,1.3.0-IGB-gcc-8.2.0,True,"Bowtie is an ultrafast, memory-efficient short read aligner.It aligns short DNA sequences (reads) to the human genome."
+Bowtie2,read-alignment-qc,9,2.5.4-IGB-gcc-8.2.0,True,Bowtie 2 is an ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences. It is particularly good at aligning reads of about
+DANPOS,read-alignment-qc,1,2.2.2-IGB-gcc-4.9.4-Python-2.7.13-R-3.3.3,True,"A toolkit for Dynamic Analysis of Nucleosome and Protein Occupancy by Sequencing, version 2"
+DIAMOND,read-alignment-qc,12,2.1.11-IGB-gcc-8.2.0,True,Accelerated BLAST compatible local sequence aligner
+DamMet,read-alignment-qc,1,1.0.2-IGB-gcc-8.2.0,True,DamMet is probabilistic model for mapping ancient methylomes using sequencing data underlying an ancient specimen.
+DamageProfiler,read-alignment-qc,1,1.1-Java-17.0.6,True,This method can be used to calculate damage profiles of mapped ancient DNA reads.
+FASTX-Toolkit,read-alignment-qc,1,0.0.14-IGB-gcc-4.9.4,True,The FASTX-Toolkit is a collection of command line tools for Short-Reads FASTA/FASTQ files preprocessing. - Homepage: http://hannonlab.cshl.edu/fastx_toolkit/
+FLASH2,read-alignment-qc,1,2.2.00-IGB-gcc-4.9.4,True,FLASH (Fast Length Adjustment of SHort reads) is an accurate and fast toolto merge paired-end reads that were generated from DNA fragments whoselengths are shor
+FastQ-Screen,read-alignment-qc,1,0.14.1-IGB-gcc-8.2.0,True,FastQ Screen allows you to screen a library of sequences in FastQ format against a set of sequence databases so you can see if the composition of the library ma
+FastQC,read-alignment-qc,5,0.12.1-Java-25.0.1,True,FastQC is a quality control application for high throughput sequence data. It reads in sequence data in a variety of formats and can either provide an interacti
+Filtlong,read-alignment-qc,1,0.2.1-IGB-gcc-8.2.0,True,"Filtlong is a tool for filtering long reads by quality. It can take a set of long reads and produce a smaller, better subset. It uses both read length (longer i"
+GMAP,read-alignment-qc,2,2020-06-04-IGB-gcc-8.2.0,True,"A Genomic Mapping and Alignment Program for mRNA and EST Sequences, andGSNAP: Genomic Short-read Nucleotide Alignment Program"
+GMAP-GSNAP,read-alignment-qc,1,2017-11-15-IGB-gcc-4.9.4,True,GMAP: A Genomic Mapping and Alignment Program for mRNA and EST Sequences GSNAP: Genomic Short-read Nucleotide Alignment Program
+HISAT2,read-alignment-qc,4,2.2.1-IGB-gcc-8.2.0-Python-3.7.2,True,HISAT2 is a fast and sensitive alignment program for mapping next-generation sequencing reads (both DNA and RNA) against the general human population (as well a
+HISAT2-3N,read-alignment-qc,1,20221013-IGB-gcc-8.2.0-Python-3.7.2,True,HISAT-3N (hierarchical indexing for spliced alignment of transcripts - 3 nucleotides) is designed for nucleotide conversion sequencing technologies and implemen
+KAT,read-alignment-qc,1,2.4.1-IGB-gcc-4.9.4,True,KAT is a suite of tools that analyse jellyfish hashes or sequence files (fasta or fastq) using kmer counts.
+LASTZ,read-alignment-qc,1,1.04.00-IGB-gcc-4.9.4,True,"LASTZ is a program for aligning DNA sequences, a pairwise aligner. Originally designed to handle sequences the size of human chromosomes and from different spec"
+MultiQC,read-alignment-qc,13,1.9-IGB-gcc-8.2.0-Python-3.7.2,True,"MultiQC searches a given directory for analysis logs and compiles a HTML report. Its a general use tool, perfect for summarising the output from numerous bioinf"
+NGSCheckMate,read-alignment-qc,1,20190507-IGB-gcc-8.2.0-Python-2.7.18,True,NGSCheckMate is a software package for identifying next generation sequencing (NGS) data files from the same individual. It analyzes various types of NGS data f
+NanoFilt,read-alignment-qc,1,2.8.0-IGB-gcc-8.2.0-Python-3.10.1,True,Filtering and trimming of long read sequencing data.
+NanoPlot,read-alignment-qc,1,1.18.2-IGB-gcc-4.9.4-Python-3.6.1,True,Plotting tool for long read sequencing data and alignments.
+PEAR,read-alignment-qc,1,0.9.8-IGB-gcc-4.9.4,True,"PEAR is an ultrafast, memory-efficient and highly accurate pair-end read merger. It is fully parallelized and can run with as low as just a few kilobytes of mem"
+Porechop,read-alignment-qc,1,0.2.3-IGB-gcc-4.9.4-Python-3.6.1,True,Porechop is a tool for finding and removing adapters from Oxford Nanopore reads.
+RMBlast,read-alignment-qc,4,2.9.0-IGB-gcc-4.9.4,True,RMBlast is a RepeatMasker compatible version of the standard NCBI blastn program. The primary difference between this distribution and the NCBI distribution is 
+SAMtools,read-alignment-qc,14,1.9-IGB-gcc-4.9.4,True,"SAM Tools provide various utilities for manipulating alignments in the SAM format, including sorting, merging, indexing and generating alignments in a per-posit"
+SNPsplit,read-alignment-qc,1,0.6.0-IGB-gcc-8.2.0-Perl-5.28.1,True,SNPsplit is an allele-specific alignment sorter which is designed to read alignment files in SAM/BAM format and determine the allelic origin of reads that cover
+SeqPrep,read-alignment-qc,1,1.3.2-IGB-gcc-8.2.0,True,SeqPrep is a program to merge paired end Illumina reads that are overlapping into a single longer read. It may also just be used for its adapter trimming featur
+Subread,read-alignment-qc,4,2.0.4-IGB-gcc-8.2.0,True,"High performance read alignment, quantification and mutation discovery"
+Trim_Galore,read-alignment-qc,2,0.6.5-IGB-gcc-4.9.4,True,"A wrapper tool around Cutadapt and FastQC to consistently apply quality and adapter trimming to FastQ files, with some extra functionality for MspI-digested RRB"
+Trimmomatic,read-alignment-qc,6,0.40-Java-25.0.1,True,Trimmomatic performs a variety of useful trimming tasks for illumina paired-end and single ended data.The selection of trimming steps and their associated param
+albacore,read-alignment-qc,3,2.3.1-IGB-gcc-4.9.4-Python-3.6.1,True,Local basecalling for MinKNOW
+alfa,read-alignment-qc,1,1.1.1-IGB-gcc-8.2.0-Python-3.7.2,True,ALFA provides a global overview of features distribution composing NGS dataset(s).
+bam-readcount,read-alignment-qc,1,0.8.0-IGB-gcc-4.9.4,True,The purpose of this program is to generate metrics at single nucleotide positions.
+bcl2fastq2,read-alignment-qc,2,2.20-IGB-gcc-8.2.0,True,"The bcl2fastq2 Conversion Software v2.20.0 can be used to convert BCL files from MiniSeq, MiSeq, NextSeq, HiSeq, and NovaSeq sequening systems. For conversion o"
+clipper,read-alignment-qc,2,2.1.0-IGB-gcc-8.2.0-Python-3.7.2,True,A tool to detect CLIP-seq peaks.
+cutadapt,read-alignment-qc,4,3.7-IGB-gcc-8.2.0-Python-3.7.2,True,"Cutadapt finds and removes adapter sequences, primers, poly-A tails and other types of unwanted sequence from your high-throughput sequencing reads."
+damidseq,read-alignment-qc,2,1.6-IGB-gcc-8.2.0,True,"damidseq_pipeline is a single script that automatically handles sequence alignment, read extension, binned counts, normalisation, pseudocount addition and final"
+deepTools,read-alignment-qc,6,3.5.6-IGB-gcc-8.2.0-Python-3.10.1,True,deepTools addresses the challenge of handling the large amounts of data that are now routinely generated from DNA sequencing centers. deepTools contains useful 
+diffReps,read-alignment-qc,1,1.55.6-IGB-gcc-4.9.4-Perl-5.24.1,True,ChIP-seq is now widely used to profile the protein DNA interactions on a genome. It is of high interest to compare the differential enrichment of a histone mark
+dorado,read-alignment-qc,2,0.9.6,True,"Dorado is a high-performance, easy-to-use, open source basecaller for Oxford Nanopore reads."
+epic,read-alignment-qc,1,0.2.9-IGB-gcc-4.9.4-Python-2.7.13,True,"epic is a software package for finding medium to diffusely enriched domains in chip-seq data. It is a fast, parallel and memory-efficient implementation of the "
+epic2,read-alignment-qc,1,0.0.41-IGB-gcc-4.9.4-Python-3.6.1,True,"epic2 is an ultraperformant reimplementation of SICER. It focuses on speed, low memory overhead and ease of use."
+exonerate,read-alignment-qc,2,2.2.0-IGB-gcc-8.2.0,True,"Exonerate is a generic tool for pairwise sequence comparison. It allows you to align sequences using a many alignment models, either exhaustive dynamic programm"
+fasta,read-alignment-qc,1,36.3.8i,True,protein and DNA sequence similarity searching and alignment programs
+fasta2,read-alignment-qc,1,21.1.1-IGB-gcc-8.2.0,True,
+fastp,read-alignment-qc,5,1.1.0-IGB-gcc-8.2.0,True,A tool designed to provide fast all-in-one preprocessing for FastQ files. This tool is developed in C++ with multithreading supported to afford high performance
+flexbar,read-alignment-qc,1,3.0.3-IGB-gcc-4.9.4,True,"The program Flexbar preprocesses high-throughput sequencing data efficiently. It demultiplexes barcoded runs and removes adapter sequences. Moreover, trimming a"
+fseq,read-alignment-qc,1,1.84-Java-1.8.0_152,True,Tag sequencing using high-throughput sequencing technologies are now regularly employed to identify specific sequence features such as transcription factor bind
+guideseq,read-alignment-qc,1,20190913-IGB-gcc-8.2.0-Python-3.7.2,True,The guideseq package implements our data preprocessing and analysis pipeline for GUIDE-Seq data. It takes raw sequencing reads (FASTQ) and a parameter manifest 
+guppy,read-alignment-qc,8,3.4.3,True,"Guppy is a stand-alone data bioinformatic toolkit that provides Oxford Nanopore Technologies basecalling algorithm, along with a number of post-processing tools"
+guppy-gpu,read-alignment-qc,14,5.0.16,True,"Guppy is a stand-alone data bioinformatic toolkit that provides Oxford Nanopore Technologies basecalling algorithm, along with a number of post-processing tools"
+kma,read-alignment-qc,1,1.3.24-IGB-gcc-8.2.0,True,"KMA is a mapping method designed to map raw reads directly against redundant databases, in an ultra-fast manner using seed and extend."
+last,read-alignment-qc,1,1257-IGB-gcc-8.2.0,True,"LAST is designed for moderately large data (e.g. genomes, DNA reads,proteomes)."
+lima,read-alignment-qc,1,2.6.0-0,True,"lima is the standard tool to identify barcode and primer sequences in PacBio single-molecule sequencing data. It powers the Demultiplex Barcodes, Iso-Seq, and M"
+longranger,read-alignment-qc,3,2.2.2,True,"Long Ranger is a set of analysis pipelines that processes Chromium sequencing output to align reads and call and phase SNPs, indels, and structural variants. Th"
+mapDamage,read-alignment-qc,2,2.0.9-IGB-gcc-4.9.4-Python-2.7.13,True,"mapDamage2 is a computational framework written in Python and R, which tracks and quantifies DNA damage patterns among ancient DNA sequencing reads generated by"
+minimap,read-alignment-qc,9,2.8-IGB-gcc-4.9.4,True,"Minimap is an experimental tool to efficiently find multiple approximate mapping positions between two sets of long sequences, such as between reads and referen"
+miniprot,read-alignment-qc,1,0.18-IGB-gcc-8.2.0,True,"Miniprot aligns a protein sequence against a genome with affine gap penalty, splicing and frameshift. It is primarily intended for annotating protein-coding gen"
+modkit,read-alignment-qc,1,0.6.4,True,"A bioinformatics tool for working with modified bases from Oxford Nanopore. Specifically for quickly converting modBAM to bedMethyl files using best practices, "
+mosdepth,read-alignment-qc,1,0.3.11-IGB-gcc-8.2.0,True,"Fast BAM/CRAM depth calculation for WGS, exome, or targeted sequencing"
+nanopolish,read-alignment-qc,11,0.9.0-IGB-gcc-4.9.4,True,Software package for signal-level analysis of Oxford Nanopore sequencing data.
+novocraft,read-alignment-qc,1,3.08.00,True,"Powerful tool designed for mapping of short reads onto a reference genome from Illumina, Ion Torrent, and 454 NGS platforms."
+pairtools,read-alignment-qc,3,1.1.3-IGB-gcc-8.2.0-Python-3.10.1,True,pairtools is a simple and fast command-line framework to process sequencing data from a Hi-C experiment.
+pbccs,read-alignment-qc,2,6.4.0,True,"ccs takes multiple subreads of the same SMRTbell molecule and combines them using a statistical model to produce one highly accurate consensus sequence, also ca"
+pbmm2,read-alignment-qc,2,1.4.0,True,"pbmm2 is a SMRT C++ wrapper for minimap2's C API. Its purpose is to support native PacBio in- and output, provide sets of recommended parameters, generate sorte"
+picard,read-alignment-qc,6,3.4.0-Java-17.0.6,True,A set of tools (in Java) for working with next generation sequencing data in the BAM (http://samtools.github.io/hts-specs) format.
+pomoxis,read-alignment-qc,1,0.1.0-IGB-gcc-4.9.4-Python-3.6.1,True,Pomoxis contains a set of services to perform analysis of squiggles as they are produced in real-time along with fast pipelines for generating draft assemblies.
+poretools,read-alignment-qc,1,0.6.0-IGB-gcc-4.9.4-Python-2.7.13,True,a toolkit for working with nanopore sequencing data from Oxford Nanopore.
+preseq,read-alignment-qc,2,3.1.2-IGB-gcc-8.2.0,True,"The preseq package is aimed at predicting and estimating the complexity of a genomic sequencing library, equivalent to predicting and estimating the number of r"
+prinseq,read-alignment-qc,1,0.20.4-IGB-gcc-4.9.4-Perl-5.24.1,True,"PRINSEQ can be used to filter, reformat, or trim your genomic and metagenomic sequence data."
+qualimap,read-alignment-qc,1,2.2.1-Java-1.8.0_121,True,Qualimap 2 is a platform-independent application written in Java and R that provides both a Graphical User Inteface (GUI) and a command-line interface to facili
+reveal,read-alignment-qc,1,0.2.2-IGB-gcc-4.9.4-Python-2.7.13,True,REVEAL (REcursiVe Exact-matching ALigner) can be used to (multi) align whole genomes.
+sabre,read-alignment-qc,1,20171114-IGB-gcc-4.9.4,True,Next-generation sequencing can currently produce hundreds of millions of reads per lane of sample and that number increases at a dizzying rate. Barcoding indivi
+salt,read-alignment-qc,1,beta0.2-IGB-gcc-8.2.0,True,alignment algorithm that is SNP-aware
+sambamba,read-alignment-qc,2,0.8.0,True,"sambamba view allows to efficiently filter SAM/BAM/CRAM files for alignments satisfying various conditions, as well as access its SAM header and information abo"
+samblaster,read-alignment-qc,1,0.1.24-IGB-gcc-4.9.4,True,ummary samblaster is a fast and flexible program for marking duplicates in read-id grouped1 paired-end SAM files. It can also optionally output discordant read 
+segemehl,read-alignment-qc,1,0.3.4-IGB-gcc-8.2.0,True,segemehl is a software to map short sequencer reads to reference genomes. segemehl implements a matching strategy based on enhanced suffix arrays (ESA)
+sickle,read-alignment-qc,1,1.33-IGB-gcc-8.2.0,True,A windowed adaptive trimming tool for FASTQ files using quality
+snpomatic,read-alignment-qc,1,1.0-IGB-gcc-4.9.4,True,"SNP-o-matic is a fast, stringent short-read mapping software. It supports a multitude of output types and formats, for uses in filtering reads, alignments, sequ"
+ssaha2,read-alignment-qc,1,2.5.5-IGB-gcc-4.9.4,True,SSAHA2 (Sequence Search and Alignment by Hashing Algorithm) is a pairwise sequence alignment program designed for the efficient mapping of sequencing reads onto
+ssaha_pileup,read-alignment-qc,1,0.6-IGB-gcc-4.9.4,True,SSAHA2: Sequence Search and Alignment by Hashing Algorithm
+tagdigger,read-alignment-qc,1,1.1-IGB-gcc-4.9.4-Python-3.6.1,True,TagDigger is a program for processing FASTQ files from genotyping-by-sequencing (GBS) or restriction site-associated DNA sequencing (RAD-seq) experiments.
+tombo,read-alignment-qc,1,1.5-IGB-gcc-4.9.4-Python-3.6.1,True,Tombo is a suite of tools primarily for the identification of modified nucleotides from nanopore sequencing data. Tombo also provides tools for the analysis and
+umi-tools,read-alignment-qc,2,1.1.6-IGB-gcc-8.2.0-Python-3.10.1,True,Tools for handling Unique Molecular Identifiers in NGS data sets
+zorro,read-alignment-qc,1,20111201,True,A probabilistic alignment masking program
+BUSCO-db,reference-data,2,5,False,
+KneadData-db,reference-data,1,20230405,False,
+alphafold-db,reference-data,4,20240213,False,
+alphafold3-db,reference-data,1,20250520,False,
+bart2-db,reference-data,1,20240302,False,
+card-prevalence,reference-data,2,4.0.1,False,
+checkm-db,reference-data,1,20150116,False,
+checkm2-db,reference-data,1,20230511,False,
+checkv-db,reference-data,1,1.5,False,
+chocophlan,reference-data,1,0.1.1,False,
+clusterblast,reference-data,1,20170105,False,
+dorado-db,reference-data,2,20261012,False,
+foldseek-db,reference-data,1,20230921,False,
+funannotate-db,reference-data,2,20240515,False,
+gatkbundle,reference-data,1,20191118,False,
+genbank,reference-data,1,250,False,
+gtdb,reference-data,3,226,False,
+humann-db,reference-data,1,201901b,False,
+interpro,reference-data,6,68.0,False,
+kraken2-db,reference-data,5,20260226,False,
+megares-db,reference-data,1,3.00,False,
+metaphlan4-db,reference-data,1,20260509,False,
+ncbi-blastdb,reference-data,4,20260622,False,
+pfam,reference-data,4,37.3,False,
+pgap-db,reference-data,1,2021-07-01.build5508,False,
+refseq-db,reference-data,2,230,False,
+silva,reference-data,1,138.1,False,
+tailseeker-db,reference-data,1,20161215,False,
+uniprot,reference-data,3,2025_02,False,
+ASEr,rnaseq-transcriptomics,1,0.2-IGB-gcc-8.2.0-Python-3.7.2,True,Get ASE counts from BAMs or raw fastq data
+CHEUI,rnaseq-transcriptomics,1,20240719,True,CHEUI (Methylation (CH3) Estimation Using Ionic current) is an RNA modification detection software for Oxford Nanopore direct RNA sequencing data.
+CLASS2,rnaseq-transcriptomics,1,2.1.7-IGB-gcc-8.2.0,True,CLASS2 is a fast and accurate program for transcript assembly of RNA-seq reads aligned to a reference genome. CLASS2 uses the splice graph model to represent a 
+Cufflinks,rnaseq-transcriptomics,3,20190706-IGB-gcc-8.2.0,True,"Transcript assembly, differential expression, and differential regulation for RNA-Seq"
+GFOLD,rnaseq-transcriptomics,1,1.1.4-IGB-gcc-4.9.4,True,GFOLD stands for Generalized FOLD change for ranking differentially expressed genes from RNA-seq data. GFOLD is especially useful when no replicate is available
+GUIDANCE,rnaseq-transcriptomics,1,2.02-IGB-gcc-4.9.4-Perl-5.24.1,True,"GUIDANCE is meant to be used for weighting, filtering or masking unreliably aligned positions in sequence alignments before subsequent analysis. For example, al"
+GUSHR,rnaseq-transcriptomics,1,20200928-Java-1.8.0_201,True,Assembly-free construction of UTRs from short read RNA-Seq data on the basis of coding sequence annotation.
+HTSeq,rnaseq-transcriptomics,3,0.9.1-IGB-gcc-4.9.4-Python-2.7.13,True,A framework to process and analyze data from high-throughput sequencing (HTS) assays
+HiC-Pro,rnaseq-transcriptomics,1,3.1.0-IGB-gcc-8.2.0-Python-3.7.2,True,"HiC-Pro was designed to process Hi-C data, from raw fastq files (paired-end Illumina data) to the normalized contact maps. Since version 2.7.0, HiC-Pro supports"
+HiCExplorer,rnaseq-transcriptomics,2,3.7.2-IGB-gcc-8.2.0-Python-3.7.2,True,HiCExplorer addresses the common tasks of Hi-C data analysis from processing to visualization.
+IDR,rnaseq-transcriptomics,1,2.0.4-IGB-gcc-4.9.4-Python-3.6.1,True,The IDR (Irreproducible Discovery Rate) framework is a uniﬁed approach to measure the reproducibility of ﬁndings identiﬁed from replicate experiments and provid
+IRFinder,rnaseq-transcriptomics,1,1.3.1-IGB-gcc-8.2.0,True,Detecting intron retention from RNA-Seq experiments
+Juicebox,rnaseq-transcriptomics,1,1.11.08-Java-1.8.0_201,True,"Juicebox is visualization software for Hi-C data. This distribution includes the source code for Juicebox, Juicer Tools, and Assembly Tools. Download Juicebox h"
+MapSplice,rnaseq-transcriptomics,1,2.2.1-IGB-gcc-4.9.4-Python-2.7.13,True,"MapSplice is a software for mapping RNA-seq data to reference genome for splice junction discovery that depends only on reference genome, and not on any further"
+NucleoATAC,rnaseq-transcriptomics,1,0.3.4-IGB-gcc-4.9.4-Python-2.7.13,True,NucleoATAC is a python package for calling nucleosome positions and occupancy using ATAC-Seq data. Functions for calling nucleosomes are included in the nucleoa
+Prost,rnaseq-transcriptomics,1,0.7.45-IGB-gcc-4.9.4-Python-2.7.13,True,Prost (PRocessing Of Small Transcripts) is a python application that quantifies and annotates microRNA (miRNA) expression in metazoans with assembled genomes. P
+R2Dtool,rnaseq-transcriptomics,1,2.0.1-IGB-gcc-8.2.0,True,"R2Dtool is a set of genomics utilities for handling, integrating, and viualising isoform-mapped RNA feature data."
+READemption,rnaseq-transcriptomics,1,1.0.1-IGB-gcc-8.2.0-Python-3.7.2,True,READemption is a pipeline for the computational evaluation of RNA-Seq data. It was originally developed to process dRNA-Seq reads (as introduced by Sharma et al
+RGT,rnaseq-transcriptomics,1,0.11.3-IGB-gcc-4.9.4-Python-2.7.13,True,Regulatory Genomics Toolbox (RGT) is an open source python library for analysis of regulatory genomics. RGT is programmed in an oriented object fashion and its 
+ROSE,rnaseq-transcriptomics,1,20150210-IGB-gcc-4.9.4-Python-2.7.13,True,"To create stitched enhancers, and to separate super-enhancers from typical enhancers using sequencing data (.bam)"
+RSEM,rnaseq-transcriptomics,3,1.3.3-IGB-gcc-8.2.0,True,RNA-Seq by Expectation-Maximization
+RSeQC,rnaseq-transcriptomics,1,2.6.4-IGB-gcc-4.9.4-Python-2.7.13,True,RSeQC package provides a number of useful modules that can comprehensively evaluate high throughput sequence data especially RNA-seq data. Some basic modules qu
+RiboDetector,rnaseq-transcriptomics,1,0.3.3-IGB-gcc-8.2.0-Python-3.10.1,True,Accurate and rapid rRNA sequence detector based on deep learning
+SOAPdenovo-Trans,rnaseq-transcriptomics,1,1.03,True,"SOAPdenovo-Trans is a de novo transcriptome assembler basing on the SOAPdenovo framework, adapt to alternative splicing and different expression level among tra"
+STAR,rnaseq-transcriptomics,9,2.7.6a-IGB-gcc-8.2.0,True,STAR aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
+STAR-Fusion,rnaseq-transcriptomics,1,1.6.0-IGB-gcc-4.9.4,True,STAR-Fusion is a component of the Trinity Cancer Transcriptome Analysis Toolkit (CTAT). STAR-Fusion uses the STAR aligner to identify candidate fusion transcrip
+Salmon,rnaseq-transcriptomics,12,1.5.2-IGB-gcc-8.2.0,True,"Salmon is a wicked-fast program to produce a highly-accurate, transcript-level quantification estimates from RNA-seq data."
+SalmonTE,rnaseq-transcriptomics,1,0.4-IGB-gcc-8.2.0,True,SalmonTE is an ultra-Fast and Scalable Quantification Pipeline of Transpose Element (TE) Abundances from Next Generation Sequencing Data.
+ShortStack,rnaseq-transcriptomics,1,4.1.0,True,Alignment of small RNA-seq data and annotation of small RNA-producing genes
+StringTie,rnaseq-transcriptomics,2,1.3.6-IGB-gcc-4.9.4,True,Transcript assembly and quantification for RNA-Seq
+TEtranscripts,rnaseq-transcriptomics,1,2.2.1-IGB-gcc-8.2.0-Python-3.7.2,True,TEtranscripts and TEcount takes RNA-seq (and similar data) and annotates reads to both genes & transposable elements. TEtranscripts then performs differential a
+TSEBRA,rnaseq-transcriptomics,1,1.0.3-IGB-gcc-8.2.0,True,TSEBRA is a combiner tool that selects transcripts from gene predictions based on the support by extrisic evidence in form of introns and start/stop codons. It 
+TopHat,rnaseq-transcriptomics,2,2.1.1-IGB-gcc-4.9.4,True,TopHat is a fast splice junction mapper for RNA-Seq reads.
+TransDecoder,rnaseq-transcriptomics,3,5.7.0-IGB-gcc-8.2.0-Perl-5.28.1,True,"TransDecoder identifies candidate coding regions within transcript sequences, such as those generated by de novo RNA-Seq transcript assembly using Trinity, or c"
+Trinity,rnaseq-transcriptomics,7,2.8.5-IGB-gcc-4.9.4,True,Trinity represents a novel method for the efficient and robust de novo reconstruction of transcriptomes from RNA-Seq data. Trinity combines three independent so
+atactk,rnaseq-transcriptomics,1,0.1.6-IGB-gcc-4.9.4-Python-2.7.13,True,a toolkit for ATAC-seq data
+bart2,rnaseq-transcriptomics,1,20240302-IGB-gcc-8.2.0-Python-3.7.2,True,BART (Binding Analysis for Regulation of Transcription) is a bioinformatics tool for predicting functional transcriptional regulators (TRs) that bind at genomic
+cap-mirseq,rnaseq-transcriptomics,1,20200817-IGB-gcc-4.9.4,True,CAP-miRSeq: A comprehensive analysis pipeline for deep microRNA sequencing
+fastmiso,rnaseq-transcriptomics,1,0.5.4-IGB-gcc-4.9.4-Python-2.7.13,True,"MISO (Mixture-of-Isoforms) is a probabilistic framework that quantitates the expression level of alternatively spliced genes from RNA-Seq data, and identifies d"
+flair,rnaseq-transcriptomics,2,2.0.0,True,LAIR can be run optionally with short-read data to help increase splice site accuracy of the long read splice junctions.
+ipyrad,rnaseq-transcriptomics,1,0.9.108,True,"Welcome to ipyrad, an interactive assembly and analysis toolkit for restriction-site associated DNA (RAD-seq) and related data types. Please explore the documen"
+isoseq3,rnaseq-transcriptomics,1,3.7.0-0,True,"IsoSeq v3 contains the newest tools to identify transcripts in PacBio single-molecule sequencing data. Starting in SMRT Link v6.0.0, those tools power the IsoSe"
+kallisto,rnaseq-transcriptomics,3,0.52.0-IGB-gcc-8.2.0,True,"kallisto is a program for quantifying abundances of transcripts from RNA-Seq data, or more generally of target sequences using high-throughput sequencing reads."
+mirdeep2,rnaseq-transcriptomics,2,0.1.3-IGB-gcc-4.9.4,True,miRDeep2 is a completely overhauled tool which discovers microRNA genes by analyzing sequenced RNAs.
+mmquant,rnaseq-transcriptomics,1,1.0.4-IGB-gcc-8.2.0,True,"A tool to quantiy gene expression. The mmquant algorithm handles multiply mapping reads, i.e., duplicated genes by constructing merged genes."
+plastid,rnaseq-transcriptomics,1,0.5.1-IGB-gcc-8.2.0-Python-3.7.2,True,plastid is a Python library for genomics and sequencing. It includes tools for exploratory data analysis (EDA) as well as a handful of scripts that implement co
+psRobot,rnaseq-transcriptomics,1,1.2-IGB-gcc-8.2.0,True,PsRobot is designed to analyze batch of plant small RNA data.
+rMATS,rnaseq-transcriptomics,1,3.2.5-IGB-gcc-4.9.4-Python-2.7.13,True,MATS is a computational tool to detect differential alternative splicing events from RNA-Seq data. The statistical model of MATS calculates the P-value and fals
+rMATS-turbo,rnaseq-transcriptomics,1,4.1.1-IGB-gcc-8.2.0-Python-3.7.2,True,rMATS turbo is the C/Cython version of rMATS (refer to http://rnaseq-mats.sourceforge.net).
+rnaquast,rnaseq-transcriptomics,1,2.1.0-IGB-gcc-8.2.0-Python-3.7.2,True,"rnaQUAST is a tool for evaluating RNA-Seq assemblies using reference genome and gene database. In addition, rnaQUAST is also capable of estimating gene database"
+rnaseqtools,rnaseq-transcriptomics,1,1.0.2-IGB-gcc-4.9.4,True,This repo rnaseqtools provides a set of tools to process transcripts (mainly in gtf format).
+scallop,rnaseq-transcriptomics,2,0.10.4-IGB-gcc-4.9.4,True,Scallop is an accurate reference-based transcript assembler. Scallop features its high accuracy in assembling multi-exon transcripts as well as lowly expressed 
+spladder,rnaseq-transcriptomics,1,3.1.0-IGB-gcc-8.2.0-Python-3.10.1,True,a toolbox for alternative splicing analysis based on RNA-Seq alignment data
+stringtie,rnaseq-transcriptomics,1,2.1.1-IGB-gcc-4.9.4,True,Transcript assembly and quantification for RNA-Seq
+tailseeker,rnaseq-transcriptomics,1,3.2.1,True,"Tailseeker is the official pipeline for TAIL-seq, which measures poly(A) tail lengths and 3′-end modifications with Illumina SBS sequencers."
+transrate,rnaseq-transcriptomics,1,1.0.3,True,Transrate is software for de-novo transcriptome assembly quality analysis. It examines your assembly in detail and compares it to experimental evidence such as 
+truesight,rnaseq-transcriptomics,1,0.06-IGB-gcc-4.9.4,True,A Self-training Algorithm for Splice Junction Detection using RNA-seq.
+xpore,rnaseq-transcriptomics,1,2.1-IGB-gcc-8.2.0-Python-3.10.1,True,xPore is a Python package for identification of differentail RNA modifications from Nanopore sequencing data.
+CITE-seq-Count,single-cell,1,1.4.5-IGB-gcc-8.2.0-Python-3.10.1,True,A python package that allows to count antibody TAGS from a CITE-seq and/or cell hashing experiment.
+Loter,single-cell,1,20210413-IGB-gcc-8.2.0-Python-3.7.2,True,Loter is a Python (and soon R) package for local ancestry inference [1] and haplotype phasing [2]
+MAESTRO,single-cell,1,1.5.1,True,MAESTRO(Model-based AnalysEs of Single-cell Transcriptome and RegulOme) is a comprehensive single-cell RNA-seq and ATAC-seq analysis suit built using snakemake.
+ParseBioSciences-Pipeline,single-cell,2,1.8.2,True,"Parse's single cell kits facilitate scalable single cell RNA-seq, enabling you to go all the way from samples in a single cell suspension to sequencing data."
+alevin-fry,single-cell,1,0.4.2,True,"alevin-fry is a suite of tools for the rapid, accurate and memory-frugal processing single-cell and single-nucleus sequencing data."
+cellranger,single-cell,18,9.0.0,True,"Cell Ranger is a set of analysis pipelines that process Chromium single cell 3 RNA-seq output to align reads, generate gene-cell matrices and perform clustering"
+cellranger-arc,single-cell,3,2.0.2,True,Cell Ranger ARC is a set of analysis pipelines that process Chromium Single Cell Multiome ATAC + Gene Expression sequencing data to generate a variety of analys
+cellranger-atac,single-cell,4,2.1.0,True,Cell Ranger ATAC is a set of analysis pipelines that process Chromium Single Cell ATAC data.
+evolocity,single-cell,1,0.1-IGB-gcc-8.2.0-Python-3.7.2,True,"Evolocity is a Python package that implements evolutionary velocity, which constructs landscapes of protein evolution by using the local evolutionary prediction"
+lorals,single-cell,1,20210528-IGB-gcc-8.2.0-Python-3.7.2,True,A Python package for allele-specific analyses in long-read data.
+magic,single-cell,2,0.1.1-IGB-gcc-4.9.4-Python-3.6.1,True,A diffusion-based imputation method reveals gene-gene interactions in single-cell RNA-sequencing data
+popscle,single-cell,1,20210504-IGB-gcc-8.2.0,True,popscle is a suite of population scale analysis tools for single-cell genomics data. The key software tools in this repository includes demuxlet (version 2) and
+scanpy,single-cell,1,1.10.1-IGB-gcc-8.2.0-Python-3.10.1,True,Scanpy is a scalable toolkit for analyzing single-cell gene expression data built jointly with anndata.
+scenicplus,single-cell,1,20240513,True,SCENIC+ is a python package to build gene regulatory networks (GRNs) using combined or separate single-cell gene expression (scRNA-seq) and single-cell chromati
+vartrix,single-cell,1,1.1.22,True,VarTrix is a software tool for extracting single cell variant information from 10x Genomics single cell data. VarTrix will take a set of previously defined vari
+velocyto,single-cell,1,0.17.17-IGB-gcc-4.9.4-Python-3.6.1,True,Velocyto is a library for the analysis of RNA velocity.
+velocyto.R,single-cell,1,20190527-IGB-gcc-4.9.4-R-3.4.2,True,RNA velocity estimation in R
+ADpred,structure-prediction-docking,1,1.3.1,True,"adpred is a tool to predict Transcription Activation Domains from protein sequences. Adpred uses psipred to predict secondary structure of the sequences, which,"
+CCMpred,structure-prediction-docking,1,20191102-IGB-gcc-4.9.4,True,CCMpred is a C implementation of a Markov Random Field pseudo-likelihood maximization for learning protein residue-residue contacts as made popular by Ekeberg e
+PITA,structure-prediction-docking,1,6-IGB-gcc-4.9.4,True,The PITA executable allows you to identify and score microRNA targets on UTRs.
+PyRosetta,structure-prediction-docking,1,2021.25-IGB-gcc-8.2.0-Python-3.7.2,True,PyRosetta is an interactive Python-based interface to the powerful Rosetta molecular modeling suite. It enables users to design their own custom molecular model
+RNAhybrid,structure-prediction-docking,1,2.1.2-IGB-gcc-4.9.4,True,"RNAhybrid is a tool for finding the minimum free energy hybridization of a long and a short RNA. The hybridization is performed in a kind of domain mode, ie. th"
+RNAstructure,structure-prediction-docking,1,6.0-IGB-gcc-4.9.4,True,"RNAstructure is a complete package for RNA and DNA secondary structure prediction and analysis. It includes algorithms for secondary structure prediction, inclu"
+RoseTTAFold-All-Atom,structure-prediction-docking,1,20240612,True,"RoseTTAFold All-Atom is a biomolecular structure prediction neural network that can predict a broad range of biomolecular assemblies including proteins, nucleic"
+SignalP,structure-prediction-docking,2,6.0h-IGB-gcc-8.2.0-Python-3.10.1,True,"The SignalP 6.0 server predicts the presence of signal peptides and the location of their cleavage sites in proteins from Archaea, Gram-positive Bacteria, Gram-"
+TMHMM,structure-prediction-docking,1,2.0c,True,Prediction of transmembrane helices in proteins
+VASP-E,structure-prediction-docking,2,20191112-IGB-gcc-4.9.4,True,VASP and VASP-E explore the idea that a solid geometric representation of molecular structures can be used to automatically deconstruct proteins into functional
+ViennaRNA,structure-prediction-docking,2,2.4.2-IGB-gcc-4.9.4,True,The ViennaRNA Package consists of a C code library and several stand-alone programs for the prediction and comparison of RNA secondary structures.
+alphafold,structure-prediction-docking,5,3.0.2,True,This package provides an implementation of the inference pipeline of AlphaFold v2.0. This is a completely new model that was entered in CASP14 and published in 
+bio-embeddings,structure-prediction-docking,1,0.2.2-IGB-gcc-8.2.0-Python-3.7.2,True,Quickly predict protein structure and function from sequence via embeddings:
+fair-esm,structure-prediction-docking,2,2.0.0-IGB-gcc-8.2.0-Python-3.7.2,True,"This repository contains code and pre-trained weights for Transformer protein language models from Facebook AI Research, including our state-of-the-art ESM-1b a"
+foldseek,structure-prediction-docking,1,8-ef4e960,True,Foldseek enables fast and sensitive comparisons of large structure sets.
+foldx,structure-prediction-docking,1,5.1,True,"The FoldX Suite builds on the strong fundament of advanced protein design features, already implemented in the successful FoldX3, and exploits the power of frag"
+fpocket,structure-prediction-docking,1,3.1.3-IGB-gcc-4.9.4,True,fpocket is a very fast open source protein pocket detection algorithm based on Voronoi tessellation.
+hhsuite,structure-prediction-docking,2,3.3.0-IGB-gcc-8.2.0,True,The HH-suite is an open-source software package for sensitive protein sequence searching based on the pairwise alignment of hidden Markov models (HMMs).
+mfold,structure-prediction-docking,1,4.7-IGB-gcc-8.2.0,True,The mfold web server is one of the oldest web servers in computational molecular biology.
+phobius,structure-prediction-docking,1,1.01-IGB-gcc-8.2.0,True,A combined transmembrane topology and signal peptide predictor
+proteinfer,structure-prediction-docking,1,20220411-IGB-gcc-4.9.4-Python-3.6.1,True,ProteInfer is an approach for predicting the functional properties of protein sequences using deep neural networks.
+psipred,structure-prediction-docking,2,4.02-IGB-gcc-8.2.0,True,The PSIPRED Workbench provides a range of protein structure prediction methods. The site can be used interactively via a web browser or programmatically via our
+pymol,structure-prediction-docking,1,2.3.4,True,"PyMOL is a user-sponsored molecular visualization system on an open-source foundation, maintained and distributed by Schrödinger."
+randfold,structure-prediction-docking,1,2.0.1-IGB-gcc-4.9.4,True,Minimum free energy of folding randomization test software
+rdkit,structure-prediction-docking,2,2021_03_1-IGB-gcc-8.2.0-Python-3.7.2,True,RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
+rosetta,structure-prediction-docking,3,3.13-IGB-gcc-8.2.0,True,The Rosetta software suite includes algorithms for computational modeling and analysis of protein structures.
+ADOL-C,utilities-libraries,1,2.6.3-IGB-gcc-4.9.4,True,ADOL-C is an open-source package for the automatic differentiation of C and C++ programs.
+Abseil,utilities-libraries,2,20230125.3-IGB-gcc-8.2.0,True,Abseil is an open-source collection of C++ library code designed to augment theC++ standard library. The Abseil library code is collected from Google's ownC++ c
+BEDTools,utilities-libraries,3,2.28.0-IGB-gcc-8.2.0,True,The BEDTools utilities allow one to address common genomics tasks such as finding feature overlaps and computing coverage. The utilities are largely based on fo
+BamTools,utilities-libraries,4,2.5.3-IGB-gcc-8.2.0,True,BamTools provides both a programmers API and an end-users toolkit for handling BAM files.
+BioPerl,utilities-libraries,3,1.7.2-IGB-gcc-8.2.0-Perl-5.28.1,True,"Bioperl is the product of a community effort to produce Perl code which is useful in biology. Examples include Sequence objects, Alignment objects and database "
+Biopieces,utilities-libraries,1,2.0-IGB-gcc-4.9.4-Perl-5.24.1,True,Biopieces is a bioinformatic framework of tools easily used and easily created.
+Biopython,utilities-libraries,6,1.83-IGB-gcc-8.2.0-Python-3.10.1,True,Biopython is a set of freely available tools for biological computation writtenin Python by an international team of developers. It is a distributed collaborati
+CD-HIT,utilities-libraries,2,4.8.1-IGB-gcc-8.2.0,True,CD-HIT is a very widely used program for clustering and comparing protein or nucleotide sequences.
+CMake,utilities-libraries,6,3.7.2-IGB-gcc-4.9.4,True,"CMake, the cross-platform, open-source build system. CMake is a family of tools designed to build, test and package software."
+CUnit,utilities-libraries,1,2.1-3-IGB-gcc-4.9.4,True,"CUnit is a lightweight system for writing, administering, and running unit tests in C. It provides C programmers a basic testing functionality with a flexible v"
+Circos,utilities-libraries,2,0.69-9-IGB-gcc-8.2.0-Perl-5.28.1,True,Circos is a software package for visualizing data and information. It visualizes data in a circular layout - this makes Circos ideal for exploring relationships
+Clustal-Omega,utilities-libraries,2,1.2.4-IGB-gcc-8.2.0,True,Clustal Omega is a multiple sequence alignment program for proteins. It produces biologically meaningful multiple sequence alignments of divergent sequences. Ev
+ClustalW2,utilities-libraries,1,2.1-IGB-gcc-4.9.4,True,ClustalW2 is a general purpose multiple sequence alignment program for DNA or proteins. - Homepage: http://www.ebi.ac.uk/Tools/msa/clustalw2/
+Doxygen,utilities-libraries,1,1.8.13-IGB-gcc-4.9.4,True,"Doxygen is a documentation system for C++, C, Java, Objective-C, Python, IDL (Corba and Microsoft flavors), Fortran, VHDL, PHP, C#, and to some extent D."
+EMBOSS,utilities-libraries,1,6.6.0-IGB-gcc-4.9.4-Java-1.8.0_121,True,"EMBOSS, The European Molecular Biology Open Software Suite. EMBOSS is a free Open Source software analysis package specially developed for the needs of the mole"
+FFmpeg,utilities-libraries,2,4.4-IGB-gcc-8.2.0,True,"A complete, cross-platform solution to record, convert and stream audio and video."
+FLAC,utilities-libraries,1,1.3.1-IGB-gcc-4.9.4,True,Programs and libraries for working with Free Lossless Audio Codec (FLAC) files.
+FreeImage,utilities-libraries,1,3.18.0-IGB-gcc-4.9.4,True,"FreeImage is an Open Source library project for developers who would like to support popular graphicsimage formats like PNG, BMP, JPEG, TIFF and others as neede"
+GD,utilities-libraries,2,2.73-IGB-gcc-8.2.0-Perl-5.28.1,True,GD.pm - Interface to Gd Graphics Library
+GDAL,utilities-libraries,3,3.9.0-IGB-gcc-8.2.0,True,GDAL is a translator library for raster geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundati
+GTK+,utilities-libraries,3,2.24.31-IGB-gcc-8.2.0-Python-3.7.2,True,The GTK+ 2 package contains libraries used for creating graphical user interfaces for applications.
+GhostScript,utilities-libraries,2,9.55.0-IGB-gcc-8.2.0,True,Ghostscript is a versatile processor for PostScript data with the ability to render PostScript to different targets. It used to be part of the cups printing sta
+Gradle,utilities-libraries,1,4.7,True,"Complete Gradle install.From mobile apps to microservices, from small startups to big enterprises,Gradle helps teams build, automate and deliver better software"
+GraphicsMagick,utilities-libraries,1,1.3.26-IGB-gcc-4.9.4,True,GraphicsMagick is the swiss army knife of image processing.
+Gurobi,utilities-libraries,1,7.5.2,True,"The Gurobi Optimizer was designed from the ground up to be the fastest, most powerful solver available for your LP, QP, QCP, and MIP (MILP, MIQP, and MIQCP) pro"
+HDF5,utilities-libraries,3,1.8.18-IGB-gcc-8.2.0,True,HDF5 is a unique technology suite that makes possible the management of extremely large and complex data collections.
+HTSlib,utilities-libraries,9,1.9-IGB-gcc-8.2.0,True,A C library for reading/writing high-throughput sequencing data. This package includes the utilities bgzip and tabix
+IllinoisDataBank,utilities-libraries,1,1.0-IGB-gcc-4.9.4-Python-3.6.1,True,The Illinois Data Bank is a public access repository for publishing research data from the University of Illinois at Urbana-Champaign
+ImageMagick,utilities-libraries,3,7.0.5-5-IGB-gcc-4.9.4,True,"ImageMagick is a software suite to create, edit, compose, or convert bitmap images"
+Jalview,utilities-libraries,1,2.11.0-Java-1.8.0_152,True,
+JasPer,utilities-libraries,3,2.0.14-IGB-gcc-8.2.0,True,The JasPer Project is an open-source initiative to provide a free software-based reference implementation of the codec specified in the JPEG-2000 Part-1 standar
+JavaFX,utilities-libraries,1,21,True,"JavaFX is an open source, next generation client application platform for desktop, mobile and embedded systems built on Java."
+KMC,utilities-libraries,2,3.2.1,True,KMC is a disk-based programm for counting k-mers from (possibly gzipped) FASTQ/FASTA files. The homepage of the KMC project is http://sun.aei.polsl.pl/kmc
+LAME,utilities-libraries,1,3.99.5-IGB-gcc-4.9.4,True,LAME is a high quality MPEG Audio Layer III (MP3) encoder licensed under the LGPL.
+LLVM,utilities-libraries,3,6.0.0-IGB-gcc-4.9.4,True,"The LLVM Core libraries provide a modern source- and target-independent optimizer, along with code generation support for many popular CPUs (as well as some les"
+LMDB,utilities-libraries,1,0.9.22-IGB-gcc-4.9.4,True,"LMDB is a fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of"
+MATLAB-python,utilities-libraries,2,2020b-IGB-gcc-8.2.0-Python-3.7.2,True,The MATLAB Engine API for Python provides a package for Python to call MATLAB as a computational engine. The engine supports the reference implementation (CPyth
+MCL,utilities-libraries,2,14.137-IGB-gcc-8.2.0,True,"The MCL algorithm is short for the Markov Cluster Algorithm, a fastand scalable unsupervised cluster algorithm for graphs (also known as networks) basedon simul"
+MEME,utilities-libraries,5,5.5.1-IGB-gcc-8.2.0,True,"The MEME Suite allows you to: * discover motifs using MEME, DREME (DNA only) or GLAM2 on groups of related DNA or protein sequences, * search sequence databases"
+METIS,utilities-libraries,1,5.1.0-IGB-gcc-4.9.4,True,"METIS is a set of serial programs for partitioning graphs, partitioning finite element meshes,and producing fill reducing orderings for sparse matrices. The alg"
+MPICH,utilities-libraries,1,3.0.4-GCC-4.9.4-2.28,True,MPICH v3.x is an open source high-performance MPI 3.0 implementation.It does not support InfiniBand (use MVAPICH2 with InfiniBand devices).
+Mako,utilities-libraries,1,1.0.6-IGB-gcc-4.9.4-Python-3.6.1,True,A super-fast templating language that borrows the best ideas from the existing templating languages
+MariaDB,utilities-libraries,4,5.5.58-IGB-gcc-4.9.4,True,"MariaDB An enhanced, drop-in replacement for MySQL."
+Maven,utilities-libraries,1,3.9.16-Java-25.0.1,True,"Binary maven install, Apache Maven is a software project management and comprehension tool. Based onthe concept of a project object model (POM), Maven can manag"
+Mayo,utilities-libraries,1,2026-IGB-gcc-8.2.0,True,Mayo Class Module
+Mesa,utilities-libraries,1,20.0.2-IGB-gcc-4.9.4,True,Mesa is an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.
+NCO,utilities-libraries,2,5.0.1-IGB-gcc-8.2.0,True,"manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5"
+OligoMiner,utilities-libraries,1,20181123-IGB-gcc-4.9.4,True,"A rapid, flexible environment for the design of genome-scale oligonucleotide in situ hybridization probes"
+OpenMPI,utilities-libraries,2,4.0.0-GCC-8.2.0-2.32,True,The Open MPI Project is an open source MPI-3 implementation.
+OpenSSL,utilities-libraries,1,1.1.1m-IGB-gcc-8.2.0,True,"The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolchain implementing the Secure Sockets La"
+PGDSpider,utilities-libraries,1,2.1.1.5-Java-1.8.0_201,True,PGDSpider is a powerful automated data conversion tool for population genetic and genomics programs. It facilitates the data exchange possibilities between prog
+Pillow,utilities-libraries,2,5.1.0-IGB-gcc-4.9.4-Python-3.6.1,True,Pillow is the friendly PIL fork by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors.
+PrimerMgr,utilities-libraries,1,1.05-Java-15.0.1,True,Biotech Center Primer Manager Database
+Qt,utilities-libraries,2,4.8.7-IGB-gcc-8.2.0,True,Qt is a comprehensive cross-platform C++ application framework.
+REAP,utilities-libraries,1,1.2-IGB-gcc-8.2.0,True,
+RcppGSL,utilities-libraries,1,0.3.2-IGB-gcc-4.9.4-R-3.3.3,True,Rcpp integration for GNU GSL vectors and matrices The GNU Scientific Library (or GSL) is a collection of numerical routines for scientific computing. It is part
+Rmpi,utilities-libraries,1,0.6-6-IGB-gcc-4.9.4-R-3.4.2,True,An interface (wrapper) to MPI APIs. It also provides interactive R manager and worker environment.
+Rust,utilities-libraries,2,1.87.0,True,"Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety."
+SAI-app,utilities-libraries,1,20230425-IGB-gcc-8.2.0-Python-3.7.2,True,StomaAI application
+SCons,utilities-libraries,2,3.0.1-IGB-gcc-4.9.4-Python-3.6.1,True,SCons is a software construction tool.
+SDL2,utilities-libraries,1,2.0.4-IGB-gcc-4.9.4,True,"SDL: Simple DirectMedia Layer, a cross-platform multimedia library"
+SMART-Aptamer-v1,utilities-libraries,1,20200313-IGB-gcc-4.9.4,True,
+SMART-Aptamer-v2,utilities-libraries,1,20200315-IGB-gcc-4.9.4,True,
+SQLite,utilities-libraries,3,3.30.1-IGB-gcc-4.9.4,True,SQLite: SQL Database Engine in a C Library
+SRA-Toolkit,utilities-libraries,4,3.0.0,True,The NCBI SRA Toolkit enables reading (dumping) of sequencing files from the SRA database and writing (loading) files into the .sra format
+SUNDIALS,utilities-libraries,2,7.1.1-IGB-gcc-8.2.0,True,SUNDIALS: SUite of Nonlinear and DIfferential/ALgebraic Equation Solvers
+SWIG,utilities-libraries,4,3.0.12-IGB-gcc-8.2.0-Python-3.7.2,True,SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages.
+SalmonTools,utilities-libraries,1,20190604-IGB-gcc-8.2.0,True,Useful tools for working with Salmon output
+SeqLib,utilities-libraries,1,1.2.0-IGB-gcc-8.2.0,True,"C++ interface to HTSlib, BWA-MEM and Fermi"
+SequelTools,utilities-libraries,1,20200619-IGB-gcc-8.2.0-Python-3.7.2,True,SequelTools is a fast and easy to install command-line program that provides a collection of tools for working with multiple SMRTcells of BAM format PacBio Sequ
+SoX,utilities-libraries,1,14.4.2-IGB-gcc-4.9.4,True,"Sound eXchange, the Swiss Army knife of audio manipulation"
+SuiteSparse,utilities-libraries,2,5.8.1-IGB-gcc-8.2.0,True,SuiteSparse is a collection of libraries manipulate sparse matrices.
+XZ,utilities-libraries,2,5.2.3-IGB-gcc-8.2.0,True,xz: XZ utilities
+a2ps,utilities-libraries,2,4.14-IGB-gcc-8.2.0,True,a2ps-4.14: Formats an ascii file for printing on a postscript printer
+ant,utilities-libraries,5,1.10.9-Java-1.8.0_201,True,Apache Ant is a Java library and command-line tool whose mission is to drive processes described in build files as targets and extension points dependent upon e
+any2fasta,utilities-libraries,1,0.4.2-IGB-gcc-8.2.0-Perl-5.28.1,True,Convert various sequence formats to FASTA
+aria2,utilities-libraries,2,1.37.0-IGB-gcc-8.2.0,True,aria2 is a lightweight multi-protocol & multi-source command-line download utility.
+aspera,utilities-libraries,2,4.2.7.445,True,"Aspera’s unwavering mission is to create the next-generation software technologies that move the world’s data at maximum speed, regardless of file size, transfe"
+awkde,utilities-libraries,1,20220617-IGB-gcc-8.2.0-Python-3.7.2,True,"This uses the awesome pybind11 package which makes creating C++ bindings super convenient. Only the evaluation is written in a small C++ snippet to speed it up,"
+awscli,utilities-libraries,2,1.18.96-IGB-gcc-8.2.0-Python-3.7.2,True,"The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS s"
+bammds,utilities-libraries,1,20140602-IGB-gcc-4.9.4,True,Software that allows to create a multidimensional scaling (MDS) plot of populations for genetic data.
+basespace-cli,utilities-libraries,1,1.5.1,True,You can work with your BaseSpace Sequence Hub data using the command line interface (CLI). The BaseSpace Sequence Hub CLI supports scripting and programmatic ac
+bax2bam,utilities-libraries,1,20171114-IGB-gcc-4.9.4,True,bax2bam converts the legacy PacBio basecall format (bax.h5) into the BAMbasecall format.
+bazel,utilities-libraries,1,0.6.0-Java-1.8.0_121,True,Bazel is a build tool that builds code quickly and reliably. It is used to build the majority of Googles software.
+bcl,utilities-libraries,1,4.0.0,True,
+bedops,utilities-libraries,1,2.4.30,True,"BEDOPS is an open-source command-line toolkit that performs highly efficient and scalable Boolean and other set operations, statistical calculations, archiving,"
+bioawk,utilities-libraries,1,1.0-IGB-gcc-8.2.0,True,"Bioawk is an extension to Brian Kernighan's awk, adding the support of several common biological data formats, including optionally gzip'ed BED, GFF, SAM, VCF, "
+biodatabase,utilities-libraries,1,1.0-IGB-gcc-4.9.4,True,Scripts to create databases on the biodatabase machine.
+biom-format,utilities-libraries,5,2.1.8-IGB-gcc-8.2.0-Python-3.7.2,True,The BIOM file format (canonically pronounced biome) is designed to be a general-useformat for representing biological sample by observation contingency tables.
+bioservices,utilities-libraries,1,1.7.9-IGB-gcc-4.9.4-Python-3.6.1,True,"Bioservices is a Python package that provides access to many Bioinformatices Web Services (e.g., UniProt) and a framework to easily implement Web Services wrapp"
+bx-python,utilities-libraries,1,0.8.13-IGB-gcc-8.2.0-Python-3.7.2,True,The bx-python project is a Python library and associated set of scripts for rapid implementation of genome scale analyses.
+byacc,utilities-libraries,1,20170709-IGB-gcc-4.9.4,True,"Berkeley Yacc (byacc) is generally conceded to be the best yacc variant available.In contrast to bison, it is written to avoid dependencies upon a particular co"
+bzip2,utilities-libraries,2,1.0.6-IGB-gcc-8.2.0,True,"bzip2 is a freely available, patent free, high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the"
+cdbfasta,utilities-libraries,2,20181005-IGB-gcc-8.2.0,True,CDB (Constant DataBase) indexing and retrieval tools for FASTA files
+ceres-solver,utilities-libraries,3,2.0.0-IGB-gcc-8.2.0,True,"Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
+chopchop,utilities-libraries,1,20190211-IGB-gcc-4.9.4-Python-2.7.13,True,"CHOPCHOP is a python script that allows quick and customizable design of guide RNA. We support selecting target sites for CRISPR/Cas9, CRISPR/Cpf1 or TALEN with"
+clang-format,utilities-libraries,1,15.0.7-IGB-gcc-8.2.0-Python-3.7.2,True,Clang-Format is an LLVM-based code formatting tool
+cocoapi,utilities-libraries,1,20190218-IGB-gcc-4.9.4-Python-3.6.1,True,"OCO is a large image dataset designed for object detection, segmentation, person keypoints detection, stuff segmentation, and caption generation."
+colmap,utilities-libraries,1,20210330-IGB-gcc-4.9.4,True,COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface. It offers a wide range
+coreutils,utilities-libraries,3,9.1-IGB-gcc-8.2.0,True,"The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system.These are the core utilities which are expected to "
+create_project,utilities-libraries,1,1.0-IGB-gcc-8.2.0-Python-3.10.1,True,"This repository contains create_project.py, a small Python CLI that generates a standardized research project layout. The tool is intentionally minimal: it crea"
+cytoscape,utilities-libraries,3,3.9.1-Java-11.0.5,True,Cytoscape is an open source software platform for visualizing complex networks and integrating these with any type of attribute data.
+deNOPA,utilities-libraries,1,1.0.2-IGB-gcc-4.9.4-Python-2.7.13,True,"As the basal bricks, the dynamics and arrangement of nucleosomes orchestrate the higher architecture of chromatin in a fundamental way, thereby affecting almost"
+distruct,utilities-libraries,1,2.2-IGB-gcc-4.9.4,True,Modified version of the original distruct.py
+ds3_java_cli,utilities-libraries,1,5.6.0,True,Command line utilities for Bioarchive
+ea-utils,utilities-libraries,1,1.04.807-IGB-gcc-4.9.4,True,"Command-line tools for processing biological sequencing data. Barcode demultiplexing, adapter trimming, etc. Primarily written to support an Illumina based pipe"
+exiftool,utilities-libraries,1,12.54-IGB-gcc-8.2.0-Perl-5.28.1,True,"Read, Write and Edit Meta Information!"
+fast5,utilities-libraries,4,0.6.5-IGB-gcc-8.2.0,True,A lightweight C++ library for accessing Oxford Nanopore Technologies sequencing data.
+fdupes,utilities-libraries,1,1.6.1-IGB-gcc-4.9.4,True,FDUPES is a program for identifying duplicate files residingwithin specified directories.
+fgbio,utilities-libraries,1,0.6.0-Java-1.8.0_152,True,fgbio is a command line toolkit for working with genomic and particularly next generation sequencing data.
+fithic,utilities-libraries,1,2.0.7-IGB-gcc-8.2.0-Python-3.7.2,True,"Fit-Hi-C (or FitHiC) was initially developed by Ferhat Ay, Timothy Bailey, and William Noble January 19th, 2014."
+gdb,utilities-libraries,1,8.0.1-IGB-gcc-4.9.4-Python-2.7.13,True,The GNU Project Debugger
+gdc-client,utilities-libraries,2,2.3-IGB-gcc-8.2.0-Python-3.10.1,True,The GDC Data Transfer Tool Client provides a command-line interface supporting both GDC data downloads and submissions.
+genometools,utilities-libraries,1,1.5.10-IGB-gcc-4.9.4,True,The GenomeTools genome analysis system is a free collection of bioinformatics tools (in the realm of genome informatics) combined into a single binary named gt.
+geos,utilities-libraries,1,3.7.1-IGB-gcc-4.9.4,True,GEOS (Geometry Engine - Open Source) is a C++ port of the JTS Topology Suite
+gfatools,utilities-libraries,2,0.5-IGB-gcc-8.2.0,True,"gfatools is a set of tools for manipulating sequence graphs in the GFA or the rGFA format. It has implemented parsing, subgraph and conversion to FASTA/BED."
+gff3sort,utilities-libraries,1,1.0.0-IGB-gcc-4.9.4-Perl-5.24.1,True,A Perl Script to sort gff3 files and produce suitable results for tabix tools
+gffread,utilities-libraries,2,ba7535f-IGB-gcc-4.9.4,True,"The program gffread can be used to validate, filter, convert and perform various other operations on GFF files"
+gffutils,utilities-libraries,2,0.11.1-IGB-gcc-8.2.0-Python-3.7.2,True,gffutils is a Python package for working with and manipulating the GFF and GTF format files typically used for genomic annotations.
+gflags,utilities-libraries,2,2.2.2-IGB-gcc-8.2.0,True,The gflags package contains a C++ library that implements commandline flagsprocessing. It includes built-in support for standard types such as stringand the abi
+git,utilities-libraries,3,2.9.5-IGB-gcc-4.9.4,True,Git is a free and open source distributed version control system designedto handle everything from small to very large projects with speed and efficiency.
+git-lfs,utilities-libraries,1,2.2.1-IGB-gcc-4.9.4,True,"Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, while storing the file co"
+glew,utilities-libraries,1,2.1.0-IGB-gcc-4.9.4,True,The OpenGL Extension Wrangler Library (GLEW) is a cross-platform open-sourceC/C++ extension loading library. GLEW provides efficient run-time mechanismsfor dete
+globus-cli,utilities-libraries,1,3.30.1-IGB-gcc-8.2.0-Python-3.10.1,True,"The CLI provides an interface to Globus services from the shell, and is suited to both interactive and simple scripting use cases."
+glog,utilities-libraries,2,0.5.0-IGB-gcc-8.2.0,True,A C++ implementation of the Google logging module.
+gnuplot,utilities-libraries,3,5.0.6-IGB-gcc-4.9.4,True,"Portable interactive, function plotting utility"
+gofasta,utilities-libraries,1,0.0.3,True,"Gofasta uses a slightly modified version of the bit-level coding scheme for nucleotides by Emmanuel Paradis (described here, and implemented in the R package ap"
+gperf,utilities-libraries,2,3.1-IGB-gcc-8.2.0,True,"GNU gperf is a perfect hash function generator. For a given list of strings, it produces a hash function and hash table, in form of C or C++ code, for looking u"
+graphviz,utilities-libraries,2,2.40.1-IGB-gcc-4.9.4-Python-2.7.13,True,Graphviz is open source graph visualization software. Graph visualization is a way of representing structural information as diagrams of abstract graphs and net
+gsutil,utilities-libraries,1,4.52-IGB-gcc-4.9.4-Python-3.6.1,True,gsutil is a Python application that lets you access Cloud Storage from the command line.
+gtest,utilities-libraries,1,1.8.0-IGB-gcc-4.9.4,True,Googles C++ test framework
+gzrt,utilities-libraries,1,0.8-IGB-gcc-8.2.0,True,So you thought you had your files backed up - until it came time to restore. Then you found out that you had bad sectors and you've lost almost everything becau
+hclust2,utilities-libraries,1,1.0.0-IGB-gcc-8.2.0-Python-3.10.1,True,Hclust2 is a handy tool for plotting heat-maps with several useful options to produce high quality figures that can be used in publication.
+higlass-python,utilities-libraries,1,0.4.4-IGB-gcc-8.2.0-Python-3.7.2,True,"Python bindings to the HiGlass for tile serving, view config generation, and Jupyter Notebook + Lab integration."
+htop,utilities-libraries,1,2.2.0-IGB-gcc-4.9.4,True,"This is htop, an interactive process viewer for Unix systems. It is a text-mode application (for console or X terminals) and requires ncurses."
+iced,utilities-libraries,1,0.5.10-IGB-gcc-8.2.0-Python-3.7.2,True,ICE normalization
+igraph,utilities-libraries,1,0.11.5-IGB-gcc-8.2.0-Python-3.10.1,True,"Python interface of igraph, a fast and open source C library to manipulate and analyze graphs (aka networks). It can be used to:"
+igv,utilities-libraries,4,snapshot-Java-11.0.5,True,"The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a "
+intervene,utilities-libraries,1,0.6.5,True,a tool for intersection and visualization of multiple genomic region sets
+ior,utilities-libraries,1,3.0.1-IGB-gcc-4.9.4,True,Parallel filesystem I/O benchmark
+jcvi,utilities-libraries,1,1.5.7,True,"Collection of Python libraries to parse bioinformatics files, or perform computation related to assembly, annotation, and comparative genomics."
+kentUtils,utilities-libraries,2,398-IGB-gcc-8.2.0,True,UCSC genome browser kent bioinformatic utilities
+kmerfreq,utilities-libraries,1,4.0-IGB-gcc-8.2.0,True,"kmerfreq count K-mer (with size K) frequency from the input sequence data, typically sequencing reads data, and reference genome data is also applicable."
+kyoto,utilities-libraries,1,20170410-IGB-gcc-4.9.4,True,"Kyoto Tycoon is a lightweight network server on top of the Kyoto Cabinet key-value database, built for high-performance and concurrency. Some of its features in"
+lbzip2,utilities-libraries,1,2.5-IGB-gcc-4.9.4,True,"lbzip2 is a free, multi-threaded compression utility with support for bzip2 compressed file format."
+lftp,utilities-libraries,1,4.9.2-IGB-gcc-8.2.0,True,"FTP is a sophisticated file transfer program supporting a number of network protocols (ftp, http, sftp, fish, torrent)."
+libaec,utilities-libraries,1,1.0.6-IGB-gcc-8.2.0,True,Libaec provides fast lossless compression of 1 up to 32 bit wide signed or unsigned integers(samples). The library achieves best results for low entropy data as
+libunwind,utilities-libraries,2,1.5.0-IGB-gcc-8.2.0,True,The primary goal of libunwind is to define a portable and efficient C programming interface (API) to determine the call-chain of a program. The API additionally
+lpsolve,utilities-libraries,2,5.5.2.5-IGB-gcc-8.2.0,True,Mixed Integer Linear Programming (MILP) solver
+lz4,utilities-libraries,2,1.9.2-IGB-gcc-8.2.0,True,"LZ4 is lossless compression algorithm, providing compression speed at 400 MB/s per core. It features an extremely fast decoder, with speed in multiple GB/s per "
+mawk,utilities-libraries,1,1.3.4-20200120-IGB-gcc-8.2.0,True,mawk is an interpreter for the AWK Programming Language.
+memprof,utilities-libraries,1,1.01,True,"Memprof is HPC Cluster Program Profiler. It records the memory, processor, and IO usage of a process. It will then generate a graph of the results."
+meryl,utilities-libraries,1,1.3,True,"This is 'meryl', a near total rewrite of 'meryl' that appeared in both project kmer and Celera Assembler."
+methylartist,utilities-libraries,2,1.3.1-IGB-gcc-8.2.0-Python-3.10.1,True,Tools for parsing and plotting methylation patterns
+nanopack,utilities-libraries,1,1.0.0-IGB-gcc-4.9.4-Python-3.6.1,True,Easily install all my long read processing and analysis scripts simultaneously.
+ncbi-datasets,utilities-libraries,3,20240305,True,Install and use the NCBI Datasets command line tools
+ncbi-genome-download,utilities-libraries,1,0.2.9-IGB-gcc-4.9.4-Python-3.6.1,True,Some script to download bacterial and fungal genomes from NCBI after they restructured their FTP a while ago.
+ncbi-toolkit,utilities-libraries,1,22-IGB-gcc-8.2.0,True,"The NCBI Toolkit is a collection of utilities developed for the production and distribution of GenBank, Entrez, BLAST, and related services by the National Cent"
+ncbi-vdb,utilities-libraries,2,2.8.2-IGB-gcc-4.9.4,True,The SRA Toolkit and SDK from NCBI is a collection of tools and libraries for using data in the INSDC Sequence Read Archives.
+ncview,utilities-libraries,1,2.1.7-IGB-gcc-8.2.0,True,"Ncview is a visual browser for netCDF format files.Typically you would use ncview to get a quick and easy, push-buttonlook at your netCDF files. You can view si"
+netCDF,utilities-libraries,3,4.9.2-IGB-gcc-8.2.0,True,"NetCDF (network Common Data Form) is a set of software libraries and machine-independent data formats that support the creation, access, and sharing of array-or"
+netCDF-Fortran,utilities-libraries,2,4.5.2-IGB-gcc-8.2.0,True,"NetCDF (network Common Data Form) is a set of software libraries and machine-independent data formats that support the creation, access, and sharing of array-or"
+nettle,utilities-libraries,1,3.3-IGB-gcc-4.9.4,True,"Nettle is a cryptographic library that is designed to fit easily in more or less any context: In crypto toolkits for object-oriented languages (C++, Python, Pik"
+nodejs,utilities-libraries,3,9.9.0-IGB-gcc-4.9.4,True,"Node.js is a platform built on Chromes JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/"
+nose-parameterized,utilities-libraries,1,0.6.0-IGB-gcc-4.9.4-Python-2.7.13,True,Parameterized testing with any Python test framework.
+npm,utilities-libraries,1,v7.20.0-IGB-gcc-4.9.4,True,the package manager for JavaScript
+nvtop,utilities-libraries,1,3.1.0-IGB-gcc-8.2.0,True,htop-like GPU usage monitor
+ont-fast5-api,utilities-libraries,2,3.3.0-IGB-gcc-8.2.0-Python-3.7.2,True,ont_fast5_api is a simple interface to HDF5 files of the Oxford Nanopore .fast5 file format.
+p7zip,utilities-libraries,1,17.04-IGB-gcc-8.2.0,True,p7zip is a quick port of 7z.exe and 7za.exe (CLI version of7zip) for Unix. 7-Zip is a file archiver with highest compression ratio.
+pairix,utilities-libraries,1,0.3.7-IGB-gcc-8.2.0,True,Pairix is a tool for indexing and querying on a block-compressed text file containing pairs of genomic coordinates.
+pandoc,utilities-libraries,1,2.2.3.2,True,"If you need to convert files from one markup format into another, pandoc is your swiss-army knife"
+parallel,utilities-libraries,2,20200822-IGB-gcc-8.2.0,True,parallel: GNU parallel is a shell tool for executing jobs in parallel using one or more computers.
+pbbam,utilities-libraries,1,1.0.7-IGB-gcc-8.2.0,True,"The pbbam software package provides components to create, query, & edit PacBio BAM files and associated indices. These components include a core C++ library, bi"
+pbzip2,utilities-libraries,2,1.1.13-IGB-gcc-8.2.0,True,PBZIP2 is a parallel implementation of the bzip2 block-sorting file compressor that uses pthreads and achieves near-linear speedup on SMP machines.
+perfsuite,utilities-libraries,1,1.1.4-IGB-gcc-4.9.4,True,"PerfSuite is a collection of tools, utilities, and libraries for software performance analysis where the primary design goals are ease of use, comprehensibility"
+pfilt,utilities-libraries,1,1.5-IGB-gcc-8.2.0,True,"The pfilt program is designed to mask out (i.e. replace amino acid characterswith Xs) regions of low complexity, coiled-coil regions and more regions withextrem"
+pigz,utilities-libraries,2,2.4-IGB-gcc-8.2.0,True,"pigz, which stands for parallel implementation of gzip, is a fully functional replacement for gzip that exploits multiple processors and multiple cores to the h"
+pod5,utilities-libraries,1,0.3.12-IGB-gcc-8.2.0-Python-3.10.1,True,POD5 is a file format for storing nanopore sequencing data in an easily accessible way. The format is able to be written in a streaming manner which allows a se
+primer3,utilities-libraries,1,2.4.0-IGB-gcc-4.9.4,True,"Primer3 is a widely used program for designing PCR primers (PCR = ""Polymerase Chain Reaction""). PCR is an essential and ubiquitous tool in genetics and molecula"
+protobuf,utilities-libraries,3,3.5.0-IGB-gcc-4.9.4,True,"Protocol Buffers (a.k.a., protobuf) are Googles language-neutral, platform-neutral, extensible mechanism for serializing structured data."
+protobuf-python,utilities-libraries,1,3.19.4-IGB-gcc-8.2.0,True,Python Protocol Buffers runtime library.
+pssh,utilities-libraries,1,2.3.1-IGB-gcc-4.9.4-Python-2.7.13,True,"PSSH provides parallel versions of OpenSSH and related tools, including pssh, pscp, prsync, pnuke and pslurp. This project includes psshlib which can be used wi"
+pullseq,utilities-libraries,1,1.0.2-IGB-gcc-4.9.4,True,Utility program for extracting sequences from a fasta/fastq file
+py2cytoscape,utilities-libraries,1,0.7.1-IGB-gcc-8.2.0-Python-3.7.2,True,"py2cytoscape is a collection of utilities to use Cytoscape and Cytoscape.js from Python. Network visualization feature is still limited in Python, but with this"
+pybedtools,utilities-libraries,4,0.9.0-IGB-gcc-8.2.0-Python-3.7.2,True,"pybedtools is a Python package that wraps BEDTools, so you will need both installed."
+pybind11,utilities-libraries,1,2.9.2-IGB-gcc-8.2.0,True,"pybind11 is a lightweight header-only library that exposes C++ types in Python and vice versa, mainly to create Python bindings of existing C++ code."
+pycairo,utilities-libraries,1,1.19.1-IGB-gcc-8.2.0-Python-3.7.2,True,"Pycairo is a Python module providing bindings for the cairo graphics library. It depends on cairo >= 1.15.10 and works with Python 3.7+. Pycairo, including this"
+pyfasta,utilities-libraries,1,0.5.2-IGB-gcc-4.9.4-Python-2.7.13,True,Stores a flattened version of the fasta file without spaces or headers and uses either a mmap of numpy binary format or fseek/fread so the sequence data is neve
+pygraphviz,utilities-libraries,1,1.3.1-IGB-gcc-4.9.4-Python-3.6.1,True,"PyGraphviz is a Python interface to the Graphviz graph layout and visualization package. With PyGraphviz you can create, edit, read, write, and draw graphs usin"
+qgrs,utilities-libraries,1,1.0-IGB-gcc-4.9.4,True,C++ implementation of QGRS mapping algorithm - described here. This program differs from the actual algorithm used by QGRS Mapper recarding overlapping motifs a
+radar,utilities-libraries,1,1.3-IGB-gcc-8.2.0,True,Welcome to radar
+rclone,utilities-libraries,4,1.71.0,True,Rclone is a command line program to sync files and directories to and from different cloud storage
+redbiom,utilities-libraries,1,0.3.2-IGB-gcc-4.9.4-Python-3.6.1,True,Redbiom is a cache service for sample metadata and sample data.
+rgeos,utilities-libraries,1,0.4-2-IGB-gcc-4.9.4-R-3.5.0,True,nterface to Geometry Engine - Open Source (GEOS) using the C API for topology operations on geometries.
+scikit-allel,utilities-libraries,1,1.3.8,True,"“SciKits” (short for SciPy Toolkits) are add-on packages for SciPy, hosted and developed separately and independently from the main SciPy distribution."
+scikit-bio,utilities-libraries,1,0.6.0,True,"Robust, performant and scalable algorithms tailored for the vast landscape of biological data analysis spanning genomics, microbiomics, ecology, evolutionary bi"
+scrappie,utilities-libraries,1,1.3.0-IGB-gcc-4.9.4,True,Scrappie is a technology demonstrator for the Oxford Nanopore Research Algorithms group.
+seqan,utilities-libraries,2,2.3.2-IGB-gcc-4.9.4,True,SeqAn is an open source C++ library of efficient algorithms and data structures for the analysis of sequences with the focus on biological data
+seqkit,utilities-libraries,6,2.6.1,True,a cross-platform and ultrafast toolkit for FASTA/Q file manipulation
+seqtk,utilities-libraries,4,1.4-IGB-gcc-8.2.0,True,Seqtk is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format. It seamlessly parses both FASTA and FASTQ files which can also be op
+sharutils,utilities-libraries,1,4.15.2-IGB-gcc-4.9.4,True,"GNU shar makes so-called shell archives out of many files, preparing them for transmission by electronic mail services, while unshar helps unpacking shell archi"
+snapgene-reader,utilities-libraries,1,0.1.19-IGB-gcc-8.2.0-Python-3.7.2,True,SnapGene Reader is a Python library to parse Snapgene *.dna files into dictionaries or Biopython SeqRecords
+spaCy,utilities-libraries,1,2.3.2-IGB-gcc-4.9.4-Python-3.6.1,True,"spaCy is designed to help you do real work — to build real products, or gather real insights. The library respects your time, and tries to avoid wasting it. It'"
+sparsehash,utilities-libraries,2,2.0.3-IGB-gcc-8.2.0,True,"This directory contains several hash-map implementations, similar inAPI to SGIs hash_map class, but with different performance characteristics."
+squid,utilities-libraries,1,1.9g-IGB-gcc-4.9.4,True,A C library that is bundled with much of the above software. C function library for sequence analysis.
+synapseclient,utilities-libraries,1,1.9.2-IGB-gcc-4.9.4-Python-3.6.1,True,"Synapse is an open source software platform that data scientists can use to carry out, track, and communicate their research in real time."
+tabix,utilities-libraries,2,0.2.6-IGB-gcc-8.2.0,True,Generic indexer for TAB-delimited genome position files
+tabixpp,utilities-libraries,1,1.1.0-IGB-gcc-8.2.0,True,This is a C++ wrapper around tabix project which abstracts some of the details of opening and jumping in tabix-indexed files.
+tar,utilities-libraries,1,1.32-IGB-gcc-8.2.0,True,tar: The GNU tape archiver
+tre,utilities-libraries,1,20161208-IGB-gcc-4.9.4,True,"TRE is a lightweight, robust, and efficient POSIX compliant regexp matching library with some exciting features such as approximate (fuzzy) matching.The matchin"
+trimal,utilities-libraries,1,1.5.0-IGB-gcc-8.2.0,True,
+ukbiobank,utilities-libraries,1,20190130,True,Biobank download software
+unrar,utilities-libraries,1,5.7.3-IGB-gcc-4.9.4,True,RAR is a powerful archive manager.
+util-linux,utilities-libraries,1,2.34-IGB-gcc-4.9.4,True,Set of Linux utilities
+valgrind,utilities-libraries,1,3.13.0-IGB-gcc-4.9.4,True,Valgrind is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and 
+vcflib,utilities-libraries,2,1.0.2-IGB-gcc-8.2.0,True,"a simple C++ library for parsing and manipulating VCF files, + many command-line utilities"
+weblogo,utilities-libraries,1,3.7.12-IGB-gcc-8.2.0-Python-3.10.1,True,WebLogo is a web-based application designed to make the generation of sequence logos easy and painless. WebLogo has been featured in over 10000 scientific publi
+wxPython,utilities-libraries,2,4.1.0-IGB-gcc-8.2.0-Python-3.7.2,True,"the cross-platform GUI toolkit for the Python language. With wxPython software developers can create truly native user interfaces for their Python applications,"
+zstd,utilities-libraries,2,1.5.5-IGB-gcc-8.2.0,True,"Zstandard is a real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression/speed trade-off, while being backe"
+BCFtools,variant-calling,7,1.9-IGB-gcc-4.9.4,True,BCFtools is a set of utilities that manipulate variant calls in the Variant Call Format (VCF) and its binary counterpart BCF. Includes https://github.com/freese
+BS-Snper,variant-calling,1,20170222-IGB-gcc-4.9.4-Perl-5.24.1,True,"BS-SNPer is an ultrafast and memory-efficient package, a program for BS-Seq variation detection from alignments in standard BAM/SAM format using approximate Bay"
+BreakSeq2,variant-calling,1,2.2-IGB-gcc-4.9.4-Python-2.7.13,True,Ultrafast and accurate nucleotide-resolution analysis of structural variants - Homepage: http://bioinform.github.io/breakseq2/
+CNVkit,variant-calling,2,0.9.8-IGB-gcc-8.2.0-Python-3.7.2,True,A command-line toolkit and Python library for detecting copy number variants and alterations genome-wide from high-throughput sequencing.
+CNVnator,variant-calling,2,0.3.3-IGB-gcc-4.9.4-Python-2.7.13,True,a tool for CNV discovery and genotyping from depth-of-coverage by mapped reads
+COPIES,variant-calling,1,0.3-IGB-gcc-8.2.0-Python-3.10.1,True,COmputational Pipeline for the Identification of CRISPR/Cas-facilitated intEgration Sites (CRISPR-COPIES) is a user-friendly web application and a command line 
+FreeBayes,variant-calling,2,1.3.4-IGB-gcc-8.2.0,True,a haplotype-based variant detector
+GATK,variant-calling,10,4.4.0.0-Java-17.0.6,True,"Developed in the Data Sciences Platform at the Broad Institute, the toolkit offers a wide variety of tools with a primary focus on variant discovery and genotyp"
+GBS-SNP-CROP,variant-calling,1,4.0-IGB-gcc-4.9.4,True,The GBS SNP Calling Reference Optional Pipeline (GBS-SNP-CROP) is executed via a sequence of seven Perl scripts that integrate custom parsing and filtering proc
+GBSX,variant-calling,1,1.3-IGB-gcc-8.2.0-Java-1.8.0_201,True,"Genotyping by Sequencing is an emerging technology for cost effective variant discovery and genotyping. However, current analysis tools do not fulfill all exper"
+GenomicConsensus,variant-calling,1,2.3.3,True,"The GenomicConsensus package provides the variantCaller tool, which allows you to apply the Quiver or Arrow algorithm to mapped PacBio reads to get consensus an"
+HapFM,variant-calling,1,20240614-IGB-gcc-8.2.0-Python-3.7.2,True,HapFM has 2 main functions: genome-wide haplotype block partition and haplotype-based fine-mapping.
+HiPhase,variant-calling,1,1.4.3,True,HiPhase will phase variant calls made from PacBio HiFi datasets.
+Jasmine,variant-calling,1,1.1.5,True,"This tool is used to merge structural variants (SVs) across samples. Each sample has a number of SV calls, consisting of position information (chromosome, start"
+KING,variant-calling,1,2.3.2-IGB-gcc-8.2.0,True,KING is a toolset that makes use of high-throughput SNP data typically seen in a genome-wide association study (GWAS) or a sequencing project. Applications of K
+MACS,variant-calling,1,1.4.2-1-IGB-gcc-4.9.4-Python-2.7.13,True,Model-based Analysis of ChIP-Seq (MACS) on short reads sequencers such as Genome Analyzer (Illumina / Solexa). MACS empirically models the length of the sequenc
+MACS2,variant-calling,4,2.2.5-IGB-gcc-8.2.0-Python-3.7.2,True,Model Based Analysis for ChIP-Seq data
+MAPGD,variant-calling,1,0.4.26-IGB-gcc-4.9.4,True,"MAPGD is a series of related programs that estimate allele frequency, heterozygosity, Hardy-Weinberg disequilibrium, linkage disequilibrium and identity-by-desc"
+Merfin,variant-calling,2,20210507-IGB-gcc-8.2.0,True,k-mer-based assembly and variant calling evaluation for improved consensus accuracy.
+NGSadmix,variant-calling,1,20260323-IGB-gcc-8.2.0,True,NGSadmix estimates individual admixture proportions from next-generation sequencing data using genotype likelihoods rather than hard genotype calls.
+NanoSV,variant-calling,1,1.2.4-IGB-gcc-8.2.0-Python-3.7.2,True,"NanoSV is a software package that can be used to identify structural genomic variations in long-read sequencing data, such as data produced by Oxford Nanopore T"
+NgsRelate,variant-calling,1,2.3.1-IGB-gcc-8.2.0,True,"NgsRelate, which can be used to infer relatedness, inbreeding coefficients and many other summary statistics for pairs of individuals from low coverage Next Gen"
+Platypus,variant-calling,1,20180622-IGB-gcc-4.9.4-Python-2.7.13,True,The Platypus variant caller.
+SNVer,variant-calling,2,0.5.3-Java-1.8.0_152,True,SNVer is a statistical tool for calling common and rare variants in analysis of pool or individual next-generation sequencing data. It reports one single overal
+SURVIVOR,variant-calling,1,1.0.7-IGB-gcc-8.2.0,True,"SURVIVOR is a tool set for simulating/evaluating SVs, merging and comparing SVs within and among samples, and includes various methods to reformat or summarize "
+Sniffles,variant-calling,1,1.0.12b-IGB-gcc-8.2.0,True,Sniffles is a structural variation caller using third generation sequencing (PacBio or Oxford Nanopore). It detects all types of SVs (10bp+) using evidence from
+TASSEL,variant-calling,2,5.2.28-Java-1.8.0_152,True,"While TASSEL has changed considerably since its initial public release in 2001, its primary function continues to be providing tools to investigate the relation"
+VCFtools,variant-calling,2,0.1.16-IGB-gcc-8.2.0-Perl-5.28.1,True,The aim of VCFtools is to provide easily accessible methods for working with complex genetic variation data in the form of VCF files.
+VEP,variant-calling,1,92.4-IGB-gcc-4.9.4-Perl-5.24.1,True,VEP (Variant Effect Predictor) predicts the functional effects of genomic variants.
+VarScan,variant-calling,1,2.3.9-Java-1.8.0_152,True,"VarScan is a platform-independent mutation caller for targeted, exome, and whole-genome resequencing data generated on Illumina, SOLiD, Life/PGM, Roche/454, and"
+beagle,variant-calling,2,5.1-Java-1.8.0_152,True,"Beagle is a software package for phasing genotypes and for imputing ungenotyped markers. Version 5.0 has new, fast algorithms for genotype phasing and imputatio"
+breseq,variant-calling,4,0.39.0-IGB-gcc-8.2.0,True,"is a computational pipeline for the analysis of short-read re-sequencing data (e.g. Illumina, 454, IonTorrent, etc.). It uses reference-based alignment approach"
+cuteSV,variant-calling,1,1.0.12-IGB-gcc-8.2.0-Python-3.7.2,True,"A sensitive, fast and scalable long-read-based SV detection approach. cuteSV uses tailored methods to collect the signatures of various types of SVs and employs"
+delly,variant-calling,1,0.8.1-IGB-gcc-4.9.4,True,"Delly is an integrated structural variant (SV) prediction method that can discover, genotype and visualize deletions, tandem duplications, inversions and transl"
+fastPHASE,variant-calling,1,20160330,True,astPHASE is a program to estimate missing genotypes and unobserved haplotypes.
+fastStructure,variant-calling,1,1.0-IGB-gcc-4.9.4-Python-2.7.13,True,fastStructure is an algorithm for inferring population structure from large SNP genotype data. It is based on a variational Bayesian framework for posterior inf
+fineRADstructure,variant-calling,1,0.3.2-IGB-gcc-8.2.0,True,Population Inference from RADseq Data
+genrich,variant-calling,1,0.6-IGB-gcc-8.2.0,True,"Genrich is a peak-caller for genomic enrichment assays (e.g. ChIP-seq, ATAC-seq). It analyzes alignment files generated following the assay and produces a file "
+graphtyper,variant-calling,1,1.3-IGB-gcc-4.9.4,True,Graphtyper is a highly scalable genotyping software. It represents a reference genome and known variants of a genomic region using an acyclic mathematical graph
+gtool,variant-calling,1,0.7.5,True,GTOOL is a program for transforming sets of genotype data for use with the programs SNPTEST and IMPUTE.
+impute2,variant-calling,1,2.3.2,True,"IMPUTE2 is freely available for academic use. To see rules for non-academic use, please read the LICENCE file, which is included with each software download."
+ivar,variant-calling,1,1.3.1-IGB-gcc-8.2.0,True,iVar is a computational package that contains functions broadly useful for viral amplicon-based sequencing. Additional tools for metagenomic sequencing are acti
+lofreq,variant-calling,1,2.1.5-IGB-gcc-4.9.4-Python-2.7.13,True,:oFreq* (i.e. LoFreq version 2) is a fast and sensitive variant-caller for inferring SNVs and indels from next-generation sequencing data.
+lumpy-sv,variant-calling,1,0.3.0-IGB-gcc-4.9.4,True,A probabilistic framework for structural variant discovery.
+manta,variant-calling,1,1.6.0-IGB-gcc-8.2.0-Python-2.7.18,True,Manta calls structural variants (SVs) and indels from mapped paired-end sequencing reads. It is optimized for analysis of germline variation in small sets of in
+megalodon,variant-calling,6,2.3.4-IGB-gcc-8.2.0-Python-3.7.2,True,Megalodon is a research tool for per-read and aggregated modified base and sequence variant calling by anchoring the information rich basecalling neural network
+minorseq,variant-calling,1,20180314-IGB-gcc-4.9.4,True,Minor Variant Calling and Phasing Tools
+ngsF,variant-calling,1,1.2.0-IGB-gcc-8.2.0,True,ngsF is a program to estimate per-individual inbreeding coefficients under a probabilistic framework that takes the uncertainty of genotype's assignation into a
+ngsF-HMM,variant-calling,1,20200722-IGB-gcc-8.2.0,True,ngsF-HMM is a program to estimate per-individual inbreeding tracts using a two-state Hidden Markov Model (HMM).
+ngsLD,variant-calling,1,1.2.0-IGB-gcc-8.2.0,True,ngsLD is a program to estimate pairwise linkage disequilibrium (LD) taking the uncertainty of genotype's assignation into account. It does so by avoiding genoty
+octopus,variant-calling,1,0.6.3-beta-IGB-gcc-8.2.0,True,Octopus is a mapping-based variant caller that implements several calling models within a unified haplotype-aware framework. Octopus takes inspiration from part
+pbsv,variant-calling,1,2.9.0,True,pbsv is a suite of tools to call and analyze structural variants in diploid genomes from PacBio single molecule real-time sequencing (SMRT) reads. The tools pow
+pcangsd,variant-calling,2,20220330-IGB-gcc-8.2.0-Python-3.7.2,True,Framework for analyzing low-depth next-generation sequencing (NGS) data in heterogeneous/structured populations using principal component analysis (PCA).
+phaser,variant-calling,1,20240408-IGB-gcc-8.2.0-Python-3.10.1,True,"Performs haplotype phasing using read alignments in BAM format from both DNA and RNA based assays, and provides measures of haplotypic expression for RNA based "
+piranha,variant-calling,1,1.2.1-IGB-gcc-4.9.4,True,iranha is a peak-caller for CLIP- and RIP-Seq data. It takes input in BED or BAM format and identifies regions of statistically significant read enrichment. Add
+plink,variant-calling,2,1.90,True,"This is a comprehensive update to Shaun Purcells PLINK command-line program, developed by Christopher Chang with support from the NIH-NIDDKs Laboratory of Biolo"
+popins,variant-calling,1,1.0.1-IGB-gcc-8.2.0,True,Population-scale detection of novel-sequence insertions.
+popins2,variant-calling,1,20220127-IGB-gcc-8.2.0,True,Population-scale detection of non-reference sequence variants using colored de Bruijn Graphs
+popoolation2,variant-calling,1,1201-IGB-gcc-8.2.0-Perl-5.28.1,True,PoPoolation2 allows to compare allele frequencies for SNPs between two or more populations and to identify significant differences.
+rtg-tools,variant-calling,1,3.8.4,True,"RTG Tools contains utilities to easily manipulate and accurately compare multiple VCF files, as well as utilities for processing other common NGS data formats."
+sentieon,variant-calling,11,202503,True,A fast and accurate solution to variant calling from next-generation sequence data
+sentieon-cli,variant-calling,2,1.2.3-IGB-gcc-8.2.0-Python-3.10.1,True,
+shapeit,variant-calling,1,2.20,True,SHAPEIT is a fast and accurate method for estimation of haplotypes (aka phasing) from genotype or sequencing data.
+snpEff,variant-calling,5,5.4a-Java-25.0.1,True,SnpEff is a variant annotation and effect prediction tool. It annotates and predicts the effects of genetic variants (such as amino acid changes).
+strelka,variant-calling,1,2.9.9,True,Strelka2 is a fast and accurate small variant caller optimized for analysis of germline variation in small cohorts and somatic variation in tumor/normal sample 
+svtools,variant-calling,1,0.5.1-IGB-gcc-4.9.4-Python-2.7.13,True,Comprehensive utilities to explore structural variations in genomes
+svtyper,variant-calling,1,0.7.1-IGB-gcc-4.9.4-Python-2.7.13,True,SVTyper performs breakpoint genotyping of structural variants (SVs) using whole genome sequencing data.
+trgt,variant-calling,1,3.0.0,True,"TRGT is a tool for targeted genotyping of tandem repeats from PacBio HiFi data. In addition to the basic size genotyping, TRGT profiles sequence composition, mo"
+variscan,variant-calling,1,2.0.3-IGB-gcc-4.9.4,True,"VariScan is a software package for the analysis of DNA sequence polymorphisms at the whole genome scale. Among other features,"
+vcfCodingSnps,variant-calling,1,1.5,True,vcfCodingSnps is a SNP annotation tool that annotates coding variants in VCF files.
+vg,variant-calling,1,1.15.0,True,"variation graph data structures, interchange formats, alignment, genotyping, and variant calling methods"
+whatshap,variant-calling,1,1.0-IGB-gcc-8.2.0-Python-3.7.2,True,"WhatsHap is a software for phasing genomic variants using DNA sequencing reads, also called read-based phasing or haplotype assembly. It is especially suitable "
+xTea,variant-calling,1,0.1.6,True,"xTea (comprehensive transposable element analyzer) is designed to identify TE insertions from paired-end Illumina reads, barcode linked-reads, long reads (PacBi"
+EasyBuild,workflow-containers,2,5.1.2,True,"EasyBuild is a software build and installation framework written in Python that allows you to install software in a structured, repeatable and robust way."
+Mamba,workflow-containers,1,24.3.0-0,True,"Mamba is a fast, robust, and cross-platform package manager. It runs on Windows, OS X and Linux (ARM64 and PPC64LE included) and is fully compatible with conda "
+clusterflow,workflow-containers,1,0.5-IGB-gcc-4.9.4-Perl-5.24.1,True,"Cluster Flow is workflow manager designed to run bioinformatics pipelines. It is operated through a single command cf, which can be used to launch, configure, m"
+cromwell,workflow-containers,1,39-Java-1.8.0_152,True,Scientific workflow engine designed for simplicity & scalability. Trivially transition between one off use cases to massive scale production environments
+jupyter,workflow-containers,1,1.0.0-IGB-gcc-4.9.4-Python-3.6.1,True,"Project Jupyter exists to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages."
+jupyterlab,workflow-containers,2,3.5.0-IGB-gcc-8.2.0-Python-3.10.1,True,"Project Jupyter exists to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages."
+microbiome_helper,workflow-containers,1,20171114-IGB-gcc-4.9.4,True,"An assortment of scripts to help process and automate various microbiome and metagenomic bioinformatic tools. We provide workflows, tutorials and a virtual box "
+nextflow,workflow-containers,16,25.10.2-Java-25.0.1,True,Nextflow enables scalable and reproducible scientific workflows using software containers. It allows the adaptation of pipelines written in the most common scri
+nf-core,workflow-containers,2,2.7.2-IGB-gcc-8.2.0-Python-3.10.1,True,A community effort to collect a curated set of analysis pipelines built using Nextflow.
+singularity,workflow-containers,1,3.8.1,True,Application and environment virtualization
+snakemake,workflow-containers,2,7.32.4-IGB-gcc-8.2.0-Python-3.10.1,True,"The Snakemake workflow management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based"
+toil,workflow-containers,1,5.3.0-IGB-gcc-8.2.0-Python-3.7.2,True,"Toil is a scalable, efficient, cross-platform (Linux & macOS) pipeline management system, written entirely in Python, and designed around the principles of func"
