@@ -28,34 +28,78 @@ Never request a whole GPU node: `--gres=gpu:1`. Three GPU nodes serve the instit
 
 ## Version pairing — 13 CUDA x 15 PyTorch
 
-This is where most time is lost. **Tier B** — read from `module avail`, not run here.
+**Tier A — every row below was run on an A6000 on `admin`, 2026-10-13.** The two
+frameworks need *opposite* treatment, which is the single most expensive thing to get
+wrong here.
 
-| Framework | Versions present | Newest |
-|---|---|---|
-| `CUDA` | 13 | `12.8.0` (also 12.5.1, 11.8.0, 11.3.0, 11.2.2, 11.1.0, 11.0.3, 10.x, 9.x, 8.x) |
-| `PyTorch` | 15 | `2.7.0-IGB-gcc-8.2.0-Python-3.10.1` |
-| `Tensorflow` | 5 | `2.9.1-IGB-gcc-8.2.0-Python-3.7.2` |
-| `cuDNN`, `PyCUDA`, `numba`, `jax-unirep`, `transformers`, `detectron2`, `pytorch-geometric`, `xgboost`, `h2o` | — | present, tier C |
+| Module | Reports | GPU usable? | Notes |
+|---|---|---|---|
+| `PyTorch/2.7.0-IGB-gcc-8.2.0-Python-3.10.1` | torch 2.7.0+cu126, cuDNN 9.5.1 | **yes** | 4000² matmul in **0.38 s**. Use this one |
+| `PyTorch/1.13.1-IGB-gcc-8.2.0-Python-3.10.1` | torch 1.13.1+cu117, cuDNN 8.9.2 | **yes** | same matmul **2.68 s** — 7x slower than 2.7.0 |
+| `PyTorch/1.12.1-IGB-gcc-8.2.0-Python-3.10.1` | torch 1.12.1+cu102, cuDNN 7.6.5 | **NO — and it lies** | see below |
+| `Tensorflow/2.9.1-IGB-gcc-8.2.0-Python-3.7.2` alone | tf 2.9.1 | **no** | `GPUs visible: 0`, silently runs on CPU |
+| `Tensorflow/2.9.1` **+ `CUDA/11.2.2` + `cuDNN/8.1.1.33-CUDA-11.2.2`** | tf 2.9.1 | **yes** | `GPUs visible: 1`, matmul on GPU. Either load order works |
+| `Tensorflow/2.8.2` + the same two | tf 2.8.2 | **yes** | same |
 
-Rules that follow from the inventory:
+### PyTorch: do NOT load a CUDA module
 
-1. **Load the framework module and let it pull its own CUDA.** The IGB builds encode the
-   toolchain and Python version in the name; loading a second CUDA by hand is how you get
-   a mismatch.
-2. **Stay inside one toolchain generation.** `PyTorch/2.7.0-IGB-gcc-8.2.0-Python-3.10.1`
-   and anything `-IGB-gcc-4.9.4` cannot share a job. The older PyTorch builds (0.3-1.6)
-   are all gcc-4.9.4 and Python 3.6/2.7 — treat them as legacy.
-3. **`Tensorflow-GPU` is a separate module** from `Tensorflow`. Check which you loaded.
-4. The driver is CUDA 12.8, so a `CUDA/12.x` build is safe; older builds generally run
-   under a newer driver, not the reverse.
+The `PyTorch` modules bundle their own CUDA runtime. 2.7.0 and 1.13.1 both found the
+A6000 with nothing else loaded. Adding a `CUDA/x` module on top is how you create a
+mismatch.
+
+### TensorFlow: you MUST load CUDA and cuDNN
+
+The opposite. On its own, `Tensorflow/2.9.1` prints `Skipping registering GPU devices`
+and reports **zero** GPUs — then trains on CPU without ever failing, so the job
+"succeeds" and is simply ~100x too slow. Pair it explicitly:
+
+    module purge
+    module load Tensorflow/2.9.1-IGB-gcc-8.2.0-Python-3.7.2
+    module load CUDA/11.2.2 cuDNN/8.1.1.33-CUDA-11.2.2
+
+### `PyTorch/1.12.1` passes `is_available()` and then crashes
+
+This is the trap worth remembering. The A6000 is compute capability **sm_86**; the
+1.12.1 build (`+cu102`) was compiled for `sm_37 sm_50 sm_60 sm_70` only. So:
+
+    torch.cuda.is_available()   -> True          # the usual check PASSES
+    a @ b  on cuda              -> RuntimeError: CUDA error: no kernel image is
+                                   available for execution on the device
+
+`is_available()` only reports that a driver and device exist, **not that this build has
+kernels for this card**. Any PyTorch older than 1.13 on IGB is suspect on the A6000/A40.
+
+### Still true from the inventory
+
+- **Stay inside one toolchain generation.** Anything `-IGB-gcc-4.9.4` cannot share a job
+  with `-IGB-gcc-8.2.0`. The old PyTorch builds (0.3–1.6) are all gcc-4.9.4 and
+  Python 3.6/2.7 — legacy, and they will hit the sm_86 wall too.
+- 13 `CUDA` modules (newest `12.8.0`), 15 `PyTorch`, 5 `Tensorflow`, 11 `cuDNN`.
+- The driver is CUDA 12.8, so `CUDA/12.x` is safe; older *runtimes* work under a newer
+  driver, but an older *build target* (sm level) does not.
+- `PyCUDA`, `numba`, `jax-unirep`, `transformers`, `detectron2`, `pytorch-geometric`,
+  `xgboost`, `h2o` are present — tier C, not run here.
 
 ## Always prove the GPU is visible before the real work
 
-Put this at the top of the job, not after an hour of data loading:
+**`nvidia-smi` is not on `PATH` on the compute nodes** (verified on compute-5-8,
+2026-10-13) — `nvidia-smi || exit 1` as a guard will abort every GPU job you submit.
+Do not use it.
 
-    nvidia-smi || { echo "no GPU visible"; exit 1; }
-    python -c "import torch; assert torch.cuda.is_available(); \
-      print(torch.cuda.get_device_name(0), torch.version.cuda)"
+**And `is_available()` is not sufficient**, per the 1.12.1 case above. The only honest
+preflight is a real tensor operation. Put this at the top of the job, not after an hour
+of data loading:
+
+    python3 -c "
+    import torch
+    assert torch.cuda.is_available(), 'no CUDA device'
+    a = torch.randn(64, 64, device='cuda')
+    (a @ a).sum().item()          # fails here if the build lacks sm_86 kernels
+    print('GPU OK:', torch.cuda.get_device_name(0), torch.version.cuda)
+    "
+
+For TensorFlow the equivalent is `len(tf.config.list_physical_devices('GPU')) > 0`,
+which returns 0 unless you loaded CUDA and cuDNN alongside it.
 
 Observed on `admin`: `NVIDIA RTX A6000`, 49140 MiB. On `gpu`: `NVIDIA A40`, 46068 MiB.
 
