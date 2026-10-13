@@ -4,8 +4,10 @@
 
 1. **Add the cluster as a compute target.** In Claude Science: **Compute → add SSH
    host** → `biologin-3.igb.illinois.edu`, your IGB username, your SSH key. This cannot
-   come from a skill; it is app configuration you do once. (Note `biologin-2` no longer
-   resolves — use `biologin-3`.)
+   come from a skill; it is app configuration you do once. As of 2026-10-13 `biologin-3`
+   is the only login node that resolves — `biologin-1` and `biologin-2` are gone, and the
+   bare alias `biologin.igb.illinois.edu` points at biologin-3's own address, so the name
+   you enter makes no practical difference. Use `biologin-3` for clarity.
 2. **Import the skills.** **Skills → Import from GitHub** → this repository's URL. You
    should see:
 
