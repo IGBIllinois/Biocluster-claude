@@ -1,0 +1,5 @@
+*.pyc
+__pycache__/
+cs-gate.log
+log/
+.venv/

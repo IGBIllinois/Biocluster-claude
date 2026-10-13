@@ -15,11 +15,17 @@ already here, which means downloading also wastes quota at $8.78/TB/month.
 
 ## A module's root is not always the path your tool wants
 
-**Check one or two levels in before concluding a database is not mirrored.** Some
-mirrors nest a tool-ready package under `auxillary_files/`, so the module root looks
-like the wrong shape and the data appears to be missing when it is not:
+**16 of the 29 databases need a subdirectory, not the module root** — see the bolded
+cells in the catalogue below. Some nest the tool-ready package several levels down, so
+the root looks like the wrong shape and the data appears missing when it is not.
 
-    find "$EBROOT<NAME>" -maxdepth 3 -type d | head -40
+**Use `ls`, never `find`, on these mirrors.** They are multi-terabyte NFS trees:
+`find "$EBROOT<NAME>" -maxdepth 3` exceeded the login-node command timeout, and the same
+walk inside a job produced 18 lines in seven minutes before it was cancelled. Step down
+one level at a time instead:
+
+    ls "$EBROOT<NAME>"                 # one level, returns in seconds
+    ls "$EBROOT<NAME>/<subdir>"        # repeat only if the shape is still wrong
 
 The worked case — **tier A, verified 2026-10-13** — is GTDB-Tk. `module load gtdb/226`
 sets `$EBROOTGTDB` to `/private_stores/mirror/gtdb/226`, which holds only the plain GTDB
@@ -57,6 +63,26 @@ release. `--skip_ani_screen` avoids needing a separate Mash database; drop it an
 `--mash_db <path>` if you want the ANI prescreen. The skani database inside the package
 is used for the species-level step either way.
 
+## Five modules hand you a path that does not exist
+
+`chocophlan`, `clusterblast`, `gatkbundle`, `interpro` and `silva` set their root to
+`/home/mirrors/...`. **There is no `/home/mirrors` on this cluster.** The directory is
+`/home/mirror` — singular — and it is a symlink to `/private_stores/mirror/`. The data
+is present and complete; the module variable has an extra `s`.
+
+So if `$EBROOT<NAME>` starts with `/home/mirrors/`, strip the `s`, or use the real
+location directly:
+
+    module load silva/138.1
+    echo "$EBROOTSILVA"                      # /home/mirrors/silva/138.1  <- does not exist
+    DB=/private_stores/mirror/silva/138.1    # <- use this
+    ls "$DB"                                 # ARB_files Exports Fields_description ...
+
+Verified 2026-10-13: all five exist at `/private_stores/mirror/<module>/<same version>`.
+Guard it in a script rather than trusting either path:
+
+    [ -d "$EBROOTSILVA" ] || EBROOTSILVA=${EBROOTSILVA/\/home\/mirrors\//\/private_stores\/mirror\/}
+
 ## The variable name is not guessable
 
 `EBROOT` + the module name **uppercased**, with every `-` replaced by **`MIN`**:
@@ -71,54 +97,52 @@ is used for the species-level step either way.
 Each module also sets `EBVERSION<NAME>`. **Load the module and `echo` the variable
 before using it** — do not hardcode the path into a job script.
 
-## Catalogue (newest version as of 2026-10-13)
+## Catalogue — opened and listed on the cluster 2026-10-13
 
-| Module | Newest | Root variable | Root path | Consumed by |
-|---|---|---|---|---|
-| `BUSCO-db` | `5` | `$EBROOTBUSCOMINDB` | `/private_stores/mirror/BUSCO-db/5` | BUSCO completeness scoring |
-| `KneadData-db` | `20230405` | `$EBROOTKNEADDATAMINDB` | `/private_stores/mirror/KneadData-db/20230405` | KneadData host-read removal |
-| `alphafold-db` | `20240213` | `$EBROOTALPHAFOLDMINDB` | `/private_stores/mirror/alphafold-db/20240213` | AlphaFold 2 |
-| `alphafold3-db` | `20250520` | `$EBROOTALPHAFOLD3MINDB` | `/private_stores/mirror/alphafold3-db/20250520` | AlphaFold 3 |
-| `bart2-db` | `20240302` | `$EBROOTBART2MINDB` | `/private_stores/mirror/bart2-db/20240302` | BART2 TF activity |
-| `card-prevalence` | `4.0.1` | `$EBROOTCARDMINPREVALENCE` | `/private_stores/mirror/card-prevalence/4.0.1` | CARD / RGI resistance genes |
-| `checkm-db` | `20150116` | `$EBROOTCHECKMMINDB` | `/private_stores/mirror/checkm-db/20150116` | CheckM bin quality |
-| `checkm2-db` | `20230511` | `$EBROOTCHECKM2MINDB` | `/private_stores/mirror/checkm2-db/20230511` | CheckM2 bin quality |
-| `checkv-db` | `1.5` | `$EBROOTCHECKVMINDB` | `/private_stores/mirror/checkv-db/1.5` | CheckV viral contig quality |
-| `chocophlan` | `0.1.1` | `$EBROOTCHOCOPHLAN` | `/home/mirrors/chocophlan/0.1.1` | HUMAnN pangenome search |
-| `clusterblast` | `20170105` | `$EBROOTCLUSTERBLAST` | `/home/mirrors/clusterblast/20170105` | antiSMASH clusterblast |
-| `dorado-db` | `20261012` | `$EBROOTDORADOMINDB` | `/private_stores/mirror/dorado-db/20261012` | Dorado basecalling models |
-| `foldseek-db` | `20230921` | `$EBROOTFOLDSEEKMINDB` | `/private_stores/mirror/foldseek-db/20230921` | foldseek structure search |
-| `funannotate-db` | `20240515` | `$EBROOTFUNANNOTATEMINDB` | `/private_stores/mirror/funannotate-db/20240515` | funannotate fungal annotation |
-| `gatkbundle` | `20191118` | `$EBROOTGATKBUNDLE` | `/home/mirrors/gatkbundle/20191118` | GATK resource bundle |
-| `genbank` | `250` | `$EBROOTGENBANK` | `/private_stores/mirror/genbank/250` | GenBank flatfiles |
-| `gtdb` | `226` | `$EBROOTGTDB` | `/private_stores/mirror/gtdb/226` | GTDB release files. **GTDB-Tk needs a deeper path — see above** |
-| `humann-db` | `201901b` | `$EBROOTHUMANNMINDB` | `/private_stores/mirror/humann-db/201901b` | HUMAnN pathways |
-| `interpro` | `68.0` | `$EBROOTINTERPRO` | `/home/mirrors/interpro/68.0` | InterProScan |
-| `kraken2-db` | `20260226` | `$EBROOTKRAKEN2MINDB` | `/private_stores/mirror/kraken2-db/20260226` | Kraken2 classification |
-| `megares-db` | `3.00` | `$EBROOTMEGARESMINDB` | `/private_stores/mirror/megares-db/3.00` | MEGARes resistance |
-| `metaphlan4-db` | `20260509` | `$EBROOTMETAPHLAN4MINDB` | `/private_stores/mirror/metaphlan4-db/20260509` | MetaPhlAn 4 profiling |
-| `ncbi-blastdb` | `20260622` | `$EBROOTNCBIMINBLASTDB` | `/private_stores/mirror/ncbi-blastdb/20260622` | BLAST (nt/nr etc.) |
-| `pfam` | `37.3` | `$EBROOTPFAM` | `/private_stores/mirror/pfam/37.3` | Pfam HMMs / hmmscan |
-| `pgap-db` | `2021-07-01.build5508` | `$EBROOTPGAPMINDB` | `/private_stores/mirror/pgap-db/2021-07-01.build5508` | NCBI PGAP prokaryotic annotation |
-| `refseq-db` | `230` | `$EBROOTREFSEQMINDB` | `/private_stores/mirror/refseq-db/230` | RefSeq |
-| `silva` | `138.1` | `$EBROOTSILVA` | `/home/mirrors/silva/138.1` | SILVA rRNA (QIIME, mothur) |
-| `tailseeker-db` | `20161215` | `$EBROOTTAILSEEKERMINDB` | `/private_stores/mirror/tailseeker-db/20161215` | tailseeker |
-| `uniprot` | `2025_02` | `$EBROOTUNIPROT` | `/private_stores/mirror/uniprot/2025_02` | UniProt |
+**Tier A.** Every row below was produced by loading the module, reading back the
+variable it actually sets, and listing the directory. `$R` below means that root.
 
-**Tier B, except `gtdb` which is tier A.** The module names, versions and variable names
-were read directly from `module avail` and `module show` on 2026-10-13. The **root paths
-are derived** from the observed naming rule
-(`/private_stores/mirror/<module>/<version>`, or `/home/mirrors/` for the five noted) —
-several were truncated in the capture, so treat the path column as indicative and the
-variable as authoritative. Only the GTDB tree has been walked on the cluster and had its
-contents confirmed; the rest have not been opened or used in a job through this skill.
+| Module | Newest | Variable | Root path | Point your tool at | What is actually in it |
+|---|---|---|---|---|---|
+| `BUSCO-db` | `5` | `$EBROOTBUSCOMINDB` | `/private_stores/mirror/BUSCO-db/5` | `lineages/` | 4 entries: `lineages/`, `placement_files/`, `file_versions.tsv` |
+| `KneadData-db` | `20230405` | `$EBROOTKNEADDATAMINDB` | `/private_stores/mirror/KneadData-db/20230405` | `$R/hg37dec_v0.1` (index prefix) | 19 entries: bowtie2 indexes `hg37dec_v0.1.*`, `human_hg38_refMrna.*` |
+| `alphafold-db` | `20240213` | `$EBROOTALPHAFOLDMINDB` | `/private_stores/mirror/alphafold-db/20240213` | root (`--data_dir`) | `bfd mgnify params pdb70 pdb_mmcif pdb_seqres small_bfd uniprot uniref30` |
+| `alphafold3-db` | `20250520` | `$EBROOTALPHAFOLD3MINDB` | `/private_stores/mirror/alphafold3-db/20250520` | root = `--db_dir`, `parameters/` = `--model_dir` | `parameters/ mmcif_files/` + MSA FASTAs; template cutoff 2022-09-28 |
+| `bart2-db` | `20240302` | `$EBROOTBART2MINDB` | `/private_stores/mirror/bart2-db/20240302` | `hg38_library/` or `mm10_library/` | two species libraries (+ their tarballs) |
+| `card-prevalence` | `4.0.1` | `$EBROOTCARDMINPREVALENCE` | `/private_stores/mirror/card-prevalence/4.0.1` | **`db/`** | `db/` holds `aro.json`, `aro_index.tsv`, `61_kmer_db.json` |
+| `checkm-db` | `20150116` | `$EBROOTCHECKMMINDB` | `/private_stores/mirror/checkm-db/20150116` | root | `distributions genome_tree hmms hmms_ssu img pfam test_data` — correct shape |
+| `checkm2-db` | `20230511` | `$EBROOTCHECKM2MINDB` | `/private_stores/mirror/checkm2-db/20230511` | **`CheckM2_database/`** | root holds only that one dir + `easybuild` |
+| `checkv-db` | `1.5` | `$EBROOTCHECKVMINDB` | `/private_stores/mirror/checkv-db/1.5` | **`checkv-db-v1.5/`** | root holds the dir + its tarball |
+| `chocophlan` | `0.1.1` | `$EBROOTCHOCOPHLAN` | **`/private_stores/mirror/chocophlan/0.1.1`** | root | variable points at dead `/home/mirrors`. Also inside `humann-db/201901b/chocophlan` |
+| `clusterblast` | `20170105` | `$EBROOTCLUSTERBLAST` | **`/private_stores/mirror/clusterblast/20170105`** | root | variable points at dead `/home/mirrors` |
+| `dorado-db` | `20261012` | `$EBROOTDORADOMINDB` | `/private_stores/mirror/dorado-db/20261012` | one model dir | **154 models**, e.g. `dna_r10.4.1_e8.2_400bps_hac@v5.0.0`; pick by chemistry+speed |
+| `foldseek-db` | `20230921` | `$EBROOTFOLDSEEKMINDB` | `/private_stores/mirror/foldseek-db/20230921` | `afdb/`, `afdb-uniprot/` or `pdb/` | three separate target databases |
+| `funannotate-db` | `20240515` | `$EBROOTFUNANNOTATEMINDB` | `/private_stores/mirror/funannotate-db/20240515` | root (`FUNANNOTATE_DB`) | 37 entries, flat: `dbCAN.hmm`, `dikarya/`, `busco_outgroups.tar.gz` |
+| `gatkbundle` | `20191118` | `$EBROOTGATKBUNDLE` | **`/private_stores/mirror/gatkbundle/20191118`** | root | variable points at dead `/home/mirrors`. Also on disk: `2.5`, `3.8`, `example_bam_b37` |
+| `genbank` | `250` | `$EBROOTGENBANK` | `/private_stores/mirror/genbank/250` | root | **5539 entries** — flat `gbbct*.seq` flatfiles plus `catalog/ daily-nc/ docs/` |
+| `gtdb` | `226` | `$EBROOTGTDB` | `/private_stores/mirror/gtdb/226` | **`auxillary_files/gtdbtk_package/full_package/release226`** | root is the plain release only — see the GTDB-Tk section above |
+| `humann-db` | `201901b` | `$EBROOTHUMANNMINDB` | `/private_stores/mirror/humann-db/201901b` | `chocophlan/`, `uniref/` or `utility_mapping/` | three sub-databases, one per HUMAnN stage |
+| `interpro` | `**105.0**` | `$EBROOTINTERPRO` | **`/private_stores/mirror/interpro/105.0`** | root | variable points at dead `/home/mirrors`. Modules: `68.0, 101.0–105.0` |
+| `kraken2-db` | `20260226` | `$EBROOTKRAKEN2MINDB` | `/private_stores/mirror/kraken2-db/20260226` | one `k2_*` subdir | **10 databases**: `k2_nt k2_pluspf k2_pluspfp k2_gtdb k2_minusb k2_eupathdb48` + 08gb/16gb capped builds |
+| `megares-db` | `3.00` | `$EBROOTMEGARESMINDB` | `/private_stores/mirror/megares-db/3.00` | **`db/`** | `megares_database_v3.00.fasta` + annotation CSVs |
+| `metaphlan4-db` | `20260509` | `$EBROOTMETAPHLAN4MINDB` | `/private_stores/mirror/metaphlan4-db/20260509` | root = `--bowtie2db` | index name `mpa_vFeb24_CDIFF_CHOCOPhlAnSGB_20240910`; `mpa_latest` points at it |
+| `ncbi-blastdb` | `20260622` | `$EBROOTNCBIMINBLASTDB` | `/private_stores/mirror/ncbi-blastdb/20260622` | **`db/nt`**, **`db/nr`**, `db/pdbaa` | also `blastdb_v5/` and `diamond/` builds of the same data |
+| `pfam` | `37.3` | `$EBROOTPFAM` | `/private_stores/mirror/pfam/37.3` | `$R/Pfam-A.hmm` | flat: `Pfam-A.hmm`, `Pfam-A.fasta`, `Pfam-A.clans.tsv`, `active_site.dat` |
+| `pgap-db` | `2021-07-01.build5508` | `$EBROOTPGAPMINDB` | `/private_stores/mirror/pgap-db/2021-07-01.build5508` | root | 24 entries, flat: `16S_rRNA`, `23S_rRNA`, `CDD2/`, `AntiFamLib/` |
+| `refseq-db` | `230` | `$EBROOTREFSEQMINDB` | `/private_stores/mirror/refseq-db/230` | **`db/<division>`** | `db/` splits by `archaea bacteria complete fungi invertebrate ...` |
+| `silva` | `138.1` | `$EBROOTSILVA` | **`/private_stores/mirror/silva/138.1`** | `Exports/` | variable points at dead `/home/mirrors`. Holds `ARB_files/ Exports/ Fields_description/` |
+| `tailseeker-db` | `20161215` | `$EBROOTTAILSEEKERMINDB` | `/private_stores/mirror/tailseeker-db/20161215` | **`refdb/`** | root holds only that dir |
+| `uniprot` | `2025_02` | `$EBROOTUNIPROT` | `/private_stores/mirror/uniprot/2025_02` | **`db/knowledgebase`** | also `db/decoy`, `db/rdf`, plus `blastdb_v5/` and `diamond/` builds |
 
-**The GTDB case is why the path column is only indicative.** It was listed here as
-"GTDB-Tk taxonomy" with the module root as its path, and that was wrong in a way that
-would have cost a user ~110 GB and a day: the module root has no GTDB-Tk layout, and a
-reasonable reader would have concluded the package was not mirrored. Expect the same
-shape of error in other rows. When you open one of these trees and find out what is
-actually in it, **correct this table** — the path column is a hypothesis, not a finding.
+**Sixteen of the 29 need a subdirectory, not the root** — the bolded cells above. This is
+the single most common way to waste a queue slot here: the job starts, the tool rejects
+the path, and you have lost the wait. Confirm with `ls "$EBROOT<NAME>"` on the login node
+before you submit.
+
+**`interpro` was listed here as `68.0` until 2026-10-13 and that was a sorting bug** —
+`"68.0"` sorts above `"105.0"` as text. Versions `101.0` through `105.0` are all
+available as modules. If you see a suspiciously old "newest" elsewhere in these skills,
+suspect the same cause.
 
 ## Two older than they look
 
