@@ -9,8 +9,53 @@ description: "Reference databases already mirrored on the IGB biocluster as load
 nodes have **no internet**, so a download inside a job fails; and the data is usually
 already here, which means downloading also wastes quota at $8.78/TB/month.
 
-    module load gtdb/226
-    gtdbtk classify_wf --genome_dir ./bins --out_dir ./out ... # uses $EBROOTGTDB
+    module load pfam/37.3
+    echo "$EBROOTPFAM"          # /private_stores/mirror/pfam/37.3
+    hmmscan --domtblout out.tbl "$EBROOTPFAM/Pfam-A.hmm" query.faa
+
+## A module's root is not always the path your tool wants
+
+**Check one or two levels in before concluding a database is not mirrored.** Some
+mirrors nest a tool-ready package under `auxillary_files/`, so the module root looks
+like the wrong shape and the data appears to be missing when it is not:
+
+    find "$EBROOT<NAME>" -maxdepth 3 -type d | head -40
+
+The worked case — **tier A, verified 2026-10-13** — is GTDB-Tk. `module load gtdb/226`
+sets `$EBROOTGTDB` to `/private_stores/mirror/gtdb/226`, which holds only the plain GTDB
+release (taxonomy, metadata, MSAs, `genomic_files_*`) and **no GTDB-Tk layout at all**.
+The GTDB-Tk reference package is two levels deeper:
+
+    module purge                      # the GTDBTk module's own message forbids others
+    module load GTDBTk/2.6.1
+    export GTDBTK_DATA_PATH=/private_stores/mirror/gtdb/226/auxillary_files/gtdbtk_package/full_package/release226
+    gtdbtk check_install              # run this FIRST - see the caveat below
+    gtdbtk classify_wf --genome_dir ./bins --out_dir ./out \
+      --extension fa --cpus 32 --skip_ani_screen
+
+That directory carries exactly the layout `classify_wf` expects — `markers masks
+metadata mrca_red msa pplacer radii skani split taxonomy` — and
+`metadata/metadata.txt` reads `VERSION_DATA=r226`. Permissions are `drwxrwxr-x
+datamover:datamover`, world-readable, so point at it in place; copying it into `$HOME`
+duplicates ~110 GB of unbacked-up storage for nothing.
+
+Two siblings under `.../gtdbtk_package/`:
+
+- `split_package/` — `gtdbtk_r226_data.tar.gz.part_aa` … `part_an` (14 parts) plus
+  `HOWTO.txt`. The archive form; only of use to someone who wants a private copy.
+- `mockup_db/r226_mockup/` — the same ten directories, tiny. Use it to smoke-test
+  pipeline plumbing before committing a real run.
+
+`gtdb/207` and `gtdb/214` have **no** `gtdbtk_package` — R226 is the only release
+mirrored in GTDB-Tk-ready form.
+
+**Caveat:** `GTDBTk/2.6.1` against r226 has **not** been confirmed with
+`gtdbtk check_install` (the verification job failed on the submit transport, not on the
+data). Run it as the first line of your job. The module also prints "There is a newer
+version of GTDB-Tk available: v2.8.0" on load — cosmetic, and unrelated to the data
+release. `--skip_ani_screen` avoids needing a separate Mash database; drop it and pass
+`--mash_db <path>` if you want the ANI prescreen. The skani database inside the package
+is used for the species-level step either way.
 
 ## The variable name is not guessable
 
@@ -46,7 +91,7 @@ before using it** — do not hardcode the path into a job script.
 | `funannotate-db` | `20240515` | `$EBROOTFUNANNOTATEMINDB` | `/private_stores/mirror/funannotate-db/20240515` | funannotate fungal annotation |
 | `gatkbundle` | `20191118` | `$EBROOTGATKBUNDLE` | `/home/mirrors/gatkbundle/20191118` | GATK resource bundle |
 | `genbank` | `250` | `$EBROOTGENBANK` | `/private_stores/mirror/genbank/250` | GenBank flatfiles |
-| `gtdb` | `226` | `$EBROOTGTDB` | `/private_stores/mirror/gtdb/226` | GTDB-Tk taxonomy |
+| `gtdb` | `226` | `$EBROOTGTDB` | `/private_stores/mirror/gtdb/226` | GTDB release files. **GTDB-Tk needs a deeper path — see above** |
 | `humann-db` | `201901b` | `$EBROOTHUMANNMINDB` | `/private_stores/mirror/humann-db/201901b` | HUMAnN pathways |
 | `interpro` | `68.0` | `$EBROOTINTERPRO` | `/home/mirrors/interpro/68.0` | InterProScan |
 | `kraken2-db` | `20260226` | `$EBROOTKRAKEN2MINDB` | `/private_stores/mirror/kraken2-db/20260226` | Kraken2 classification |
@@ -60,12 +105,20 @@ before using it** — do not hardcode the path into a job script.
 | `tailseeker-db` | `20161215` | `$EBROOTTAILSEEKERMINDB` | `/private_stores/mirror/tailseeker-db/20161215` | tailseeker |
 | `uniprot` | `2025_02` | `$EBROOTUNIPROT` | `/private_stores/mirror/uniprot/2025_02` | UniProt |
 
-**Tier B.** The module names, versions and variable names were read directly from
-`module avail` and `module show` on 2026-10-13. The **root paths are derived** from the
-observed naming rule (`/private_stores/mirror/<module>/<version>`, or `/home/mirrors/`
-for the five noted) — several were truncated in the capture, so treat the path column as
-indicative and the variable as authoritative. No database in this table has been used in
-a job through this skill yet.
+**Tier B, except `gtdb` which is tier A.** The module names, versions and variable names
+were read directly from `module avail` and `module show` on 2026-10-13. The **root paths
+are derived** from the observed naming rule
+(`/private_stores/mirror/<module>/<version>`, or `/home/mirrors/` for the five noted) —
+several were truncated in the capture, so treat the path column as indicative and the
+variable as authoritative. Only the GTDB tree has been walked on the cluster and had its
+contents confirmed; the rest have not been opened or used in a job through this skill.
+
+**The GTDB case is why the path column is only indicative.** It was listed here as
+"GTDB-Tk taxonomy" with the module root as its path, and that was wrong in a way that
+would have cost a user ~110 GB and a day: the module root has no GTDB-Tk layout, and a
+reasonable reader would have concluded the package was not mirrored. Expect the same
+shape of error in other rows. When you open one of these trees and find out what is
+actually in it, **correct this table** — the path column is a hypothesis, not a finding.
 
 ## Two older than they look
 
