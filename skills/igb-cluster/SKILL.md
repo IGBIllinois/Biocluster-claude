@@ -40,9 +40,15 @@ at tier C and it works, say so in your reply so the skill can be promoted.
 5. Submit, end the cell, park on `wait_for_notification`.
 
 **Do not go exploring.** Everything in this document was paid for by an earlier
-session. If a fact you need is genuinely absent, run `cs-doctor` (one call, prints the
-lot) rather than a handful of `module avail` probes — then append what it told you to
-`compute_details`.
+session. If a fact you need is genuinely absent, get it in **one** call rather than a
+handful of probes — then append what it told you to `compute_details` so the next
+session does not pay again:
+
+    id; sinfo -a -o "%.14P %.6D %.20G %.10m %.12l %.20A"; module avail 2>&1 | grep -i <name>
+
+Keep probes to `ls` and `module avail`. **Never** `find` or `du` over
+`/private_stores/mirror` or `/home` — those are multi-terabyte networked filesystems and
+the call will be killed before it returns.
 
 ## Site policy — IGB's rules, not ours
 

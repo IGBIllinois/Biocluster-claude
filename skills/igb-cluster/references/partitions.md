@@ -9,8 +9,12 @@ Verified 2026-09-28 for account `sagarj2` (groups: `biocluster_queue`, `admin_qu
     sinfo -a -o "%.14P %.6D %.20G %.10m %.12l %.20A"
     scontrol show partition | grep -E 'PartitionName|AllowGroups|MaxTime|TRES'
 
-Intersect your `id` output with each partition's `AllowGroups`. `cs-doctor` does this
-in one call and prints the result.
+Intersect your `id` output with each partition's `AllowGroups`.
+
+**Do this before recommending `admin` to anyone.** The table below was recorded on one
+account that happens to be in `admin_queue`; most IGB accounts are not. If the compute
+target's notes do not state *this* account's groups, the group list here is somebody
+else's and `admin` may not exist for the person asking.
 
 ## Reachable with the groups above
 
