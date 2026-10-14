@@ -35,7 +35,6 @@ The GTDB-Tk reference package is two levels deeper:
     module purge                      # the GTDBTk module's own message forbids others
     module load GTDBTk/2.6.1
     export GTDBTK_DATA_PATH=/private_stores/mirror/gtdb/226/auxillary_files/gtdbtk_package/full_package/release226
-    gtdbtk check_install              # run this FIRST - see the caveat below
     gtdbtk classify_wf --genome_dir ./bins --out_dir ./out \
       --extension fa --cpus 32 --skip_ani_screen
 
@@ -55,11 +54,20 @@ Two siblings under `.../gtdbtk_package/`:
 `gtdb/207` and `gtdb/214` have **no** `gtdbtk_package` — R226 is the only release
 mirrored in GTDB-Tk-ready form.
 
-**Caveat:** `GTDBTk/2.6.1` against r226 has **not** been confirmed with
-`gtdbtk check_install` (the verification job failed on the submit transport, not on the
-data). Run it as the first line of your job. The module also prints "There is a newer
-version of GTDB-Tk available: v2.8.0" on load — cosmetic, and unrelated to the data
-release. `--skip_ani_screen` avoids needing a separate Mash database; drop it and pass
+**Verified 2026-10-13: `gtdbtk check_install` passes.** Slurm job 2428811, exit 0,
+`INFO: Done.` after **1 h 07 m** on `normal`. All eight bundled binaries (`FastTree`,
+`FastTreeMP`, `guppy`, `hmmalign`, `hmmsearch`, `pplacer`, `prodigal`, `skani`) and all
+nine reference directories (`pplacer masks markers radii msa metadata taxonomy skani
+mrca_red`) reported OK. GTDB-Tk **2.6.1 and r226 are a working pair** — this is no
+longer an assumption.
+
+**Do not put `check_install` at the top of a real job.** It walks **143,617 files** in
+`skani/` alone over NFS and takes over an hour — longer than many classify runs. It is a
+once-per-release check; run it on its own when the data or module version changes, not
+as a preflight. (An earlier version of this skill advised the opposite.)
+
+The module also prints "There is a newer version of GTDB-Tk available: v2.8.0" on load —
+cosmetic, and unrelated to the data release. `--skip_ani_screen` avoids needing a separate Mash database; drop it and pass
 `--mash_db <path>` if you want the ANI prescreen. The skani database inside the package
 is used for the species-level step either way.
 
@@ -143,6 +151,20 @@ before you submit.
 `"68.0"` sorts above `"105.0"` as text. Versions `101.0` through `105.0` are all
 available as modules. If you see a suspiciously old "newest" elsewhere in these skills,
 suspect the same cause.
+
+## What tier A means here, and what it does not
+
+Every row was **opened**: the module loaded, the variable read back, the directory
+listed. So the path, the variable name and the directory contents are measurements.
+
+**What was not done: using any of these with its tool.** `db/nt` was listed; no `blastn`
+was run against it. `CheckM2_database/` exists; CheckM2 was never pointed at it. The one
+exception is GTDB-Tk, where `check_install` was run end to end, and AlphaFold 3, which
+has a verified working job in the hub.
+
+So a wrong *subdirectory choice* is still possible in these rows — if a tool rejects the
+path suggested here, that is a real finding. **Say so, or open a PR**: the correction is
+one table cell and it saves the next person the same queue wait.
 
 ## Two older than they look
 

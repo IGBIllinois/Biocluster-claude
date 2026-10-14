@@ -114,3 +114,19 @@ from the login node, or use a mirrored module (`dorado-db` for Dorado models —
 `seff <jobid>` after the first run, then size the next one from `MaxRSS`. Deep-learning
 jobs on this cluster have run at single-digit CPU efficiency because the GPU is the
 bottleneck — 8 CPUs is usually plenty, and asking for more only lengthens the queue.
+
+## What is still unverified here
+
+Tier A covers the three PyTorch builds and three TensorFlow builds listed above, run on
+the A6000 on `admin`. **Not** verified, and listed only as present: `PyCUDA`, `numba`,
+`jax-unirep`, `transformers`, `detectron2`, `pytorch-geometric`, `xgboost`, `h2o`, every
+`PyTorch` build on the `-IGB-gcc-4.9.4` toolchain, and **anything at all on the `gpu`
+partition's A40s** — all GPU measurements here come from the A6000.
+
+The A40 is the same compute capability (8.6) as the A6000, so the sm_86 conclusions
+should carry over, but that is an inference and has not been run.
+
+**If you run any of these, say so.** Tell the agent in your reply, or open a PR on
+`IGBIllinois/Biocluster-claude` moving the row to tier A with the module string you
+loaded, whether the GPU was visible, and the runtime. A single confirmed row saves the
+next person a queue wait.

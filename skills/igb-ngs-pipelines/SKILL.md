@@ -66,3 +66,22 @@ Starting points, then `seff <jobid>` and size the next run from `MaxRSS`:
 
 Hand the user the commands to watch it themselves rather than only your summary:
 `squeue -u $USER`, `tail -f <workdir>/run.log`, `seff <jobid>` when it finishes.
+
+## Nothing in this skill has been run on the cluster
+
+This is the largest skill here and the least verified. What **is** established: all 523
+modules exist at the versions listed, read from live `module avail` on 2026-10-13, and
+the site facts in the hub (partitions, memory ceilings, no internet on compute nodes,
+toolchain split) apply to every one of them.
+
+What is **not** established for any tool in this file: the correct invocation on this
+cluster, whether it needs a reference database that is already mirrored, how long it
+takes, or how much memory it actually uses. Sizing suggestions here are informed
+guesses, not measurements.
+
+**This cannot be fixed from a desk.** Confirming that `bwa`, `STAR` or `SPAdes` works
+means running it on real reads — which is your research, not a verification exercise. So
+the ask is small: **when you finish a run that worked, send back four things** — the
+module string, the sbatch resources you used, the wall time, and `MaxRSS` from
+`seff <jobid>`. Tell the agent in your reply, or open a PR. Four lines turns a guess into
+a measurement for everyone after you.

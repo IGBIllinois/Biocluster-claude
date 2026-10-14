@@ -5,17 +5,43 @@ description: "Running workflow managers on the IGB biocluster - Nextflow (16 ver
 
 # Workflow managers on the IGB biocluster
 
-**Tier C throughout** — these modules are present; nothing here has been run on this
-cluster. The configuration below follows from site facts established elsewhere in these
-skills, not from a successful run. Verify before trusting, and report back so this can
-be promoted.
+| Module | Versions | Newest | Status |
+|---|---|---|---|
+| `nextflow` | 16 | `25.10.2-Java-25.0.1` | **tier A** — ran a pipeline on compute-1-1 |
+| `snakemake` | 2 | `7.32.4-IGB-gcc-8.2.0-Python-3.10.1` | **tier A** — ran a workflow, 2/2 steps |
+| `singularity` | — | **`/usr/bin/singularity` 3.8.7** | **tier A** — ran the AlphaFold container |
+| `cromwell`, `toil`, `nf-core`, `clusterflow`, `Mamba`, `EasyBuild` | — | present | tier C |
 
-| Module | Versions | Newest |
-|---|---|---|
-| `nextflow` | 16 | `25.10.2-Java-25.0.1` |
-| `snakemake` | 2 | `7.32.4-IGB-gcc-8.2.0-Python-3.10.1` |
-| `singularity` | 1 | `3.8.1` |
-| `cromwell`, `toil`, `nf-core`, `clusterflow`, `Mamba`, `EasyBuild` | — | present |
+## Four things measured on the cluster 2026-10-13
+
+**1. Nextflow already submits to Slurm — you do not configure the executor.** A bare
+`nextflow run hello.nf` inside a job printed `executor > SLURM (1)` and dispatched the
+process as its own Slurm job. There is a site-wide config doing this. Do not assume the
+default local executor, and do not copy a generic `process.executor = 'slurm'` block
+from a tutorial without checking what the site config already sets.
+
+**2. `NXF_HOME` is mandatory here.** The module's own load message says so:
+*"Please set the environmental variable NXF_HOME to a directory in your home directory.
+Without this parameter, nextflow will not work."* Set it before the run:
+
+    export NXF_HOME="$HOME/nextflow"
+
+**3. IGB limits you to 3 concurrent nextflow jobs.** Also from the module's load
+message: *"Please limit the number of nextflow jobs to 3 at a time. Using more creates a
+lot of stress on the shared filesystem."* This is a site request, not a scheduler limit
+— nothing will stop you exceeding it, which is exactly why it belongs here.
+
+**4. Singularity needs no module.** It is `/usr/bin/singularity`, version **3.8.7**, on
+the compute nodes — a *newer* build than the `singularity/3.8.1` module advertises.
+`singularity exec` on the 4.9 GB AlphaFold image worked with nothing loaded but
+`alphafold/3.0.2`, and reported Python 3.11.10 inside the container.
+
+**Confirmed no-internet, concretely:** `nextflow run nextflow-io/hello` — the quickstart
+in every tutorial — fails on a compute node with
+`curl: (7) Failed to connect to www.nextflow.io port 443: Connection timed out`.
+Nextflow also phones home for version checks at startup; `export NXF_OFFLINE=true`
+suppresses that. Any pipeline that resolves itself from GitHub must be fetched on the
+**login node** first.
 
 ## The one thing that makes or breaks this
 
@@ -37,12 +63,18 @@ instead:
 - **Unprivileged `singularity build` is usually unavailable** on a shared cluster — pull
   a prebuilt image instead of building on-cluster.
 
-## Nextflow sketch (unverified)
+## Nextflow starter — the module-load part is verified
 
+    module purge
     module load nextflow/25.10.2-Java-25.0.1
-    module load singularity/3.8.1
-    export NXF_SINGULARITY_CACHEDIR="$HOME/.nxf_singularity"   # pre-populated
-    nextflow run nf-core/<pipeline> -profile singularity -c igb.config
+    export NXF_HOME="$HOME/nextflow"                           # required, see above
+    export NXF_OFFLINE=true                                    # skip the version phone-home
+    export NXF_SINGULARITY_CACHEDIR="$HOME/.nxf_singularity"   # pre-populated on the login node
+    nextflow run <local-pipeline-dir> -c igb.config
+
+No `singularity` module is needed — `/usr/bin/singularity` 3.8.7 is already on `PATH`.
+Replace `<local-pipeline-dir>` with a pipeline you fetched on the login node; a
+`nf-core/<name>` reference resolves over the network and **will fail inside a job**.
 
 with `igb.config` setting `process.executor = 'slurm'`, `process.queue = 'normal'`,
 explicit `cpus`/`memory` per label, and no label exceeding its partition's ceiling.
@@ -51,3 +83,20 @@ explicit `cpus`/`memory` per label, and no label exceeding its partition's ceili
 submits correctly and that `squeue -u $USER` shows the child jobs — a misconfigured
 executor silently runs everything locally on the login node, which is the one outcome
 that gets an account locked.
+
+## What is still unverified here
+
+**Tier A:** everything in the four measured points above — nextflow 25.10.2 running a
+pipeline, its Slurm executor, `NXF_HOME`, snakemake 7.32.4, and `singularity exec` on a
+real image.
+
+**Tier C — not run here:** any **real** nf-core pipeline (the test was a hello-world, not
+a pipeline with containers, profiles and staged references), `NXF_SINGULARITY_CACHEDIR`
+actually serving a pre-pulled image, `cromwell`, `toil`, `clusterflow`, and whether a
+nextflow driver process is better placed on the login node or inside a job on this
+cluster — the site's "limit to 3 nextflow jobs" notice implies the latter, but that is an
+inference.
+
+**Running one real pipeline would settle most of this at once.** If you do, **send back
+the pipeline and revision, your config, whether containers resolved, and the wall time** —
+in your reply to the agent, or as a PR on `IGBIllinois/Biocluster-claude`.

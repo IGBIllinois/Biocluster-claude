@@ -52,10 +52,22 @@ Every claim is tagged, so the agent knows what to trust:
   IGB's docs, but nobody has run it here.
 - **C — listed**: the module is present. Nothing further is claimed.
 
-Today the hub, the AlphaFold 3 recipe and the scanpy/leidenalg workaround are **A**;
-reference data and GPU version-pairing are **B**; workflows, NGS pipelines and most of
-structure prediction are **C**. **If you run something at tier C and it works, open a PR
-promoting it** — that is how this stops being a catalogue and becomes a manual.
+As of 2026-10-13, **tier A**: the hub, the AlphaFold 3 recipe, the scanpy/leidenalg
+workaround, all 29 reference-database paths, GTDB-Tk against r226, the GPU framework
+pairing, and nextflow/snakemake/singularity. **Tier C**: the 523 NGS modules, the 10x
+single-cell tools, and structure prediction other than AlphaFold 3. There is no tier B
+left — every claim that could be settled by inspection has been.
+
+**What remains at C cannot be promoted from a desk.** Those claims are about tools
+producing correct output on real input, and the only way to settle one is to run it on
+the cluster with your own data. **If you do, open a PR** adding the command you used and
+the runtime you saw — that is how this stops being a catalogue and becomes a manual.
+
+Three of the four verification sweeps found claims that were *wrong*, not merely
+unverified: five databases whose module variable points at a path that does not exist, a
+`nvidia-smi` preflight that would have aborted every GPU job, and a PyTorch build that
+passes `torch.cuda.is_available()` and then crashes. Assume the tier C rows contain
+errors of the same kind.
 
 ## Provenance
 

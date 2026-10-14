@@ -62,3 +62,20 @@ Reference transcriptomes are **not** in the mirrored module set — check
 `alevin-fry`, `velocyto` / `velocyto.R`, `CITE-seq-Count`, `MAESTRO`, `scenicplus`,
 `popscle`, `vartrix`, `magic`, `ParseBioSciences-Pipeline`, `evolocity`, `Loter`,
 `lorals`.
+
+## What is verified and what is not
+
+**Tier A:** the scanpy module's missing `leidenalg`, and the venv overlay that fixes it —
+built, imported and used on this cluster.
+
+**Tier C — present, never run here:** `cellranger` (18 versions), `spaceranger` (10),
+`cellranger-atac`, `cellranger-arc`, `velocyto`, `CellBender`, and the Seurat/R path. For
+the 10x tools in particular, nothing about reference transcriptome paths, `--localcores`
+/ `--localmem` behaviour under Slurm, or runtime has been measured here.
+
+**Verifying these needs real data** — a 10x run takes a real library and hours of
+compute, so it only gets confirmed by someone doing their actual experiment. If that is
+you, **please send back the module string, the resources you requested, and the wall
+time**, either in your reply to the agent or as a PR on
+`IGBIllinois/Biocluster-claude`. Cellranger sizing in particular is worth far more to the
+lab as a measurement than as the guess currently written here.

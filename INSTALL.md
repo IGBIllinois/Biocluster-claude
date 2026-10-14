@@ -39,6 +39,56 @@ ceiling, normally idle) and `gpu` (two A40s per node, 250 GB, but 22–32 h queu
 the counter-intuitive part is that the *idle* GPU partition has the *smallest* memory on
 the cluster, while the 2 TB partition has no GPU at all.
 
+## Read this before you trust anything here
+
+Every claim in these skills carries a confidence tier, and **you should treat them
+differently**:
+
+- **Tier A — someone ran it on this cluster.** The command shown is the one that worked,
+  with real timings. Follow it.
+- **Tier C — the module is installed, and that is all we know.** The invocation is
+  informed guesswork. Expect it to be subtly wrong.
+
+(There is no tier B left as of 2026-10-13 — every claim that could be settled by
+inspecting the cluster has been.)
+
+**Why the distinction is not pedantry.** Four verification sweeps were run on
+2026-10-13, and three of them found claims that were *wrong* rather than merely
+unverified:
+
+- five reference databases whose module sets a path that **does not exist**
+  (`/home/mirrors` — the real directory is `/home/mirror`, singular);
+- a GPU preflight check using `nvidia-smi`, which is **not on `PATH`** on the compute
+  nodes and would have aborted every GPU job in the lab;
+- `PyTorch/1.12.1`, which passes `torch.cuda.is_available()` and then **crashes** on the
+  first GPU operation because it has no kernels for the A6000.
+
+Assume the remaining tier C rows contain errors of the same kind, and read them as a
+starting point rather than an instruction.
+
+## How a tier C claim becomes tier A — this needs you
+
+It cannot happen from a desk. Tier C claims are about tools producing correct output on
+real input; the only thing that settles one is **running it on the cluster with your own
+data**. There is no sweep anyone can do remotely that would promote the 523 NGS modules
+or the 10x pipelines.
+
+So when a run of yours works, send back four things:
+
+    the module string you loaded
+    the sbatch resources you requested
+    the wall time
+    MaxRSS from `seff <jobid>`
+
+Either tell the agent in your reply — it will offer to write the correction — or open a
+PR on `IGBIllinois/Biocluster-claude`. Four lines from one successful run saves every
+person after you a queue wait. **This is the only mechanism by which this repo improves.**
+
+If a skill tells you something that turns out to be wrong, that is worth reporting even
+more than a success. The GTDB-Tk entry was corrected exactly that way: a user was told to
+download a 110 GB database that was already mirrored on the cluster, the agent checked,
+and the skill was fixed.
+
 ## Keeping it honest
 
 The inventory is a snapshot: 927 modules, 1795 versions, taken 2026-10-13. After any
