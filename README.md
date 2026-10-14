@@ -1,5 +1,7 @@
 # igb-cluster skills
 
+**New here? Read [ARCHITECTURE.md](ARCHITECTURE.md) first** — what each file is for, how the agent picks which one to read, and how much of it has actually been tested on the cluster.
+
 Claude Science skills for the **IGB Biocluster** at the University of Illinois
 Urbana-Champaign. Import them and a new session already knows the cluster: which
 partitions that account can use, which databases are already mirrored, which module
