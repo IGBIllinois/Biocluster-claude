@@ -1,0 +1,21 @@
+# This repo ships shell scripts from Windows machines to a Linux cluster.
+# CRLF line endings silently destroy job scripts on IGB: `2>&1` becomes `1\r`
+# ("ambiguous redirect") and `> out.log` creates a file literally named "out.log\r".
+# A job can report exit 0 with an empty log while its real output sits in the \r file.
+# This happened on 2026-10-13 (slurm 2428763) and cost a full verification run.
+#
+# Force LF for everything that is read by a shell or a tool on the cluster, regardless
+# of each contributor's core.autocrlf setting.
+
+*.sh    text eol=lf
+*.bash  text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.csv   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.json  text eol=lf
+*.conf  text eol=lf
+
+# Files with no extension that are still scripts (cs-gate, cs-doctor, ...)
+cs-*    text eol=lf
