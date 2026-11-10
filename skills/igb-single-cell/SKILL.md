@@ -1,81 +1,115 @@
 ---
 name: igb-single-cell
-description: "Single-cell and spatial analysis on the IGB biocluster - Cell Ranger (18 versions, plus cellranger-arc and cellranger-atac), Space Ranger for Visium, the scanpy module and its missing leidenalg, alevin-fry, velocyto, CITE-seq-Count, MAESTRO, scenicplus and popscle. Load this when running 10x pipelines, counting or demultiplexing single-cell libraries, or doing scanpy/Seurat clustering on IGB, and before assuming a package is available in the scanpy module."
+description: "Single-cell, spatial and long-read work on IGB Biocluster 4 — the 10x Genomics pipelines (cellranger, cellranger-arc, cellranger-atac, spaceranger) and the nanopore/PacBio stack (dorado, pod5, modkit, medaka, nanopolish, smrtlink). Records that Biocluster 4 has no scanpy, Seurat or other downstream analysis module, and what to do instead. Load before planning a single-cell, spatial or long-read run here."
 ---
 
-# Single-cell on the IGB biocluster
+# Single-cell, spatial and long-read on Biocluster 4
 
-## The scanpy module is missing leidenalg — tier A, verified
+Load `igb-cluster` first for partitions, ceilings and submission rules.
 
-`scanpy/1.10.1-IGB-gcc-8.2.0-Python-3.10.1` is the **only** scanpy module. It gives
-Python 3.10.1, scanpy 1.10.1, anndata 0.10.7, umap 0.5.6 and scikit-learn — and **no
-`leidenalg`, no `igraph`**, so `sc.tl.leiden` raises `ModuleNotFoundError`.
+## Read this before planning an analysis
 
-The working pattern is a venv layered on the module (verified 2026-10-06: imports scanpy
-1.10.1 / leidenalg 0.12.0 / igraph 1.0.0):
+**Biocluster 4 has no downstream single-cell analysis module.** `scanpy` is gone, and so
+are `velocyto`, `CellBender`, `alevin-fry`, `CITE-seq-Count`, `MAESTRO`, `scenicplus` and
+`popscle`. Biocluster 3 had all of them, and earlier versions of these skills were built
+around a shared `cs/scanpy-leiden` environment that **no longer has a module to layer on**.
 
-    python -m venv --system-site-packages <path>/scanpy-leiden   # login node only
-    <path>/scanpy-leiden/bin/pip install leidenalg igraph
+What remains is the **vendor pipeline layer** — the 10x and long-read tools that turn
+instrument output into matrices and alignments. Everything after that is now your
+responsibility:
 
-In a job: load the module **first**, then use the venv's interpreter. The venv's
-`bin/python` needs the module's `libpython3.10.so.1.0` on `LD_LIBRARY_PATH`; without the
-module loaded it fails with `cannot open shared object file`, which looks like a broken
-venv and is not.
+| Stage | On Biocluster 4 |
+|---|---|
+| BCL/FASTQ to count matrix | `cellranger` and friends — **present, tier B** |
+| QC, normalisation, clustering, DE, trajectory | **no module** — pip into a venv, or work off-cluster |
 
-    export MPLCONFIGDIR="$PWD/.mplcache"       # matplotlib fails on a read-only home
-    module load scanpy/1.10.1-IGB-gcc-8.2.0-Python-3.10.1
-    <path>/scanpy-leiden/bin/python ./pipeline.py
+If a user asks for a scanpy or Seurat pipeline here, say plainly that the module is gone
+and offer the two honest routes: build a venv on the login node
+(`module load Python/3.14.0-GCCcore-15.2.0`, then `python -m venv`, then `pip install
+scanpy leidenalg`), or do the count step here and the analysis on their own machine.
+Do not write a job script that loads a `scanpy` module.
 
-Template: `igb-cluster/recipes/scanpy.sh`. Resource reality for a PBMC-3k-scale run:
-12.96% CPU efficiency and 1.31 GB used at 8 CPU / 32 GB — **2 cores and 8 GB is the
-honest ask**, and it queues sooner.
+R is available (`R/4.6.1-IGB-gcc-15.2.0`) but **Seurat is not a module** — it would need
+installing into a personal library.
 
-**Cluster counts are not portable across scanpy versions.** The same pipeline gives 8
-Leiden clusters at r=1.0 under scanpy 1.10.1 here versus 9 under 1.12.4 locally, with
-identical QC and HVG numbers (2700 cells in, 2638 x 13714 after QC, 1838 HVGs). The
-naive/memory CD4 T split is the boundary that moves. Never present a cluster count as
-version-independent.
+## The 10x pipelines
 
-## 10x pipelines — tier C
-
-| Module | Versions | Newest |
+| Module | Version | For |
 |---|---|---|
-| `cellranger` | **18** | `10.0.0` (2.1.0, 3.x, 4.0.0, 5.0.0, 6.x, 7.x, 8.x, 9.0.0 all present) |
-| `cellranger-atac`, `cellranger-arc` | — | present |
-| `spaceranger` | 10 | `4.1.0` |
+| `cellranger` | 9.0.0, **10.1.0** | 3'/5' gene expression |
+| `cellranger-arc` | 2.0.2, **2.2.0** | multiome (GEX + ATAC) |
+| `cellranger-atac` | 2.1.0, **2.2.0** | scATAC |
+| `spaceranger` | 4.1.0 | Visium spatial |
 
-**Pin the version to the one the data was generated with**, or to whatever the rest of
-the study used — Cell Ranger output is not comparable across major versions, and
-`module load cellranger` takes the default, which moves. None of these has been run
-through this skill; treat the invocation as 10x-standard and verify.
+Biocluster 3 carried 18 `cellranger` versions; Biocluster 4 carries **two** — and the
+second appeared between 2026-10-31 and 2026-11-09, so **run `module avail cellranger`
+rather than trusting this table**. A pipeline pinned to an older version will not find
+it here; check with the user which version their analysis expects before rewriting.
 
-Cell Ranger is memory-hungry and CPU-parallel: `normal` is the right partition (128
-cores, 2 TB per node, short queue), not `admin`. It wants `--localcores`/`--localmem`
-set to match the Slurm request rather than left to autodetect, since `os.cpu_count()`
-reports the node's 128 cores and not your allocation.
+These are CPU jobs. They belong on `normal`, not `gpu`. Cell Ranger is memory-hungry and
+long-running; `normal` has the room, and `MaxTime` is unlimited.
 
-Reference transcriptomes are **not** in the mirrored module set — check
-`igb-reference-data`, then ask the user where the lab keeps its 10x references.
+    #SBATCH -p normal
+    #SBATCH -N 1
+    #SBATCH -n 16
+    #SBATCH --mem=128g
 
-## Also present, tier C
+    export TMPDIR="$PWD/tmp"; mkdir -p "$TMPDIR"
+    module purge
+    module load cellranger/10.1.0   # or 9.0.0 - pin deliberately
+    cellranger count --id=run1 --transcriptome=<ref> --fastqs=<dir> \
+      --localcores=16 --localmem=120 2>&1 | tee -a run.log
 
-`alevin-fry`, `velocyto` / `velocyto.R`, `CITE-seq-Count`, `MAESTRO`, `scenicplus`,
-`popscle`, `vartrix`, `magic`, `ParseBioSciences-Pipeline`, `evolocity`, `Loter`,
-`lorals`.
+**Pass `--localcores` and `--localmem` explicitly.** Cell Ranger inspects the whole
+machine, not the cgroup, so on a 128-core node it will try to use all of it and be
+killed. Set them to match `-n` and slightly below `--mem`.
 
-## What is verified and what is not
+**You must supply the transcriptome reference.** There is no 10x reference among the 29
+mirrored database modules — check `igb-reference-data` and you will not find one. Stage
+it into the user's own space on the login node, once, and reuse it.
 
-**Tier A:** the scanpy module's missing `leidenalg`, and the venv overlay that fixes it —
-built, imported and used on this cluster.
+Tier B: the modules are present and the invocations above are standard 10x usage, but no
+Cell Ranger run has been executed on Biocluster 4 through these skills. Say so, and
+report real timings back when you do one.
 
-**Tier C — present, never run here:** `cellranger` (18 versions), `spaceranger` (10),
-`cellranger-atac`, `cellranger-arc`, `velocyto`, `CellBender`, and the Seurat/R path. For
-the 10x tools in particular, nothing about reference transcriptome paths, `--localcores`
-/ `--localmem` behaviour under Slurm, or runtime has been measured here.
+## Long-read: nanopore
 
-**Verifying these needs real data** — a 10x run takes a real library and hours of
-compute, so it only gets confirmed by someone doing their actual experiment. If that is
-you, **please send back the module string, the resources you requested, and the wall
-time**, either in your reply to the agent or as a PR on
-`IGBIllinois/Biocluster-claude`. Cellranger sizing in particular is worth far more to the
-lab as a measurement than as the guess currently written here.
+| Module | Version | For |
+|---|---|---|
+| `dorado` | 2.1.2 | basecalling (GPU) |
+| `dorado-db` | 20261012 | basecalling models — a mirrored module, do not download |
+| `pod5` | 0.3.49 | POD5 file handling |
+| `modkit` | 0.6.4 | modified-base calling from BAM tags |
+| `medaka` | 2.2.2 | consensus and polishing |
+| `nanopolish` | 0.14.0 | signal-level polishing, methylation |
+
+`dorado` is the one GPU tool in this skill — it belongs on `-p gpu --gres=gpu:1`.
+Everything else is CPU work for `normal`.
+
+Basecalling models are mirrored: `module load dorado-db/20261012` and use
+`$EBROOTDORADOMINDB`. Do **not** let `dorado download` run on a compute node — it has no
+internet and will fail.
+
+    #SBATCH -p gpu
+    #SBATCH --gres=gpu:1
+    module purge
+    module load dorado/2.1.2
+    module load dorado-db/20261012
+    dorado basecaller "$EBROOTDORADOMINDB/<model>" pod5_dir/ > calls.bam
+
+Check the A40's 47.7 GB against the model you pick; see `igb-gpu-ml` for the card.
+
+## Long-read: PacBio
+
+`smrtlink/26.1.0.284828` is installed. It is a large vendor suite — consult its own
+documentation for subcommands. CPU work, `normal`.
+
+`hifiasm/0.25.0` is the assembler of choice for HiFi reads; see `igb-ngs-pipelines`.
+
+## What to tell the user up front
+
+1. Which stage of their analysis this cluster actually covers, and where it stops.
+2. That the downstream analysis layer is gone since the Biocluster 4 migration, and
+   which of the two routes above they want.
+3. The reference they need to stage, if any.
+4. `squeue`/`sacct`/`seff` so they can audit the run themselves.

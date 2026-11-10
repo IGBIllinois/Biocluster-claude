@@ -1,180 +1,185 @@
 ---
 name: igb-reference-data
-description: "Reference databases already mirrored on the IGB biocluster as loadable modules - BLAST nt/nr, GenBank, RefSeq, UniProt, Pfam, InterPro, GTDB, SILVA, Kraken2, CheckM/CheckM2/CheckV, BUSCO, HUMAnN/ChocoPhlAn, MetaPhlAn4, MEGARes, CARD, the GATK resource bundle, AlphaFold 2 and 3 databases, foldseek, Dorado basecalling models and more. Load this BEFORE downloading or staging any reference genome, annotation, BLAST database or model weights for cluster work, and whenever a tool needs a --db/--database path on IGB."
+description: "The 29 reference-database modules mirrored on IGB Biocluster 4 — BLAST, UniProt, Pfam, InterPro, GTDB, SILVA, Kraken2, CheckM/CheckV, BUSCO, HUMAnN, AlphaFold and others. Carries the non-guessable EBROOT variable rule, the four modulefiles whose paths are broken, the eleven that need a subdirectory rather than the module root, and the verified GTDB-Tk setup. Load before pointing any tool at a reference database, and before even considering downloading one."
 ---
 
-# Reference data on the IGB biocluster
+# Reference databases on Biocluster 4
 
-**Do not download a reference. Load it.** 29 databases are mirrored as modules. Compute
-nodes have **no internet**, so a download inside a job fails; and the data is usually
-already here, which means downloading also wastes quota at $8.78/TB/month.
+**Never download a reference database.** IGB mirrors them under
+`/private_stores/mirror` and exposes each as a module. Compute nodes have no internet,
+so this is not a convenience — it is the only way to get a reference onto a compute node
+without staging it by hand. Downloading one also costs the user storage they are billed
+for, and none of these appear on the IGB Applications wiki page, so a newcomer who
+trusts that page will pay twice.
 
-    module load pfam/37.3
-    echo "$EBROOTPFAM"          # /private_stores/mirror/pfam/37.3
-    hmmscan --domtblout out.tbl "$EBROOTPFAM/Pfam-A.hmm" query.faa
+All 29 modules were opened and inspected on **2026-10-31** (tier A).
 
-## A module's root is not always the path your tool wants
+## The variable name rule
 
-**16 of the 29 databases need a subdirectory, not the module root** — see the bolded
-cells in the catalogue below. Some nest the tool-ready package several levels down, so
-the root looks like the wrong shape and the data appears missing when it is not.
+    EBROOT + <module name uppercased, every "-" replaced by "MIN">
 
-**Use `ls`, never `find`, on these mirrors.** They are multi-terabyte NFS trees:
-`find "$EBROOT<NAME>" -maxdepth 3` exceeded the login-node command timeout, and the same
-walk inside a job produced 18 lines in seven minutes before it was cancelled. Step down
-one level at a time instead:
+So `ncbi-blastdb` sets `$EBROOTNCBIMINBLASTDB` and `alphafold3-db` sets
+`$EBROOTALPHAFOLD3MINDB`. The rule held for **all 29 with zero exceptions**.
 
-    ls "$EBROOT<NAME>"                 # one level, returns in seconds
-    ls "$EBROOT<NAME>/<subdir>"        # repeat only if the shape is still wrong
+    module load gtdb/226
+    echo "$EBROOTGTDB"
 
-The worked case — **tier A, verified 2026-10-13** — is GTDB-Tk. `module load gtdb/226`
-sets `$EBROOTGTDB` to `/private_stores/mirror/gtdb/226`, which holds only the plain GTDB
-release (taxonomy, metadata, MSAs, `genomic_files_*`) and **no GTDB-Tk layout at all**.
-The GTDB-Tk reference package is two levels deeper:
+Load the module and echo the variable. Do not hardcode a path — the mirror layout has
+already changed once.
 
-    module purge                      # the GTDBTk module's own message forbids others
-    module load GTDBTk/2.6.1
-    export GTDBTK_DATA_PATH=/private_stores/mirror/gtdb/226/auxillary_files/gtdbtk_package/full_package/release226
-    gtdbtk classify_wf --genome_dir ./bins --out_dir ./out \
-      --extension fa --cpus 32 --skip_ani_screen
+**Never pipe `module load`.** `module load gtdb/226 | head` runs in a subshell and the
+variable is silently never set; you then get an empty path and a confusing downstream
+error. This is easy to do by accident even when you know about it.
 
-That directory carries exactly the layout `classify_wf` expects — `markers masks
-metadata mrca_red msa pplacer radii skani split taxonomy` — and
-`metadata/metadata.txt` reads `VERSION_DATA=r226`. Permissions are `drwxrwxr-x
-datamover:datamover`, world-readable, so point at it in place; copying it into `$HOME`
-duplicates ~110 GB of unbacked-up storage for nothing.
+## The 29 modules
 
-Two siblings under `.../gtdbtk_package/`:
+Newest version of each, as of 2026-10-31.
 
-- `split_package/` — `gtdbtk_r226_data.tar.gz.part_aa` … `part_an` (14 parts) plus
-  `HOWTO.txt`. The archive form; only of use to someone who wants a private copy.
-- `mockup_db/r226_mockup/` — the same ten directories, tiny. Use it to smoke-test
-  pipeline plumbing before committing a real run.
+| Module | Newest | Variable | Where to point the tool |
+|---|---|---|---|
+| `alphafold-db` | `20240213` | `$EBROOTALPHAFOLDMINDB` | module root is correct |
+| `alphafold3-db` | `20250520` | `$EBROOTALPHAFOLD3MINDB` | module root is correct |
+| `bart2-db` | `20240302` | `$EBROOTBART2MINDB` | module root is correct |
+| `BUSCO-db` | `5` | `$EBROOTBUSCOMINDB` | point the tool at `lineages/` |
+| `card-prevalence` | `4.0.1` | `$EBROOTCARDMINPREVALENCE` | point the tool at `db/` |
+| `checkm-db` | `20150116` | `$EBROOTCHECKMMINDB` | module root is correct |
+| `checkm2-db` | `20230511` | `$EBROOTCHECKM2MINDB` | point the tool at `CheckM2_database/` |
+| `checkv-db` | `1.5` | `$EBROOTCHECKVMINDB` | point the tool at `checkv-db-v1.5/` |
+| `chocophlan` | `0.1.1` | `$EBROOTCHOCOPHLAN` | **path does not exist** |
+| `clusterblast` | `20170105` | `$EBROOTCLUSTERBLAST` | **path does not exist** |
+| `dorado-db` | `20261012` | `$EBROOTDORADOMINDB` | module root is correct |
+| `foldseek-db` | `20230921` | `$EBROOTFOLDSEEKMINDB` | module root is correct |
+| `funannotate-db` | `20240515` | `$EBROOTFUNANNOTATEMINDB` | module root is correct |
+| `gatkbundle` | `20191118` | `$EBROOTGATKBUNDLE` | **path does not exist** |
+| `genbank` | `250` | `$EBROOTGENBANK` | module root is correct |
+| `gtdb` | `226` | `$EBROOTGTDB` | point the tool at `auxillary_files/` |
+| `humann-db` | `201901b` | `$EBROOTHUMANNMINDB` | point the tool at `chocophlan | uniref | utility_mapping/` |
+| `interpro` | `105.0` | `$EBROOTINTERPRO` | module root is correct |
+| `KneadData-db` | `20230405` | `$EBROOTKNEADDATAMINDB` | module root is correct |
+| `kraken2-db` | `20260226` | `$EBROOTKRAKEN2MINDB` | module root is correct |
+| `megares-db` | `3.00` | `$EBROOTMEGARESMINDB` | point the tool at `db/` |
+| `metaphlan4-db` | `20260509` | `$EBROOTMETAPHLAN4MINDB` | module root is correct |
+| `ncbi-blastdb` | `20260622` | `$EBROOTNCBIMINBLASTDB` | point the tool at `blastdb_v5 | db | diamond/` |
+| `pfam` | `37.3` | `$EBROOTPFAM` | module root is correct |
+| `pgap-db` | `2021-07-01.build5508` | `$EBROOTPGAPMINDB` | module root is correct |
+| `refseq-db` | `230` | `$EBROOTREFSEQMINDB` | point the tool at `db/` |
+| `silva` | `138.1` | `$EBROOTSILVA` | **path does not exist** |
+| `tailseeker-db` | `20161215` | `$EBROOTTAILSEEKERMINDB` | point the tool at `refdb/` |
+| `uniprot` | `2025_02` | `$EBROOTUNIPROT` | point the tool at `blastdb_v5 | db | diamond/` |
 
-`gtdb/207` and `gtdb/214` have **no** `gtdbtk_package` — R226 is the only release
-mirrored in GTDB-Tk-ready form.
+## The four broken modulefiles
 
-**Verified 2026-10-13: `gtdbtk check_install` passes.** Slurm job 2428811, exit 0,
-`INFO: Done.` after **1 h 07 m** on `normal`. All eight bundled binaries (`FastTree`,
-`FastTreeMP`, `guppy`, `hmmalign`, `hmmsearch`, `pplacer`, `prodigal`, `skani`) and all
-nine reference directories (`pplacer masks markers radii msa metadata taxonomy skani
-mrca_red`) reported OK. GTDB-Tk **2.6.1 and r226 are a working pair** — this is no
-longer an assumption.
+These point at **`/home/mirrors`**, which does not exist. The real mount is
+`/home/mirror` — a symlink into `/private_stores/mirror`. The module loads without
+complaint and the tool fails later with a confusing error.
 
-**Do not put `check_install` at the top of a real job.** It walks **143,617 files** in
-`skani/` alone over NFS and takes over an hour — longer than many classify runs. It is a
-once-per-release check; run it on its own when the data or module version changes, not
-as a preflight. (An earlier version of this skill advised the opposite.)
+| Module | What the modulefile says | What to use instead |
+|---|---|---|
+| `chocophlan/0.1.1` | `/home/mirrors/chocophlan/0.1.1` | `/private_stores/mirror/chocophlan/0.1.1` |
+| `clusterblast/20170105` | `/home/mirrors/clusterblast/20170105` | `/private_stores/mirror/clusterblast/20170105` |
+| `gatkbundle/20191118` | `/home/mirrors/gatkbundle/20191118` | `/private_stores/mirror/gatkbundle/20191118` |
+| `silva/138.1` | `/home/mirrors/silva/138.1` | `/private_stores/mirror/silva/138.1` |
 
-The module also prints "There is a newer version of GTDB-Tk available: v2.8.0" on load —
-cosmetic, and unrelated to the data release. `--skip_ani_screen` avoids needing a separate Mash database; drop it and pass
-`--mash_db <path>` if you want the ANI prescreen. The skani database inside the package
-is used for the species-level step either way.
-
-## Five modules hand you a path that does not exist
-
-`chocophlan`, `clusterblast`, `gatkbundle`, `interpro` and `silva` set their root to
-`/home/mirrors/...`. **There is no `/home/mirrors` on this cluster.** The directory is
-`/home/mirror` — singular — and it is a symlink to `/private_stores/mirror/`. The data
-is present and complete; the module variable has an extra `s`.
-
-So if `$EBROOT<NAME>` starts with `/home/mirrors/`, strip the `s`, or use the real
-location directly:
+**Always `ls` the variable before passing it to a tool:**
 
     module load silva/138.1
-    echo "$EBROOTSILVA"                      # /home/mirrors/silva/138.1  <- does not exist
-    DB=/private_stores/mirror/silva/138.1    # <- use this
-    ls "$DB"                                 # ARB_files Exports Fields_description ...
+    ls "$EBROOTSILVA" || echo "broken modulefile - substitute /private_stores/mirror/silva/138.1"
 
-Verified 2026-10-13: all five exist at `/private_stores/mirror/<module>/<same version>`.
-Guard it in a script rather than trusting either path:
+This is worth reporting to IGB rather than only working around.
 
-    [ -d "$EBROOTSILVA" ] || EBROOTSILVA=${EBROOTSILVA/\/home\/mirrors\//\/private_stores\/mirror\/}
+## The eleven that need a subdirectory
 
-## The variable name is not guessable
+Pointing a tool at the module root fails for these — it wants a specific child:
 
-`EBROOT` + the module name **uppercased**, with every `-` replaced by **`MIN`**:
-
-| Module | Variable |
+| Module | Pass this |
 |---|---|
-| `alphafold3-db` | `$EBROOTALPHAFOLD3MINDB` |
-| `ncbi-blastdb` | `$EBROOTNCBIMINBLASTDB` |
-| `card-prevalence` | `$EBROOTCARDMINPREVALENCE` |
-| `gtdb` | `$EBROOTGTDB` |
+| `BUSCO-db` | `$EBROOTBUSCOMINDB/lineages` |
+| `card-prevalence` | `$EBROOTCARDMINPREVALENCE/db` |
+| `checkm2-db` | `$EBROOTCHECKM2MINDB/CheckM2_database` |
+| `checkv-db` | `$EBROOTCHECKVMINDB/checkv-db-v1.5` |
+| `gtdb` | `$EBROOTGTDB/auxillary_files` (note the spelling — it is misspelled on disk) |
+| `humann-db` | `$EBROOTHUMANNMINDB/{chocophlan,uniref,utility_mapping}` |
+| `megares-db` | `$EBROOTMEGARESMINDB/db` |
+| `ncbi-blastdb` | `$EBROOTNCBIMINBLASTDB/{blastdb_v5,db,diamond}` |
+| `refseq-db` | `$EBROOTREFSEQMINDB/db` |
+| `tailseeker-db` | `$EBROOTTAILSEEKERMINDB/refdb` |
+| `uniprot` | `$EBROOTUNIPROT/{blastdb_v5,db,diamond}` |
 
-Each module also sets `EBVERSION<NAME>`. **Load the module and `echo` the variable
-before using it** — do not hardcode the path into a job script.
+`ncbi-blastdb` and `uniprot` each offer three formats — pick `blastdb_v5` for BLAST+,
+`diamond` for DIAMOND, `db` for raw FASTA. Passing the wrong one produces a format
+error, not a missing-file error.
 
-## Catalogue — opened and listed on the cluster 2026-10-13
+## Versions — pin them
 
-**Tier A.** Every row below was produced by loading the module, reading back the
-variable it actually sets, and listing the directory. `$R` below means that root.
+Twelve of the 29 carry more than one version, and the newest is not always what a
+published pipeline expects. The seven with the widest spread:
 
-| Module | Newest | Variable | Root path | Point your tool at | What is actually in it |
-|---|---|---|---|---|---|
-| `BUSCO-db` | `5` | `$EBROOTBUSCOMINDB` | `/private_stores/mirror/BUSCO-db/5` | `lineages/` | 4 entries: `lineages/`, `placement_files/`, `file_versions.tsv` |
-| `KneadData-db` | `20230405` | `$EBROOTKNEADDATAMINDB` | `/private_stores/mirror/KneadData-db/20230405` | `$R/hg37dec_v0.1` (index prefix) | 19 entries: bowtie2 indexes `hg37dec_v0.1.*`, `human_hg38_refMrna.*` |
-| `alphafold-db` | `20240213` | `$EBROOTALPHAFOLDMINDB` | `/private_stores/mirror/alphafold-db/20240213` | root (`--data_dir`) | `bfd mgnify params pdb70 pdb_mmcif pdb_seqres small_bfd uniprot uniref30` |
-| `alphafold3-db` | `20250520` | `$EBROOTALPHAFOLD3MINDB` | `/private_stores/mirror/alphafold3-db/20250520` | root = `--db_dir`, `parameters/` = `--model_dir` | `parameters/ mmcif_files/` + MSA FASTAs; template cutoff 2022-09-28 |
-| `bart2-db` | `20240302` | `$EBROOTBART2MINDB` | `/private_stores/mirror/bart2-db/20240302` | `hg38_library/` or `mm10_library/` | two species libraries (+ their tarballs) |
-| `card-prevalence` | `4.0.1` | `$EBROOTCARDMINPREVALENCE` | `/private_stores/mirror/card-prevalence/4.0.1` | **`db/`** | `db/` holds `aro.json`, `aro_index.tsv`, `61_kmer_db.json` |
-| `checkm-db` | `20150116` | `$EBROOTCHECKMMINDB` | `/private_stores/mirror/checkm-db/20150116` | root | `distributions genome_tree hmms hmms_ssu img pfam test_data` — correct shape |
-| `checkm2-db` | `20230511` | `$EBROOTCHECKM2MINDB` | `/private_stores/mirror/checkm2-db/20230511` | **`CheckM2_database/`** | root holds only that one dir + `easybuild` |
-| `checkv-db` | `1.5` | `$EBROOTCHECKVMINDB` | `/private_stores/mirror/checkv-db/1.5` | **`checkv-db-v1.5/`** | root holds the dir + its tarball |
-| `chocophlan` | `0.1.1` | `$EBROOTCHOCOPHLAN` | **`/private_stores/mirror/chocophlan/0.1.1`** | root | variable points at dead `/home/mirrors`. Also inside `humann-db/201901b/chocophlan` |
-| `clusterblast` | `20170105` | `$EBROOTCLUSTERBLAST` | **`/private_stores/mirror/clusterblast/20170105`** | root | variable points at dead `/home/mirrors` |
-| `dorado-db` | `20261012` | `$EBROOTDORADOMINDB` | `/private_stores/mirror/dorado-db/20261012` | one model dir | **154 models**, e.g. `dna_r10.4.1_e8.2_400bps_hac@v5.0.0`; pick by chemistry+speed |
-| `foldseek-db` | `20230921` | `$EBROOTFOLDSEEKMINDB` | `/private_stores/mirror/foldseek-db/20230921` | `afdb/`, `afdb-uniprot/` or `pdb/` | three separate target databases |
-| `funannotate-db` | `20240515` | `$EBROOTFUNANNOTATEMINDB` | `/private_stores/mirror/funannotate-db/20240515` | root (`FUNANNOTATE_DB`) | 37 entries, flat: `dbCAN.hmm`, `dikarya/`, `busco_outgroups.tar.gz` |
-| `gatkbundle` | `20191118` | `$EBROOTGATKBUNDLE` | **`/private_stores/mirror/gatkbundle/20191118`** | root | variable points at dead `/home/mirrors`. Also on disk: `2.5`, `3.8`, `example_bam_b37` |
-| `genbank` | `250` | `$EBROOTGENBANK` | `/private_stores/mirror/genbank/250` | root | **5539 entries** — flat `gbbct*.seq` flatfiles plus `catalog/ daily-nc/ docs/` |
-| `gtdb` | `226` | `$EBROOTGTDB` | `/private_stores/mirror/gtdb/226` | **`auxillary_files/gtdbtk_package/full_package/release226`** | root is the plain release only — see the GTDB-Tk section above |
-| `humann-db` | `201901b` | `$EBROOTHUMANNMINDB` | `/private_stores/mirror/humann-db/201901b` | `chocophlan/`, `uniref/` or `utility_mapping/` | three sub-databases, one per HUMAnN stage |
-| `interpro` | `**105.0**` | `$EBROOTINTERPRO` | **`/private_stores/mirror/interpro/105.0`** | root | variable points at dead `/home/mirrors`. Modules: `68.0, 101.0–105.0` |
-| `kraken2-db` | `20260226` | `$EBROOTKRAKEN2MINDB` | `/private_stores/mirror/kraken2-db/20260226` | one `k2_*` subdir | **10 databases**: `k2_nt k2_pluspf k2_pluspfp k2_gtdb k2_minusb k2_eupathdb48` + 08gb/16gb capped builds |
-| `megares-db` | `3.00` | `$EBROOTMEGARESMINDB` | `/private_stores/mirror/megares-db/3.00` | **`db/`** | `megares_database_v3.00.fasta` + annotation CSVs |
-| `metaphlan4-db` | `20260509` | `$EBROOTMETAPHLAN4MINDB` | `/private_stores/mirror/metaphlan4-db/20260509` | root = `--bowtie2db` | index name `mpa_vFeb24_CDIFF_CHOCOPhlAnSGB_20240910`; `mpa_latest` points at it |
-| `ncbi-blastdb` | `20260622` | `$EBROOTNCBIMINBLASTDB` | `/private_stores/mirror/ncbi-blastdb/20260622` | **`db/nt`**, **`db/nr`**, `db/pdbaa` | also `blastdb_v5/` and `diamond/` builds of the same data |
-| `pfam` | `37.3` | `$EBROOTPFAM` | `/private_stores/mirror/pfam/37.3` | `$R/Pfam-A.hmm` | flat: `Pfam-A.hmm`, `Pfam-A.fasta`, `Pfam-A.clans.tsv`, `active_site.dat` |
-| `pgap-db` | `2021-07-01.build5508` | `$EBROOTPGAPMINDB` | `/private_stores/mirror/pgap-db/2021-07-01.build5508` | root | 24 entries, flat: `16S_rRNA`, `23S_rRNA`, `CDD2/`, `AntiFamLib/` |
-| `refseq-db` | `230` | `$EBROOTREFSEQMINDB` | `/private_stores/mirror/refseq-db/230` | **`db/<division>`** | `db/` splits by `archaea bacteria complete fungi invertebrate ...` |
-| `silva` | `138.1` | `$EBROOTSILVA` | **`/private_stores/mirror/silva/138.1`** | `Exports/` | variable points at dead `/home/mirrors`. Holds `ARB_files/ Exports/ Fields_description/` |
-| `tailseeker-db` | `20161215` | `$EBROOTTAILSEEKERMINDB` | `/private_stores/mirror/tailseeker-db/20161215` | **`refdb/`** | root holds only that dir |
-| `uniprot` | `2025_02` | `$EBROOTUNIPROT` | `/private_stores/mirror/uniprot/2025_02` | **`db/knowledgebase`** | also `db/decoy`, `db/rdf`, plus `blastdb_v5/` and `diamond/` builds |
+| Module | Versions |
+|---|---|
+| `interpro` | 68.0, 101.0, 102.0, 103.0, 104.0, **105.0** |
+| `kraken2-db` | 20220327, 20230314, 20240112, 20250714, **20260226** |
+| `alphafold-db` | 20210917, 20220118, 20230405, **20240213** |
+| `ncbi-blastdb` | 20220318, 20230124, 20250211, **20260622** |
+| `pfam` | 32.0, 35.0, 37.0, **37.3** |
+| `gtdb` | 207, 214, **226** |
+| `uniprot` | 2024_06, 2025_01, **2025_02** |
+| `BUSCO-db` | 4, **5** |
+| `card-prevalence` | 3.0.6, **4.0.1** |
+| `dorado-db` | 20240501, **20261012** |
+| `funannotate-db` | 20220428, **20240515** |
+| `refseq-db` | 211, **230** |
 
-**Sixteen of the 29 need a subdirectory, not the root** — the bolded cells above. This is
-the single most common way to waste a queue slot here: the job starts, the tool rejects
-the path, and you have lost the wait. Confirm with `ls "$EBROOT<NAME>"` on the login node
-before you submit.
+Sort these **numerically**, not lexicographically — a string sort puts `68.0` above
+`105.0` and silently selects a seven-year-old InterPro release. That mistake was made
+once in this repository.
 
-**`interpro` was listed here as `68.0` until 2026-10-13 and that was a sorting bug** —
-`"68.0"` sorts above `"105.0"` as text. Versions `101.0` through `105.0` are all
-available as modules. If you see a suspiciously old "newest" elsewhere in these skills,
-suspect the same cause.
+## GTDB-Tk
 
-## What tier A means here, and what it does not
+    module load GTDBTk
+    module load gtdb/226
+    export GTDBTK_DATA_PATH="$EBROOTGTDB/auxillary_files/gtdbtk_package/full_package/release226"
 
-Every row was **opened**: the module loaded, the variable read back, the directory
-listed. So the path, the variable name and the directory contents are measurements.
+`gtdbtk check_install` **passed** against this path, validating all 8 bundled binaries
+(`FastTree FastTreeMP guppy hmmalign hmmsearch pplacer prodigal skani`) and all 9
+reference directories.
 
-**What was not done: using any of these with its tool.** `db/nt` was listed; no `blastn`
-was run against it. `CheckM2_database/` exists; CheckM2 was never pointed at it. The one
-exception is GTDB-Tk, where `check_install` was run end to end, and AlphaFold 3, which
-has a verified working job in the hub.
+**It took 1 h 07 m.** The `skani/` directory alone holds **143,617 files**, and the
+check stats every one. Run it **once per release**, never as a per-job preflight, and
+give it hours — an earlier attempt was killed at 25 minutes and the timeout was
+misread as a GTDB-Tk fault.
 
-So a wrong *subdirectory choice* is still possible in these rows — if a tool rejects the
-path suggested here, that is a real finding. **Say so, or open a PR**: the correction is
-one table cell and it saves the next person the same queue wait.
+`gtdb/207` and `gtdb/214` have **no `gtdbtk_package`** — only 226 is usable with
+GTDB-Tk.
 
-## Two older than they look
+## AlphaFold databases
 
-`checkm-db/20150116` and `clusterblast/20170105` are the only versions present. If a
-result depends on database recency, say so — a 2015 CheckM database is not comparable to
-a current one.
+`alphafold3-db/20250520` sets **both** `$EBROOTALPHAFOLD3MINDB` and `$BIODB` to
+`/private_stores/mirror/alphafold3-db/20250520` (verified inside a running job, not a
+login shell). IGB's own documentation uses `$BIODB`; either works.
 
-## If what you need is not here
+A caution learned the hard way while checking this: if you probe with
+`module load alphafold3-db/20250520 | head`, the load happens in a subshell and **both**
+variables come back empty, which looks exactly like "the module does not set them".
+Redirect to a file instead of piping.
 
-Check `module avail | grep -i <name>` first — this list is from one snapshot. If it is
-genuinely absent, staging it is a **login-node** step (compute nodes have no egress) and
-it belongs in the user's own space, not in a job. Say so and stop; do not try to fetch
-it from inside a job script.
+Contents include `parameters/` (AF3 weights), `pdb_seqres_2022_09_28.fasta`,
+`uniref90_2022_05.fa`, `mgy_clusters_2022_05.fa`, `uniprot_all_2021_04.fa`,
+`mmcif_files/` and the RNA databases.
+
+**The template cutoff is 2022-09-28.** Any PDB entry deposited before that date is
+template-informed, not a blind fold — say so when reporting a result.
+
+`pdb_seqres_2022_09_28.fasta` is a reliable **offline** SEQRES source (headers look like
+`>1ubq_A mol:protein length:76`). Resolve a sequence on the cluster from this file
+rather than transcribing residues into the transcript, and never type a sequence from
+memory.
+
+## Probing without burning a session
+
+**Never** `find` or `du` over `/private_stores/mirror`. Those calls are killed before
+they return, and `skani/` shows why. To look inside a database directory:
+
+    ls -1U "$EBROOTGTDB" | head -20
+
+`-1U` is unsorted, so `ls` does not read the whole directory before printing. Combined
+with `head`, this cut a full 29-module sweep from 656 s to **105 s**.

@@ -1,22 +1,42 @@
-# Databases and application paths on the IGB biocluster
+# Databases and application paths on Biocluster 4
 
-Verified 2026-09-28.
+Verified 2026-10-31 / 2026-11-01.
+
+**The full detail lives in the `igb-reference-data` skill, not here.** This file is a
+pointer plus the AlphaFold specifics the hub's recipe needs. If you want the table of
+all 29 mirrored databases, the four broken modulefiles or the eleven that need a
+subdirectory, load `igb-reference-data`.
+
+## The one rule
+
+    module load <db-module>/<version>
+    echo "$EBROOT<MODULE NAME UPPERCASED, every - replaced by MIN>"
+
+29 databases are mirrored under `/private_stores/mirror` and exposed as modules.
+Compute nodes have no internet, so loading the module is the only way to get a
+reference onto one. Never download a database that is already mirrored.
+
+Never pipe `module load` — it runs in a subshell and the variable is silently never set.
 
 ## AlphaFold
 
     module avail alphafold
 
-- Applications: `alphafold/2.1.2`, `2.3.1`, `2.3.2`, `3.0.1`, `3.0.2`
+- Applications: `alphafold/2.3.2`, `alphafold/3.0.4`
 - AF2 databases: `alphafold-db/20210917`, `20220118`, `20230405`, `20240213`
-- AF3 databases: `alphafold3-db/20250520`
+- AF3 database: `alphafold3-db/20250520`
 
-### AF3 (module `alphafold/3.0.2` + `alphafold3-db/20250520`)
+Biocluster 3 carried `alphafold/2.1.2`, `2.3.1`, `3.0.1` and `3.0.2` as well; those
+versions no longer exist.
+
+### AF3 (`alphafold/3.0.4` + `alphafold3-db/20250520`)
 
 | Variable | Value | Notes |
 |---|---|---|
-| `$EBROOTALPHAFOLD` | `/home/apps/software/alphafold/3.0.2` | holds `alphafold.sif`, 5.22 GB |
+| `$EBROOTALPHAFOLD` | `/home/apps/software/alphafold/3.0.4` | holds `alphafold.sif` |
 | `$BIODB` | `/private_stores/mirror/alphafold3-db/20250520` | databases + weights |
-| `$BIODB/parameters/af3.bin` | 1.15 GB | model weights, world-readable here |
+| `$EBROOTALPHAFOLD3MINDB` | same as `$BIODB` | the db module sets both |
+| `$BIODB/parameters` | | model weights |
 
 No explicit `--bind` is needed — `$BIODB` is visible inside the container.
 
@@ -38,20 +58,10 @@ fold. State this when reporting a result for such a target (1UBQ, for example).
     $BIODB/pdb_seqres_2022_09_28.fasta
 
 SEQRES for every PDB entry in the snapshot; headers look like
-`>2pv7_A mol:protein length:298`. This is the reliable route when the local sandbox has
-no network egress. Build the AF3 `input.json` on the cluster with a here-doc and pass it
-to `submit_job` as an `ssh://` locator — that keeps the sequence out of the transcript
-entirely, and avoids transcription errors (2PV7 chain A is 298 residues, not 295).
+`>1ubq_A mol:protein length:76`. This is the reliable route when the local sandbox has
+no network egress. Build the AF3 `input.json` **on the cluster** with a here-doc — that
+keeps the sequence out of the transcript entirely and avoids transcription errors.
 
-## scanpy
+    SEQ=$(awk '/^>1ubq_A /{getline; print; exit}' "$BIODB/pdb_seqres_2022_09_28.fasta")
 
-`scanpy/1.10.1-IGB-gcc-8.2.0-Python-3.10.1` gives scanpy 1.10.1, anndata 0.10.7,
-umap 0.5.6, scikit-learn — and **no leidenalg, no igraph**, so `sc.tl.leiden` raises.
-Use `module load cs/scanpy-leiden` (manifest: `cluster/manifests/scanpy-leiden.yaml`).
-
-Version sensitivity worth knowing: the same PBMC-3k pipeline gives identical QC and
-feature-selection numbers under scanpy 1.10.1 (cluster) and 1.12.4 (laptop) — 2700
-cells loaded, 2638 x 13714 after QC, 1838 HVGs — but Leiden r=1.0 yields 8 clusters on
-the cluster versus 9 locally. The naive/memory CD4 T split is the boundary that does
-not survive the version change. Do not treat cluster counts as portable across
-scanpy versions.
+Never type a protein sequence from memory.

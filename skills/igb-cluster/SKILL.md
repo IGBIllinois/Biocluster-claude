@@ -1,12 +1,17 @@
 ---
 name: igb-cluster
-description: "Run jobs on the IGB biocluster (University of Illinois Urbana-Champaign) through a Claude Science SSH compute target. Carries the partition map with its group ACLs, the shared-environment names, the AlphaFold/BioDB paths and snapshot dates, the node resource ceilings, the known failure modes with their diagnostics, and the house rules for what may and may not be run there. Load before submitting any job to the igb target, before estimating a cluster runtime, or when a cluster job has failed and you need the diagnostic."
+description: "Run jobs on the IGB Biocluster 4 (University of Illinois Urbana-Champaign) through a Claude Science SSH compute target. Carries the partition map with its group ACLs and node hardware, the module-stack conventions, the reference-database paths, the measured runtimes, the known failure modes with their diagnostics, and the house rules for what may and may not be run there. Load before submitting any job to the igb target, before estimating a cluster runtime, or when a cluster job has failed and you need the diagnostic."
 ---
 
-# IGB biocluster
+# IGB Biocluster 4
 
-The compute target is **`igb`** (login node `biologin-3`). An older `biocluster`
-target pointed at `biologin-2`, which no longer resolves — if you see it, do not use it.
+The compute target is **`igb`**, login node **`biologin-0.igb.illinois.edu`**
+(`ClusterName=biocluster`, controller `biocluster4-headnode`, **Slurm 25.05.1**).
+
+**This is Biocluster 4, which replaced Biocluster 3 in October 2026.** Everything below
+was re-measured on the new hardware on **2026-10-31**. If you find a claim anywhere that
+mentions `biologin-3`, the `IGB-gcc-8.2.0` toolchain, `/scratch`, or a 927-module stack,
+it is Biocluster 3 material and is **wrong here** — report it rather than acting on it.
 
 ## About the optional sidecar
 
@@ -22,7 +27,7 @@ you have confirmed they exist in your kernel.
 
 Every capability claim in the `igb-*` skills is tagged:
 
-- **A — verified**: run on this cluster; the recipe is the one that worked, with timings.
+- **A — verified**: run on Biocluster 4; the recipe is the one that worked, with timings.
 - **B — documented**: the module exists and the invocation comes from `module show` or
   IGB's docs, but nobody has run it here.
 - **C — listed**: the module is present. Nothing further is claimed.
@@ -47,7 +52,7 @@ session does not pay again:
     id; sinfo -a -o "%.14P %.6D %.20G %.10m %.12l %.20A"; module avail 2>&1 | grep -i <name>
 
 Keep probes to `ls` and `module avail`. **Never** `find` or `du` over
-`/private_stores/mirror` or `/home` — those are multi-terabyte networked filesystems and
+`/private_stores/mirror` or `/home` — those are multi-petabyte networked filesystems and
 the call will be killed before it returns.
 
 ## Site policy — IGB's rules, not ours
@@ -59,11 +64,12 @@ Two of these are enforcement, not etiquette.
 2. **Compute nodes have no internet.** `pip install`, `conda install` and any download
    *fail* there — this is the mechanical reason a job must load a pre-built environment
    instead of creating one. The login node does have egress: stage data there first.
+   (Measured: a `pooch` dataset fetch inside a compute job failed with a connection
+   error while the identical call on `biologin-0` succeeded.)
 3. **Never request a whole GPU node.** `--gres=gpu:1`. Three GPU nodes serve the whole
    institute.
 4. **No HIPAA or PHI data on this cluster.**
-5. **Nothing here is backed up**, and storage costs $8.78/TB/month. Clean up
-   intermediates.
+5. **Nothing here is backed up**, and storage is charged. Clean up intermediates.
 6. **Always request resources explicitly.** Nodes are large — 128 cores on `normal` —
    but a job that does not ask gets a minimal default slice of **2 CPUs** regardless.
 
@@ -72,11 +78,10 @@ Two of these are enforcement, not etiquette.
 These are not preferences. Each one is a failure already paid for, or a boundary the
 user set.
 
-1. **Never create an environment.** No `pip install`, no `conda create`, no
-   `python -m venv`, no `apptainer build` inside a job. Load a shared one:
-   `module use "$CS_SHARED_ROOT/modulefiles" && module load cs/<name>`. If the name you
-   need is not in `cs-env list`, **stop and report the missing name** — do not improvise
-   one into existence.
+1. **Never build an environment inside a job.** No `pip install`, no `conda create`, no
+   `python -m venv`, no `apptainer build` in a batch script — compute nodes have no
+   egress, so it cannot work. Build on the login node, then load it in the job. See
+   *Building an environment* below.
 2. **Never touch another user's work.** No `scancel`, `renice`, or preemption of a job
    you did not submit. No Slurm priority manipulation. If the partition you want is
    busy, use an idle partition the account is entitled to, or wait.
@@ -86,10 +91,10 @@ user set.
 4. **The user acts on the cluster too.** They cancel jobs under their own uid without
    telling you. Re-check `squeue`/`sacct` before reasoning about a job you submitted.
 5. **Never resubmit after a transport-level submit failure** until you have checked
-   `sacct` for an `operon-*` row. A dead connection can follow a successful `sbatch`;
-   resubmitting forfeits a multi-day queue position and double-books the GPU.
+   `sacct` for the job. A dead connection can follow a successful `sbatch`;
+   resubmitting forfeits a queue position and double-books the GPU.
 6. **Write outputs into the job workdir** (`./` or `./out`), never to an absolute path
-   under home or scratch — only workdir files are harvested back.
+   under home — only workdir files are harvested back.
 7. **`tee` console output to a named `run.log`.** `slurm-<jobid>.out` is never harvested.
 8. **Tell the user where work runs** and give them the cluster-side command to check it
    themselves (`squeue`, `sacct`, `seff`, `tail -f run.log`). They audit independently;
@@ -97,57 +102,73 @@ user set.
 
 ## Partitions
 
-Full table with group ACLs and hardware: `references/partitions.md`.
-Check your own access with `id` against `scontrol show partition | grep AllowGroups`.
+Full table with group ACLs, live node states and the partitions to avoid:
+`references/partitions.md`. Check access with `id` against
+`scontrol show partition | grep AllowGroups`.
 
-| Partition | Hardware | Node mem ceiling | Wait | Use it for |
-|---|---|---|---|---|
-| `admin` | 1 node, 32 CPU, 1x RTX A6000 (48 GB) | **60 GB** | <1 min, normally idle | GPU work under 60 GB |
-| `gpu` | 3 nodes, 32 CPU, 2x A40 (46 GB) each | **250 GB** | **22-32 h observed** | GPU work over 60 GB |
-| `normal` | 7 nodes, 128 CPU (EPYC 7543), 2 TB each | **2 TB** | short | everything CPU |
+| Partition | Hardware | Node mem ceiling | Use it for |
+|---|---|---|---|
+| `normal` | 7 nodes, 128 CPU (EPYC 7543), ~2 TB each | **2,000,000 MB** | everything CPU-only |
+| `gpu` | 3 nodes, 32 CPU, 2x **A40 (47.7 GB, sm_86)** each | **250,000 MB** | anything needing a GPU |
 
-All three verified 2026-10-04 (`sinfo`, `scontrol show partition`). Totals: `normal`
-896 CPUs / 7 nodes, `gpu` 96 / 3, `admin` 32 / 1. Every partition has
-`MaxTime=UNLIMITED`, `DefaultTime=NONE`, `MaxMemPerNode=UNLIMITED` — the binding limit
-is always the node's RealMemory, never a partition cap. No wall-time limit anywhere,
-so long jobs are allowed.
-
-**The tradeoff that decides the partition** — and it is counter-intuitive: the *idle*
-GPU partition has the **smallest** memory on the cluster, and the 2 TB partition has no
-GPU at all:
+**These two are the only general-access partitions** — both gated on the
+`biocluster_queue` Unix group. Verified 2026-10-31 (`sinfo`, `scontrol show partition`).
+Configured totals: `normal` 896 CPUs / 7 nodes, `gpu` 96 CPUs / 3 nodes — but **check
+what is actually up**, which on 2026-10-31 was **2 of 7** and **1 of 3** respectively.
+Both carry `MaxTime=UNLIMITED`, `DefaultTime=NONE`, `MaxMemPerNode=UNLIMITED`, so the
+binding limit is always the node's RealMemory, never a partition cap, and long jobs are
+allowed.
 
 | Need | Partition | Why |
 |---|---|---|
-| GPU, ≤60 GB | `admin` | idle, starts in under a minute |
-| GPU, >60 GB | `gpu` | 250 GB/node — but say the 22-32 h queue out loud first |
-| no GPU, any memory | `normal` | 2 TB and 128 cores, short wait |
+| a GPU | `gpu` | `--gres=gpu:1` |
+| no GPU | `normal` | 2 TB and 128 cores |
 
-Membership comes from Unix groups, not from Slurm admin rights: `biocluster_queue`
-opens `normal` and `gpu`; `admin_queue` opens `admin`. About fourteen further
-partitions exist (`mmli` 4x A100, `cabbi` 8x RTX6000, `sonngpu`, `hpcbio`), all
-group-restricted — check `id` against `scontrol show partition` before assuming `gpu`
-is the only GPU route. The account has no Slurm `AdminLevel` and only Priority=0 QOS,
-so there is no priority-bump route and none is needed.
+**Queue depth varies enormously — measure it, do not quote a number.** On Biocluster 3
+GPU waits of 22-32 h were recorded; across a full day of Biocluster 4 testing the GPU
+queue was empty and jobs started in under 20 s. Run
+`squeue -p gpu -t PENDING` before promising the user a turnaround.
 
-`gpu` honours `--cpus-per-task` exactly; `normal` does not.
+**Fifteen partitions appear in `sinfo -a`; an ordinary account can submit to these
+two.** The other thirteen belong to specific labs, projects, teaching allocations or
+IGB staff. Several of them sit idle advertising GPUs and large-memory nodes that look
+better than anything in `normal` or `gpu` — which makes them the most likely thing to
+recommend by mistake. **An idle node you cannot submit to is not capacity.**
+
+The test is that `scontrol show partition <name>` returns **empty** for a partition the
+account cannot use, while `sinfo -a` still lists it: **listing is not access.** Only
+ever put `-p normal` or `-p gpu` in a job script. Full detail in
+`references/partitions.md`.
+
+Membership is by Unix group: `biocluster_queue` opens `normal` and `gpu`. There is no
+Slurm `AdminLevel` and only Priority=0 QOS, so no priority-bump route exists and none is
+needed.
 
 ## Module conventions — three rules that prevent most failures
 
-**1. Two toolchain generations exist and must not be mixed.** Of 1795 module versions,
-680 carry `-IGB-gcc-4.9.4`, 608 carry `-IGB-gcc-8.2.0`, 507 carry no IGB tag. The two
-are separate stacks with separate Python builds; loading one module from each in a job
-produces linker and `libpython` errors that point nowhere near the cause. **Prefer
-`-IGB-gcc-8.2.0`.** Never mix.
+**1. One toolchain generation, unlike Biocluster 3.** The stack is **212 name/version
+pairs across 173 module names**, and every toolchain tag present is `15.2.0`: 108 carry
+`-IGB-gcc-15.2.0`, 6 carry `-GCCcore-15.2.0`, 3 carry it in another form
+(`GCC/15.2.0`, `IGB-gcc/15.2.0`, `OpenMPI/5.0.9-GCC-15.2.0`), and 95 carry no toolchain
+tag at all — 108 + 6 + 3 + 95 = 212, counted over the live inventory on 2026-11-09. Biocluster 3's
+`IGB-gcc-4.9.4` / `IGB-gcc-8.2.0` split is **gone**, and with it the mixing hazard that
+caused most `libpython` link failures. If you are porting a
+Biocluster 3 script, delete the toolchain suffix and re-resolve the version.
 
-**2. Pin the version explicitly.** Version spread is wide and newest is not always
-wanted: `cellranger` has 18 versions (2.1.0 to 10.0.0), `R` 14, `PyTorch` 15, `CUDA`
-13, `nextflow` 16. `module load R` takes whatever the default happens to be and that
-changes under you.
+**2. Pin the version explicitly.** 22 modules carry more than one version — `interpro`
+has 6, `kraken2-db` 5, `alphafold-db` 4, `ncbi-blastdb` 4, `pfam` 4, `gtdb` 3,
+`uniprot` 3, `nextflow` 3, `Java` 3. `module load interpro` takes whatever the default
+happens to be and that changes under you.
 
 **3. Never pipe `module load`.** `module load X | head`, `| tee`, or `$(module load X)`
 all run in a subshell and silently discard the load — `module list` then says "No
-modules loaded" and you fall back to the system python 3.6.8. Run it bare, on its own
-line.
+modules loaded" and you fall back to the system python. Run it bare, on its own line.
+
+The stack is much smaller than Biocluster 3's (173 names vs 927) and **many tools did
+not survive the migration**. Confirmed absent: `snakemake`, `scanpy`, `rosetta` /
+`PyRosetta`, `hhsuite`, `pymol`, `rdkit`, `ViennaRNA`, `RNAstructure`, `SPAdes`,
+`Trinity`, `salmon`, `RepeatMasker`, `cromwell`, `toil`, standalone `foldseek`,
+`transformers`, `jax`, `Anaconda3`. **Check `module avail` before promising a tool.**
 
 ## Reference data is already here — never download it
 
@@ -165,122 +186,110 @@ clusterblast, tailseeker-db.
 
 **The variable name is not guessable**: `EBROOT` + the module name uppercased with
 every `-` replaced by `MIN`. So `alphafold3-db` sets `$EBROOTALPHAFOLD3MINDB`,
-`ncbi-blastdb` sets `$EBROOTNCBIMINBLASTDB`. Load the module and `echo` the variable;
-do not hardcode a path. Detail and versions: the **`igb-reference-data`** skill.
+`ncbi-blastdb` sets `$EBROOTNCBIMINBLASTDB`. The rule held for all 29 with zero
+exceptions when re-checked on 2026-10-31. Load the module and `echo` the variable; do
+not hardcode a path.
 
-**None of these 29 appear on the IGB Applications wiki page.** A newcomer who trusts
-that page will spend days downloading a database the cluster already mirrors, pay for
-the storage at $8.78/TB/month, and still fail on the compute node.
+**Four of the 29 point at a directory that does not exist** (`chocophlan`,
+`clusterblast`, `gatkbundle`, `silva` — the modulefiles say `/home/mirrors`, the real
+mount is `/home/mirror`), and **11 need a subdirectory rather than the module root**.
+Both lists, with the working paths, are in the **`igb-reference-data`** skill. Always
+`ls` the variable before passing it to a tool.
 
 ## What else is installed, and which skill covers it
 
-927 modules / 1795 versions. Full searchable table:
+173 modules / 212 versions. Full searchable table:
 `igb-ngs-pipelines/references/module-index.csv`.
 
-| Area | Modules | Load this skill |
-|---|---|---|
-| assembly, alignment/QC, variant calling, RNA-seq, metagenomics, annotation | 466 | `igb-ngs-pipelines` |
-| reference databases | 29 | `igb-reference-data` |
-| structure prediction, docking, RNA folding | 26 | `igb-structure-prediction` |
-| GPU / deep learning frameworks | 46 | `igb-gpu-ml` |
-| single-cell and spatial | 17 | `igb-single-cell` |
-| workflow managers and containers | 12 | `igb-workflows` |
-| phylogenetics and comparative genomics | 57 | `igb-ngs-pipelines` (shares the conventions) |
-| languages and stats (R, Python, Julia, MATLAB) | 28 | this skill — just `module load R/4.5.1` |
-| imaging, proteomics, molecular dynamics | 27 | module-index.csv; thin coverage, verify before relying |
-| compilers, libraries, utilities | 219 | dependencies, not capabilities — ignore |
+| Area | Load this skill |
+|---|---|
+| assembly, alignment/QC, variant calling, RNA-seq, metagenomics, annotation | `igb-ngs-pipelines` |
+| reference databases | `igb-reference-data` |
+| structure prediction and docking | `igb-structure-prediction` |
+| GPU / deep learning frameworks | `igb-gpu-ml` |
+| single-cell, spatial and long-read | `igb-single-cell` |
+| workflow managers and containers | `igb-workflows` |
+| languages and stats (R, Python, Julia, MATLAB) | this skill — just `module load R/<ver>` |
 
 For the science itself, load the tool's own skill (`alphafold2`, `boltz`, `scvi-tools`,
 `proteinmpnn`, ...). The `igb-*` skills carry only what is specific to **this cluster**:
 which module, which database, which partition, measured wall-clock, known failures.
 
-## Shared environments
+## Building an environment
 
-**There is no pre-built shared conda environment on this cluster** (verified
-2026-10-04). `conda` is not on the default PATH, and it is still absent after
-`module load Miniconda3/24.7.1-0` in a non-interactive shell — conda needs its
-`profile.d/conda.sh` sourced. Eight `Anaconda3` and four `Miniconda3` modules exist to
-build on. The house pattern is therefore a **venv layered on an IGB module**
-(`python -m venv --system-site-packages`), which is exactly what `cs/scanpy-leiden` is.
-Do not reach for conda here.
+**conda now works on Biocluster 4.** This reverses the Biocluster 3 finding:
+
+    module load Miniconda3/26.9.4        # puts conda 26.9.4 on PATH
+
+The pattern that has actually been exercised here, though, is a **venv layered on an IGB
+module**, which keeps the module's CUDA-matched PyTorch and adds only what is missing:
+
+    module load PyTorch/2.14.1-IGB-gcc-15.2.0-Python-3.14.0
+    python -m venv --system-site-packages ~/envs/<name>
+    source ~/envs/<name>/bin/activate
+    pip install <packages>               # login node only
+
+Four foundation models (ESM-2, SAM, DINOv2, Evo 2) were installed this way and run; the
+traps that cost time are written up in **`igb-gpu-ml`**. Build on the login node, load
+in the job, and **never** let a batch script create an environment.
 
 Two further facts worth not rediscovering: **no Slurm account string is required**
-(`sacctmgr show assoc` returns no rows — do not add `--account`), and **`quota -s` does
-not work** (the quota servers refuse the connection), so size against
-`df -h $HOME` and `sacct` `MaxRSS` instead.
-
-    module use "$CS_SHARED_ROOT/modulefiles"
-    module load cs/<name>
-
-`CS_SHARED_ROOT` is set per install by `bootstrap.sh`; `cs-env list` enumerates what
-exists. Manifests live in `cluster/manifests/`. One owner builds; everyone else loads.
-
-Known shared env: **`cs/scanpy-leiden`** — the IGB `scanpy/1.10.1-IGB-gcc-8.2.0-Python-3.10.1`
-module supplies scanpy 1.10.1 / anndata 0.10.7 / umap 0.5.6 / sklearn but ships **no
-leidenalg and no igraph**, so `sc.tl.leiden` fails on the bare module. The shared env is
-a `venv --system-site-packages` layered on it plus leidenalg 0.12.0 and igraph 1.0.0.
-Also set `MPLCONFIGDIR="$PWD/.mplcache"` in the job script or matplotlib warns on a
-read-only home.
-
-## Databases and application paths
-
-Full detail: `references/databases.md`.
-
-- AlphaFold modules: `alphafold/{2.1.2,2.3.1,2.3.2,3.0.1,3.0.2}`;
-  databases `alphafold-db/{20210917,20220118,20230405,20240213}` (AF2) and
-  `alphafold3-db/20250520` (AF3).
-- AF3 container: `$EBROOTALPHAFOLD/alphafold.sif` (5.22 GB, `$EBROOTALPHAFOLD` =
-  `/home/apps/software/alphafold/3.0.2`).
-- AF3 databases + weights: `$BIODB` = `/private_stores/mirror/alphafold3-db/20250520`;
-  weights at `$BIODB/parameters/af3.bin` (1.15 GB), world-readable here.
-- **Template cutoff is 2022-09-28** (`pdb_2022_09_28`; sequence DBs `uniref90_2022_05`,
-  `mgy_clusters_2022_05`, `uniprot_all_2021_04`). Any PDB entry deposited before that
-  date is template-informed, not a blind fold — say so when reporting a result.
-- `$BIODB/pdb_seqres_2022_09_28.fasta` is a reliable **offline** SEQRES source
-  (headers `>2pv7_A mol:protein length:298`). Prefer resolving a sequence on the cluster
-  to transcribing residues into the transcript, and never type a sequence from memory.
+(`sacctmgr show assoc` returns no rows — do not add `--account`), and **`quota -s`
+returns nothing at all**, so size against `df -h $HOME` and `sacct` `MaxRSS` instead.
+Home is a 2.8 PB CephFS with ~1.3 PB free; `/home/groups` exists but nothing in it is
+writable by an ordinary account.
 
 ## Job script skeleton
 
-Worked templates: `recipes/af3_monomer.sh`, `recipes/scanpy.sh`. **Check `--mem`
-against the partition's ceiling in the table above before submitting** — over it, the
-job pends forever with `Reason=Resources` and no error.
+Worked templates in `recipes/`. **Check `--mem` against the partition's ceiling in the
+table above before submitting** — over it, the job pends forever with
+`Reason=Resources` and no error. Jobs are **billed**, so request what you measured you
+need rather than padding.
 
-    #SBATCH -p admin
+    #!/bin/bash
+    #SBATCH -p gpu            # or -p normal for CPU-only work
     #SBATCH -N 1
     #SBATCH -n 8
     #SBATCH --mem=16g
     #SBATCH --gres=gpu:1
+    #SBATCH -t 04:00:00
 
-    # /scratch guard: nodes report TmpDisk=0, but mkdir has been observed to succeed
-    if mkdir -p "/scratch/$SLURM_JOB_ID" 2>/dev/null && [ -w "/scratch/$SLURM_JOB_ID" ]; then
-      export TMPDIR="/scratch/$SLURM_JOB_ID"; trap 'rm -rf "/scratch/$SLURM_JOB_ID"' EXIT
-    else
-      export TMPDIR="$PWD/tmp"; mkdir -p "$TMPDIR"
-    fi
+    # Slurm gives each job a node-local /scratch/$SLURM_JOB_ID and sets TMPDIR to it
+    # (measured on compute-0-0, job 17991). Use it, but do not assume it: TMPDIR is
+    # NOT set on the login node, and a job that falls through to an unset TMPDIR will
+    # scribble into $HOME. Guard it.
+    : "${TMPDIR:=$PWD/tmp}"; mkdir -p "$TMPDIR"; export TMPDIR
+    export MPLCONFIGDIR="$PWD/.mplcache"
 
-    module use "$CS_SHARED_ROOT/modulefiles"
-    module load cs/<name>
+    module purge
+    module load <module>/<version>
 
     <work> 2>&1 | tee -a ./run.log
     ls -lh ./out 2>/dev/null || true
 
+Write job scripts with **LF line endings**. A CRLF script fails in ways that do not name
+the cause: `2>&1` becomes an "ambiguous redirect" and `> out.log` creates a file called
+`out.log\r`. The repository ships a `.gitattributes` that enforces this.
+
 ## Observed runtimes
 
-Do not extrapolate from problem size alone — on this cluster AF3 wall-clock is
-dominated by the **template stage**, not the MSA.
+Measured on Biocluster 4 unless noted. GPU timings are on an **A40**.
 
-| Job | Shape | Wall clock | Breakdown |
+| Job | Shape | Wall clock | Notes |
 |---|---|---|---|
-| AF3 ubiquitin (1UBQ chain A) | 76 aa monomer, 1 seed / 5 samples | 33 min 37 s | jackhmmer MSA 539 s; **templates ~23.5 min**; inference 42.8 s |
-| AF3 2PV7 homodimer | 596 tokens, 4778 atoms | ~40 min | MSA ~590 s (hit the 5000-sequence cap); hmmsearch 7 s |
+| ESM-2 650M, deep mutational scan | 1,444 variants of a 76 aa protein | 23 s | 1.6 s of it on the GPU |
+| SAM ViT-H, automatic masks | one 512x512 microscopy image | 10.7 s | 391 raw masks |
+| DINOv2-large, tile embedding | 300 tiles of 64 px | 1 m 31 s | 3.5 s of it on the GPU |
+| Evo 2 7B, variant scoring | 25 sequences of 219 bp | 54 s | 7.4 s of it on the GPU |
+| PyTorch 4000x4000 matmul | single op | 0.255 s | A40, torch 2.14.1+cu130 |
 
-Both were `-n 8 --mem=16g` on `admin`. `seff` on the dimer: CPU efficiency 9.73%,
-6.42 GB of 56 GB reserved — the IGB doc's `--mem=128g -n 4` is a ~20x memory
-over-reservation. The honest ask for this size is `-n 8 --mem=16g`.
+The pattern across all four model runs: **GPU time was under 25 s in total; everything
+else was staging.** Size the job for the data movement, not the arithmetic, and do not
+reserve a GPU for hours because the model name sounds expensive.
 
-The PBMC-3k scanpy pipeline is likewise over-served by 8 CPU / 32 GB: 12.96% CPU
-efficiency, 1.31 GB used. Roughly 2 cores and 8 GB suffices and queues sooner.
+AlphaFold 3 timings measured on Biocluster 3 (`alphafold/3.0.2`, different GPU) are
+**not carried forward** — Biocluster 4 ships `alphafold/3.0.4` on A40s. See
+`igb-structure-prediction` for the current status of that recipe.
 
 ## When it breaks
 
@@ -292,8 +301,6 @@ usually an **unschedulable memory request**, not a queue wait. Diagnostic:
     scontrol show job <jobid> | grep -E 'Reason|TRES'
 
 ## Auditing — hand these to the user
-
-Agent-submitted jobs appear in Slurm as `operon-<first 8 chars of the job uuid>`.
 
     sacct -u $USER -S <YYYY-MM-DD> -X --format=JobID,JobName,Partition,AllocCPUS,ReqTRES%38,Elapsed,State,Submit,End
     squeue -u $USER

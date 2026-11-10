@@ -1,102 +1,123 @@
 ---
 name: igb-workflows
-description: "Running workflow managers on the IGB biocluster - Nextflow (16 versions) and nf-core pipelines, Snakemake, Cromwell, Toil, and Singularity/Apptainer containers. Load this when launching or configuring a pipeline that submits its own Slurm jobs, when a Nextflow or Snakemake profile needs cluster settings, or when a job needs to run inside a container image on IGB."
+description: "Workflow managers and containers on IGB Biocluster 4 — Nextflow (the only workflow manager left after the migration), Apptainer/Singularity, conda, and the site rules that govern them. Records that Nextflow already submits to Slurm site-wide, the mandatory NXF_HOME setting, IGB's concurrency limit, and that snakemake, cromwell and toil are gone. Load before running any multi-step pipeline or container here."
 ---
 
-# Workflow managers on the IGB biocluster
+# Workflows and containers on Biocluster 4
 
-| Module | Versions | Newest | Status |
-|---|---|---|---|
-| `nextflow` | 16 | `25.10.2-Java-25.0.1` | **tier A** — ran a pipeline on compute-1-1 |
-| `snakemake` | 2 | `7.32.4-IGB-gcc-8.2.0-Python-3.10.1` | **tier A** — ran a workflow, 2/2 steps |
-| `singularity` | — | **`/usr/bin/singularity` 3.8.7** | **tier A** — ran the AlphaFold container |
-| `cromwell`, `toil`, `nf-core`, `clusterflow`, `Mamba`, `EasyBuild` | — | present | tier C |
+Load `igb-cluster` first for partitions, ceilings and submission rules.
 
-## Four things measured on the cluster 2026-10-13
+## What survived the migration
 
-**1. Nextflow already submits to Slurm — you do not configure the executor.** A bare
-`nextflow run hello.nf` inside a job printed `executor > SLURM (1)` and dispatched the
-process as its own Slurm job. There is a site-wide config doing this. Do not assume the
-default local executor, and do not copy a generic `process.executor = 'slurm'` block
-from a tutorial without checking what the site config already sets.
+| Tool | Status |
+|---|---|
+| `nextflow` | **present** — 22.09.7-edge, 24.04.6, 25.10.2 |
+| Apptainer / Singularity | **present**, no module needed |
+| `Miniconda3` | **present** — 26.7.1, 26.9.4 |
+| `snakemake` | **gone** |
+| `cromwell` | **gone** |
+| `toil` | **gone** |
+| `clusterflow` | **gone** |
 
-**2. `NXF_HOME` is mandatory here.** The module's own load message says so:
-*"Please set the environmental variable NXF_HOME to a directory in your home directory.
-Without this parameter, nextflow will not work."* Set it before the run:
+**Nextflow is the only workflow manager on Biocluster 4.** If a user arrives with a
+Snakemake workflow, do not improvise a module for it — the honest options are to install
+snakemake into a personal venv on the login node, or to run the steps as plain Slurm
+jobs. Say which you are doing and why.
 
-    export NXF_HOME="$HOME/nextflow"
+## Nextflow
 
-**3. IGB limits you to 3 concurrent nextflow jobs.** Also from the module's load
-message: *"Please limit the number of nextflow jobs to 3 at a time. Using more creates a
-lot of stress on the shared filesystem."* This is a site request, not a scheduler limit
-— nothing will stop you exceeding it, which is exactly why it belongs here.
+Pick the version deliberately — each is pinned to a different Java:
 
-**4. Singularity needs no module.** It is `/usr/bin/singularity`, version **3.8.7**, on
-the compute nodes — a *newer* build than the `singularity/3.8.1` module advertises.
-`singularity exec` on the 4.9 GB AlphaFold image worked with nothing loaded but
-`alphafold/3.0.2`, and reported Python 3.11.10 inside the container.
+| Module | Java |
+|---|---|
+| `nextflow/25.10.2-Java-25.0.1` | 25.0.1 |
+| `nextflow/24.04.6-Java-21.0.8` | 21.0.8 |
+| `nextflow/22.09.7-edge-Java-17.0.6` | 17.0.6 |
 
-**Confirmed no-internet, concretely:** `nextflow run nextflow-io/hello` — the quickstart
-in every tutorial — fails on a compute node with
-`curl: (7) Failed to connect to www.nextflow.io port 443: Connection timed out`.
-Nextflow also phones home for version checks at startup; `export NXF_OFFLINE=true`
-suppresses that. Any pipeline that resolves itself from GitHub must be fetched on the
-**login node** first.
+The module loads its Java for you. Do not load a second `Java` module alongside it.
 
-## The one thing that makes or breaks this
+### Two things that are not optional
 
-A workflow manager **submits its own Slurm jobs**. That means it bypasses every
-resource decision made for you, and the site constraints have to go into its config
-instead:
+**1. `NXF_HOME` must be set.** The module says so itself on load. Without it Nextflow
+writes into a default location that may not be writable, and the failure is obscure.
 
-- **Partition and memory ceiling.** A profile that requests 128 GB will pend forever on
-  `admin` (60 GB ceiling) with `Reason=Resources` and no error. Set the executor to
-  `normal` for CPU work (2 TB/node) and only route GPU tasks to `admin`.
-- **No internet on compute nodes.** Nextflow pulling a container or a plugin at task
-  start fails. Pre-pull images on the **login node** into a shared cache and point
-  `NXF_SINGULARITY_CACHEDIR` at it; same for `singularity pull`.
-- **Never let it run on the login node.** `nextflow run` itself is a lightweight
-  orchestrator and is usually acceptable there, but any task that does real work must go
-  through the executor. IGB policy forbids login-node compute and can lock accounts.
-- **Set `APPTAINER_CACHEDIR` / `APPTAINER_TMPDIR`** to a path under scratch before
-  pulling, or the layer cache fills your home quota.
-- **Unprivileged `singularity build` is usually unavailable** on a shared cluster — pull
-  a prebuilt image instead of building on-cluster.
+    export NXF_HOME="$PWD/.nextflow"
 
-## Nextflow starter — the module-load part is verified
+**2. Nextflow already submits to Slurm.** This is configured site-wide at IGB — a
+pipeline launched from the login node dispatches its tasks as Slurm jobs
+(`executor > SLURM (n)`). **Do not wrap a Nextflow run in `sbatch` and do not set
+`executor = 'local'`.** Wrapping it means your allocation sits idle while Nextflow
+submits more jobs from inside it, double-booking the cluster.
+
+Launch it from the login node. This is the one documented exception to "never run
+anything on a login node" — the Nextflow process itself is a lightweight scheduler, not
+compute. Keep it in a `tmux`/`screen` session so it survives a disconnect.
+
+**IGB asks for at most 3 concurrent Nextflow pipelines per user.** Respect it, and tell
+the user if their plan would exceed it.
+
+### No internet on compute nodes
+
+`nextflow run nextflow-io/hello` fails on a compute node with
+`curl: (7) Failed to connect to www.nextflow.io port 443`. Anything that pulls a
+pipeline, a container or a reference at runtime must be fetched **on the login node
+first**:
+
+    nextflow pull <pipeline>          # login node
+    export NXF_SINGULARITY_CACHEDIR="$HOME/.nxf_singularity"
+
+Pre-pulling container images into `NXF_SINGULARITY_CACHEDIR` is the usual fix for an
+nf-core pipeline that dies partway through on a compute node.
 
     module purge
     module load nextflow/25.10.2-Java-25.0.1
-    export NXF_HOME="$HOME/nextflow"                           # required, see above
-    export NXF_OFFLINE=true                                    # skip the version phone-home
-    export NXF_SINGULARITY_CACHEDIR="$HOME/.nxf_singularity"   # pre-populated on the login node
-    nextflow run <local-pipeline-dir> -c igb.config
+    export NXF_HOME="$PWD/.nextflow"
+    export NXF_SINGULARITY_CACHEDIR="$HOME/.nxf_singularity"
+    nextflow run <pipeline> -profile singularity --outdir ./out 2>&1 | tee -a run.log
 
-No `singularity` module is needed — `/usr/bin/singularity` 3.8.7 is already on `PATH`.
-Replace `<local-pipeline-dir>` with a pipeline you fetched on the login node; a
-`nf-core/<name>` reference resolves over the network and **will fail inside a job**.
+Tier B: the module, the Slurm executor and the `NXF_HOME` requirement are verified; no
+full nf-core pipeline has been run end to end on Biocluster 4 through these skills.
 
-with `igb.config` setting `process.executor = 'slurm'`, `process.queue = 'normal'`,
-explicit `cpus`/`memory` per label, and no label exceeding its partition's ceiling.
+## Apptainer / Singularity
 
-**Before running a real pipeline**, confirm with one trivial workflow that the executor
-submits correctly and that `squeue -u $USER` shows the child jobs — a misconfigured
-executor silently runs everything locally on the login node, which is the one outcome
-that gets an account locked.
+**No module needed.** `/usr/bin/apptainer` is **1.5.3** on every node, with a
+`singularity` alias. Any skill that tells you to `module load singularity` is carrying
+Biocluster 3 material.
 
-## What is still unverified here
+    apptainer exec --nv image.sif <command>     # --nv for GPU
 
-**Tier A:** everything in the four measured points above — nextflow 25.10.2 running a
-pipeline, its Slurm executor, `NXF_HOME`, snakemake 7.32.4, and `singularity exec` on a
-real image.
+Pull images **on the login node**:
 
-**Tier C — not run here:** any **real** nf-core pipeline (the test was a hello-world, not
-a pipeline with containers, profiles and staged references), `NXF_SINGULARITY_CACHEDIR`
-actually serving a pre-pulled image, `cromwell`, `toil`, `clusterflow`, and whether a
-nextflow driver process is better placed on the login node or inside a job on this
-cluster — the site's "limit to 3 nextflow jobs" notice implies the latter, but that is an
-inference.
+    apptainer pull docker://<registry>/<image>:<tag>
 
-**Running one real pipeline would settle most of this at once.** If you do, **send back
-the pipeline and revision, your config, whether containers resolved, and the wall time** —
-in your reply to the agent, or as a PR on `IGBIllinois/Biocluster-claude`.
+Building a container inside a job cannot work — no internet, and `--fakeroot` is not
+something to assume. Pull once, reuse.
+
+Two measured gotchas, both in `igb-gpu-ml` in full:
+
+- Triton inside a container cannot find `libcuda.so` — pass
+  `--env TRITON_LIBCUDA_PATH=/.singularity.d/libs`.
+- An NGC PyTorch image is a practical way to get a Python that is **not** 3.14 when a
+  package has no 3.14 wheel; you can build a host-side venv with the container's
+  interpreter.
+
+## conda
+
+**conda works on Biocluster 4.** This reverses the Biocluster 3 finding that it was
+unusable:
+
+    module load Miniconda3/26.9.4        # puts conda 26.9.4 on PATH
+
+Create environments **on the login node only** — `conda create` and `conda install` need
+internet. Then activate in the job.
+
+That said, the pattern with measured results behind it here is a **venv layered on an
+IGB module** (`python -m venv --system-site-packages`), which inherits the module's
+CUDA-matched builds instead of resolving a parallel stack. Prefer it for anything
+GPU-adjacent; reach for conda when a package only exists on conda-forge/bioconda.
+
+## The rule that underlies all of this
+
+Build environments and fetch artefacts on the **login node**. Run them on **compute
+nodes**. Never create an environment inside a batch script — compute nodes have no
+egress, so it cannot work, and the error you get will not say that.

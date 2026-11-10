@@ -1,132 +1,190 @@
 ---
 name: igb-gpu-ml
-description: "GPU and deep-learning work on the IGB biocluster - which CUDA module pairs with which PyTorch, Tensorflow or JAX build, choosing between the idle RTX A6000 on the admin partition and the backlogged A40s on gpu, requesting --gres correctly, and checking the GPU is actually visible from inside the job. Load this before submitting any job that needs a GPU, trains or fine-tunes a model, or imports torch, tensorflow, jax, transformers or detectron2 on IGB."
+description: "GPU and deep-learning work on IGB Biocluster 4 — which framework modules actually see the GPU, how to layer a venv on an IGB PyTorch module, how to run a model from an Apptainer container, and the measured traps (TensorFlow cannot see the A40, FP8 is unavailable on this card, torch.load defaults changed). Covers installing and running foundation models such as ESM-2, Segment Anything, DINOv2 and Evo 2. Load before writing any job that requests --gres=gpu."
 ---
 
-# GPU and deep learning on the IGB biocluster
+# GPU and deep learning on Biocluster 4
 
-## Pick the GPU first — the counter-intuitive part
+Load `igb-cluster` first — it owns the partition table, the memory ceilings and the
+submission rules. This skill covers only what is specific to GPU work.
 
-| Need | Partition | Hardware | Memory ceiling | Queue |
-|---|---|---|---|---|
-| GPU, ≤60 GB RAM | `admin` | 1x RTX A6000, 48 GB VRAM | **60 GB** | starts in <1 min |
-| GPU, >60 GB RAM | `gpu` | 2x A40 per node, 46 GB VRAM, 3 nodes | 250 GB | **22-32 h observed** |
+Use `-p gpu --gres=gpu:1`. **Never request a whole GPU node.**
 
-**The idle GPU partition has the smallest host memory on the cluster.** A6000 and A40
-are both compute capability 8.6 / driver 570.86.15 / CUDA 12.8, so for most work `admin`
-is strictly better — it is the same generation of card and it starts immediately. Go to
-`gpu` only when you need >60 GB host RAM or two GPUs.
+## The card
 
-Never request a whole GPU node: `--gres=gpu:1`. Three GPU nodes serve the institute.
+    NVIDIA A40 | compute capability sm_86 | 47.7 GB VRAM
 
-    #SBATCH -p admin
-    #SBATCH -n 8
-    #SBATCH --mem=32g
+Two per node. The VRAM figure and the compute capability are stated here because they
+decide whether a model fits and whether a kernel will build; node CPU and RAM ceilings
+live in the hub's partition table, not here.
+
+`nvidia-smi` is on `PATH` at `/usr/bin/nvidia-smi`. Earlier versions of these skills
+carried an `nvidia-smi || exit 1` preflight because it was *not* on PATH on Biocluster 3
+— that guard would have aborted every GPU job and has been removed. Do not reintroduce it.
+
+**sm_86 has no FP8.** Anything that assumes an H100/L40S and enables FP8 unconditionally
+will fail with `Device compute capability 8.9 or higher required for FP8 execution`.
+See the Evo 2 section for the fix.
+
+## Which framework sees the GPU — measured, 2026-10-31 (tier A)
+
+| Module | Loaded how | Result |
+|---|---|---|
+| `PyTorch/2.14.1-IGB-gcc-15.2.0-Python-3.14.0` | alone | **works** — `torch 2.14.1+cu130`, cuDNN 92400, `is_available: True`, A40 detected |
+| `TensorFlow/2.21.0` | alone | **`GPUs visible: 0`** |
+| `TensorFlow/2.21.0` | + `CUDA/13.1.0` + `cuDNN/9.17.1.4-CUDA-13.1.0` | **`GPUs visible: 0`** |
+
+**TensorFlow has no working GPU path on Biocluster 4.** On Biocluster 3 the fix was to
+add the CUDA and cuDNN modules; here that does not help, because the cluster ships only
+**CUDA 13.x** and TensorFlow 2.21 is built against CUDA 12. There is no module pairing
+that closes the gap.
+
+Consequences, and please state them to the user rather than quietly absorbing them:
+
+- **Use PyTorch for GPU work.** It is the only framework verified to reach the card.
+- A TensorFlow job will run to completion on the CPU, slowly, with no error — it is a
+  silent performance failure, not a crash.
+- If a user needs TensorFlow on a GPU here, that is a request for IGB, not something to
+  work around by burning GPU hours.
+
+Benchmark for scale: a 4000x4000 float32 matmul takes **0.255 s** on the A40 under
+torch 2.14.1.
+
+## Building a GPU environment
+
+Compute nodes have no internet. Build on the login node, load in the job.
+
+The pattern that works, and the one all four model installs below used, is a **venv
+layered on the IGB PyTorch module** — it inherits the module's CUDA-matched torch
+instead of pulling a second multi-gigabyte copy from PyPI:
+
+    module load PyTorch/2.14.1-IGB-gcc-15.2.0-Python-3.14.0
+    python -m venv --system-site-packages ~/models/venv
+    source ~/models/venv/bin/activate
+    pip install <packages>          # login node only
+
+`conda` also works now (`module load Miniconda3/26.9.4`), reversing the Biocluster 3
+finding, but the venv route is the one with measured results behind it.
+
+**Two installation traps, both paid for:**
+
+1. **`pip install` of anything torch-adjacent will try to replace torch.** Use
+   `--no-deps` and let the module supply it. `torchvision 0.29.2+cu132` installed with
+   `--no-deps` works correctly against the module's `torch 2.14.1+cu130` —
+   `batched_nms` was verified — despite the CUDA minor-version mismatch in the wheel tag.
+2. **The Python here is 3.14.** Some wheels have no 3.14 build. `tokenizers` turned out
+   to be fine (it ships a `cp310-abi3` wheel that 3.14 can load), so check for an abi3
+   wheel before concluding a package is unavailable.
+
+## Running a model from a container
+
+For anything whose dependency stack cannot be satisfied against Python 3.14, pull an
+NGC container on the login node and build the venv with the **container's** Python:
+
+    apptainer pull docker://nvcr.io/nvidia/pytorch:25.12-py3     # 8.1 GB SIF
+
+That image gives Python 3.12.3, `torch 2.10.0a0+...nv25.12` on CUDA 13.1,
+Transformer Engine 2.10.0 and flash-attn 2.7.4. Apptainer needs no module —
+`/usr/bin/apptainer` 1.5.3 is on every node, with a `singularity` alias.
+
+**Triton inside a container cannot find `libcuda.so`.** Pass:
+
+    apptainer exec --nv --env TRITON_LIBCUDA_PATH=/.singularity.d/libs <sif> ...
+
+## `torch.load` and checkpoint security
+
+PyTorch >= 2.6 defaults `torch.load` to `weights_only=True`. Checkpoints that pickle
+arbitrary objects now raise instead of loading. For ESM-2:
+
+    import argparse, torch
+    torch.serialization.add_safe_globals([argparse.Namespace])
+
+Only do this for a checkpoint whose provenance you trust. Do not reach for
+`weights_only=False` as a blanket fix.
+
+## Foundation models installed here (tier A)
+
+All four were installed under `~/models` on 2026-10-31 and run on the `gpu` partition.
+Weights are **not** shared — a new user repeats the download on the login node.
+
+| Model | How it is installed | Weights |
+|---|---|---|
+| **ESM-2 650M** | `pip install fair-esm` into the module venv | `~/models/esm2`, 2.6 GB |
+| **Segment Anything (ViT-H)** | `pip install --no-deps segment-anything torchvision` | `~/models/sam`, 2.4 GB |
+| **DINOv2-large** | `pip install transformers` | `~/models/hf`, 1.2 GB |
+| **Evo 2 7B** | container venv, `pip install --no-deps evo2 vtx` | `~/models/evo2`, 13 GB |
+
+### ESM-2
+
+`fair-esm` 2.0.0 is pure Python and installs cleanly. Weights come from
+`dl.fbaipublicfiles.com` — **`HEAD` returns 403 while `GET` returns 200**, so a
+downloader that probes with HEAD first will wrongly report the file as missing.
+
+Measured: all 1,444 single substitutions of a 76-residue protein scored by masked
+marginals in **1.6 s of GPU time** (23 s wall including staging).
+
+### Segment Anything
+
+Install `segment-anything` and `torchvision` with `--no-deps`.
+
+**`min_mask_region_area` must be 0.** Any value above zero makes the mask generator
+`import cv2`, which is not installed; the error names OpenCV and not the parameter.
+
+Measured: 391 raw masks from one 512x512 microscopy image in **10.7 s**.
+
+### DINOv2 — and why not DINOv3
+
+**Every DINOv3 checkpoint on Hugging Face is gated** (`"gated": "manual"`); `config.json`
+returns **401** without an approved token. `dinov3-vits16-pretrain-lvd1689m`, `-vitb16-`
+and `-vitl16-` were all checked.
+
+DINOv2-large (`facebook/dinov2-large`, 304M params, 1024-dim, patch 14) is ungated and
+was substituted **with the user's explicit approval**. If you make a substitution like
+this, say so in every output that depends on it — do not let a DINOv2 number be read as
+a DINOv3 number.
+
+To switch to DINOv3 once a token exists, change the model id in the script and set
+`HF_TOKEN`; nothing else in the pipeline changes.
+
+### Evo 2
+
+Runs from the NGC container above. `pip install --no-deps evo2 vtx` gives
+**evo2 0.6.0 + vtx 1.1.0** under the container's Python 3.12; on Python 3.14 pip silently
+falls back to evo2 **0.3.0**, which is not the version you want. Weights
+(`arcinstitute/evo2_7b`) are ungated, 13 GB on disk.
+
+**Two A40-specific fixes are mandatory:**
+
+1. `vortex/model/layers.py` enables `te.fp8_autocast` unconditionally. Set
+   `use_fp8_input_projections: false` in the model's config YAML. Note that
+   **`evo2_7b` resolves to `evo2-7b-1m.yml`, not the `8k` file** — editing the wrong
+   one changes nothing and the assertion persists.
+2. Pass `--env TRITON_LIBCUDA_PATH=/.singularity.d/libs`.
+
+**The 40B, 20B and 1B Evo 2 models cannot run on this hardware at all** — they require
+FP8 and therefore a Hopper-class GPU. Only the 7B models work, in bfloat16. Do not
+promise a user the 40B model on Biocluster 4.
+
+Measured: 25 sequences of 219 bp scored in **7.4 s of GPU time** (54 s wall).
+
+## Sizing a GPU job
+
+Across all four models the total GPU time was **under 25 seconds**; everything else was
+weight loading and data staging. Size for data movement, not for the arithmetic, and do
+not reserve a GPU for hours because the model name sounds expensive.
+
+A reasonable starting ask for inference on a single model:
+
+    #SBATCH -p gpu
     #SBATCH --gres=gpu:1
+    #SBATCH -n 4
+    #SBATCH --mem=24g
+    #SBATCH -t 00:30:00
 
-`gpu` honours `--cpus-per-task` exactly; `normal` does not.
+Check `seff <jobid>` afterwards and tell the user what it actually used.
 
-## Version pairing — 13 CUDA x 15 PyTorch
+## What is not here
 
-**Tier A — every row below was run on an A6000 on `admin`, 2026-10-13.** The two
-frameworks need *opposite* treatment, which is the single most expensive thing to get
-wrong here.
-
-| Module | Reports | GPU usable? | Notes |
-|---|---|---|---|
-| `PyTorch/2.7.0-IGB-gcc-8.2.0-Python-3.10.1` | torch 2.7.0+cu126, cuDNN 9.5.1 | **yes** | 4000² matmul in **0.38 s**. Use this one |
-| `PyTorch/1.13.1-IGB-gcc-8.2.0-Python-3.10.1` | torch 1.13.1+cu117, cuDNN 8.9.2 | **yes** | same matmul **2.68 s** — 7x slower than 2.7.0 |
-| `PyTorch/1.12.1-IGB-gcc-8.2.0-Python-3.10.1` | torch 1.12.1+cu102, cuDNN 7.6.5 | **NO — and it lies** | see below |
-| `Tensorflow/2.9.1-IGB-gcc-8.2.0-Python-3.7.2` alone | tf 2.9.1 | **no** | `GPUs visible: 0`, silently runs on CPU |
-| `Tensorflow/2.9.1` **+ `CUDA/11.2.2` + `cuDNN/8.1.1.33-CUDA-11.2.2`** | tf 2.9.1 | **yes** | `GPUs visible: 1`, matmul on GPU. Either load order works |
-| `Tensorflow/2.8.2` + the same two | tf 2.8.2 | **yes** | same |
-
-### PyTorch: do NOT load a CUDA module
-
-The `PyTorch` modules bundle their own CUDA runtime. 2.7.0 and 1.13.1 both found the
-A6000 with nothing else loaded. Adding a `CUDA/x` module on top is how you create a
-mismatch.
-
-### TensorFlow: you MUST load CUDA and cuDNN
-
-The opposite. On its own, `Tensorflow/2.9.1` prints `Skipping registering GPU devices`
-and reports **zero** GPUs — then trains on CPU without ever failing, so the job
-"succeeds" and is simply ~100x too slow. Pair it explicitly:
-
-    module purge
-    module load Tensorflow/2.9.1-IGB-gcc-8.2.0-Python-3.7.2
-    module load CUDA/11.2.2 cuDNN/8.1.1.33-CUDA-11.2.2
-
-### `PyTorch/1.12.1` passes `is_available()` and then crashes
-
-This is the trap worth remembering. The A6000 is compute capability **sm_86**; the
-1.12.1 build (`+cu102`) was compiled for `sm_37 sm_50 sm_60 sm_70` only. So:
-
-    torch.cuda.is_available()   -> True          # the usual check PASSES
-    a @ b  on cuda              -> RuntimeError: CUDA error: no kernel image is
-                                   available for execution on the device
-
-`is_available()` only reports that a driver and device exist, **not that this build has
-kernels for this card**. Any PyTorch older than 1.13 on IGB is suspect on the A6000/A40.
-
-### Still true from the inventory
-
-- **Stay inside one toolchain generation.** Anything `-IGB-gcc-4.9.4` cannot share a job
-  with `-IGB-gcc-8.2.0`. The old PyTorch builds (0.3–1.6) are all gcc-4.9.4 and
-  Python 3.6/2.7 — legacy, and they will hit the sm_86 wall too.
-- 13 `CUDA` modules (newest `12.8.0`), 15 `PyTorch`, 5 `Tensorflow`, 11 `cuDNN`.
-- The driver is CUDA 12.8, so `CUDA/12.x` is safe; older *runtimes* work under a newer
-  driver, but an older *build target* (sm level) does not.
-- `PyCUDA`, `numba`, `jax-unirep`, `transformers`, `detectron2`, `pytorch-geometric`,
-  `xgboost`, `h2o` are present — tier C, not run here.
-
-## Always prove the GPU is visible before the real work
-
-**`nvidia-smi` is not on `PATH` on the compute nodes** (verified on compute-5-8,
-2026-10-13) — `nvidia-smi || exit 1` as a guard will abort every GPU job you submit.
-Do not use it.
-
-**And `is_available()` is not sufficient**, per the 1.12.1 case above. The only honest
-preflight is a real tensor operation. Put this at the top of the job, not after an hour
-of data loading:
-
-    python3 -c "
-    import torch
-    assert torch.cuda.is_available(), 'no CUDA device'
-    a = torch.randn(64, 64, device='cuda')
-    (a @ a).sum().item()          # fails here if the build lacks sm_86 kernels
-    print('GPU OK:', torch.cuda.get_device_name(0), torch.version.cuda)
-    "
-
-For TensorFlow the equivalent is `len(tf.config.list_physical_devices('GPU')) > 0`,
-which returns 0 unless you loaded CUDA and cuDNN alongside it.
-
-Observed on `admin`: `NVIDIA RTX A6000`, 49140 MiB. On `gpu`: `NVIDIA A40`, 46068 MiB.
-
-## No internet on compute nodes
-
-`pip install` and any model-weight download **fail inside a job**. Pre-stage weights
-from the login node, or use a mirrored module (`dorado-db` for Dorado models — see
-`igb-reference-data`). Set `HF_HOME`/`TORCH_HOME` to a path you populated beforehand.
-
-## Sizing
-
-`seff <jobid>` after the first run, then size the next one from `MaxRSS`. Deep-learning
-jobs on this cluster have run at single-digit CPU efficiency because the GPU is the
-bottleneck — 8 CPUs is usually plenty, and asking for more only lengthens the queue.
-
-## What is still unverified here
-
-Tier A covers the three PyTorch builds and three TensorFlow builds listed above, run on
-the A6000 on `admin`. **Not** verified, and listed only as present: `PyCUDA`, `numba`,
-`jax-unirep`, `transformers`, `detectron2`, `pytorch-geometric`, `xgboost`, `h2o`, every
-`PyTorch` build on the `-IGB-gcc-4.9.4` toolchain, and **anything at all on the `gpu`
-partition's A40s** — all GPU measurements here come from the A6000.
-
-The A40 is the same compute capability (8.6) as the A6000, so the sm_86 conclusions
-should carry over, but that is an inference and has not been run.
-
-**If you run any of these, say so.** Tell the agent in your reply, or open a PR on
-`IGBIllinois/Biocluster-claude` moving the row to tier A with the module string you
-loaded, whether the GPU was visible, and the runtime. A single confirmed row saves the
-next person a queue wait.
+No `jax`, no `transformers` module (pip it into a venv), no `detectron2`, no `PyCUDA`,
+no `Tensorflow-GPU` module. `numba`, `umap-learn`, `hmmlearn`, `coniii` and `ssqueezepy`
+exist as modules. Check `module avail` before promising anything.
